@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/design
+    username: root
+    password: tiger
+
+mybatis:
+  mapper-locations: classpath:com/yunduo/mapper/*Mapper.xml
