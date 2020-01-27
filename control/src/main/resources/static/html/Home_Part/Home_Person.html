@@ -8,16 +8,32 @@
 <body>
 <!--左侧好友列表-->
 <div id="letf_part">
-    <div id="friend_list">
-        <div id="list_title">好友列表</div>
-        <li><img src="../../images/登录背景1.jpg">
-            <div>好友名称</div>
-        </li>
+    <div id="overview">
+        <li><div>说说： </div><p>****</p></li>
+        <li><div>留言： </div><p>****</p></li>
+        <li><div>相册： </div><p>****</p></li>
     </div>
+
 </div>
 <!--      中间的好友动态部分-->
 <div id="center_part"></div>
 <!--右侧的搜索-->
-<div id="right_part"></div>
+<div id="right_part">
+    <div id="info">
+       <div id="user_logo"><img src="../../images/登录背景1.jpg"></div>
+        <div id="change_logo"><input type="file" value="更换头像"><p>点击更换头像</p>
+            <input id="user_name" type="text" size="1px" >
+        </div>
+        <li><div class="model"><div id="sex">性别：</div><div class="write"><input type="text" ></div></div></li>
+        <li><div class="model"><div id="birthday">出生年月日：</div><div class="write"><input type="date" ></div></div></li>
+        <li><div class="model"><div id="constellation">星座：</div><div class="write"><input type="text" ></div></div></li>
+        <li><div class="model"><div id="like">爱好：</div><div class="write"><input type="text" ></div></div></li>
+        <li><div class="model"><div id="sign">个性签名：</div><div class="write"><input type="text" ></div></div></li>
+    <div id="info_bottom">
+        <input id="delete_update" type="button" value="取消修改">
+        <input id="save_update" type="button" value="保存修改">
+    </div>
+    </div>
+</div>
 </body>
 </html>

@@ -72,6 +72,10 @@ body{
     border-radius: 15px;
     float: left;
 }
+#head img{
+    width: 120px;
+    height: 120px;
+}
 #detail{
     width:920px ;
     height: 120px;

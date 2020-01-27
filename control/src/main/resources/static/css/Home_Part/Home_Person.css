@@ -13,6 +13,32 @@ body{
     height: 100%;
     background-color: #4cae4c;
 }
+#overview{
+    margin-top: 10%;
+    margin-left: 10%;
+    width: 80%;
+    height: 160px;
+    background-color: #9d9d9d;
+}
+#overview li{
+    margin-top: 10px;
+    margin-left: 20px;
+    background-color: white;
+    width: 80%;
+    list-style: none;
+    float: left;
+}
+#overview li div{
+    text-align: center;
+    background-color: white;
+    float: left;
+    font-size: 30px;
+}
+#overview li p{
+    background-color: #122b40;
+    float: left;
+    font-size: 30px;
+}
 #center_part{
     float: left;
     width: 50%;
@@ -25,32 +51,105 @@ body{
     height: 100%;
     background-color: #4cae4c;
 }
-#friend_list{
-    margin-left: 10%;
-    width: 80%;
-    height: 70%;
-    background-color: #9d9d9d;
-}
-
-#list_title{
+#info{
+    margin-top: 10%;
     width: 100%;
-    height: 8%;
-    text-align: center;
-    font-size: 30px;
-    background-color: darkgreen;
-}
+    height: 300px;
+    background-color: #9d9d9d;
 
-#friend_list li{
+}
+#user_logo{
+    width: 120px;
+    height: 120px;
+    background-color: white;
+    float: left;
+}
+#info img{
+    margin-top: 5px;
+    margin-left: 5px;
+    width: 110px;
+    height: 110px;
+    border-radius: 10px;
+}
+#info li{
     list-style: none;
 }
-#friend_list li img{
-    border-radius: 10px;
+#change_logo{
     float: left;
-    width: 50px;
-    height: 50px;
+    width: 150px;
+    height: 120px;
+    background-color: yellow;
 }
-#friend_list li div{
-    margin-top: 10px;
-    font-size: 20px;
-    text-align: center;
+#change_logo input{
+    /*!*margin-left: 20px;*/
+    width: 300px;
+    height: 30px;
+    /*font-size: 30px;*/
+    /*opacity: 0;*/
+    /*-ms-filter: 'alpha(opacity=0)';*/
+}
+#change_logo p{
+    float: none;
+}
+#user_name{
+    width: 100%;
+    height: 30px;
+    margin-left: 10px;
+    /*font-size: 15px;*/
+    float: left;
+    background-color: #5bc0de;
+}
+.model{
+    width: 100%;
+    height: 30px;
+    float: left;
+    background-color: #4cae4c;
+}
+#sex{
+    float: left;
+    background-color: red;
+}
+#birthday{
+    float: left;
+    background-color: red;
+}
+#constellation{
+    float: left;
+    background-color: red;
+}
+#like{
+
+    float: left;
+    background-color: red;
+}
+#sign{
+
+    float: left;
+    background-color: red;
+}
+.write{
+    float: left;
+    background-color: #269abc;
+}
+#info_bottom{
+    width: 100%;
+    height: 30px;
+    background-color: #1b6d85;
+}
+/*#info_bottom input{*/
+/*    margin-left: 10px;*/
+/*}*/
+#delete_update{
+    float: left;
+    margin-left: 40px;
+    border-radius: 10px;
+    background-color: #5bc0de;
+    font-size: 15px;
+}
+#save_update{
+    float: left;
+    margin-left: 40px;
+    border-radius: 10px;
+    background-color: #4cae4c;
+    font-size: 15px;
 }
