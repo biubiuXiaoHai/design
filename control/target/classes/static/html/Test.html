@@ -14,25 +14,40 @@
 <!--        })-->
 <!--    </script>-->
     <script>
+        // $(function () {
+        //     $("input[name='into']").click(function () {
+        //     alert("it was attacked!")
+        //         alert($("input[name='fileName']").val())
+        //         $.ajax({
+        //             url:"localhost:8080/fileUpload",
+        //             type:"post",
+        //             dataType:"json",
+        //             data : $( '#uploadForm').serialize(),    //表单序列化 ,【注意】上传文件的文件流是无法被序列化并传递的
+        //             processData:false,   //  告诉jquery不要处理发送的数据
+        //             contentType:false,   // 告诉jquery不要设置content-Type请求头
+        //             success: function (date) {
+        //                 alert("成功了")
+        //             },
+        //             error: function (data) {
+        //                 alert("失败了")
+        //             }
+        //
+        //         })
+        //     })
+        //
+        // })
         $(function () {
             $("input[name='into']").click(function () {
-            alert("it was attacked!")
-                alert($("input[name='fileName']").val())
+                alert("ok");
                 $.ajax({
-                    url:"localhost:8080/fileUpload",
+                    url: "localhost:8080/test",
                     type:"post",
-                    dataType:"json",
-                    data : $( '#uploadForm').serialize(),    //表单序列化 ,【注意】上传文件的文件流是无法被序列化并传递的
-                    processData:false,   //  告诉jquery不要处理发送的数据
-                    contentType:false,   // 告诉jquery不要设置content-Type请求头
-                    success: function (date) {
-                        alert("成功了")
-                    },
-                    error: function (data) {
-                        alert("失败了")
-                    }
+                    datatype: "file",
+                    data:
+
 
                 })
+
             })
 
         })
@@ -45,19 +60,19 @@
 <!--    <p><input type="submit" value="提交"/></p>-->
 <!--</form>-->
 
-<!--<div class="load">-->
-<!--    <input type="file" name="fileName">-->
-<!--    <input type="button" name="into" id ="sw"value="提交">-->
-<!--    <div id="show"><img id="images"></div>-->
-<!--</div>-->
-<div id="all">
-<form  id = "uploadForm" action="/fileUpload" method="post" enctype="multipart/form-data">
-    <label>上传图片</label>
-    <input type="file" name="file"/>
-    <input type="submit" value="上传"/>
-</form>
-<p>图片:</p>
-<img >
+<div class="load">
+    <input type="file" name="fileName">
+    <input type="button" name="into" id ="sw"value="提交">
+    <div id="show"><img id="images"></div>
 </div>
+<!--<div id="all">-->
+<!--<form  id = "uploadForm" action="/fileUpload" method="post" enctype="multipart/form-data">-->
+<!--    <label>上传图片</label>-->
+<!--    <input type="file" name="file"/>-->
+<!--    <input type="submit" value="上传"/>-->
+<!--</form>-->
+<!--<p>图片:</p>-->
+<!--<img id="images">-->
+<!--</div>-->
 </body>
 </html>
