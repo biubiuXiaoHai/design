@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home_Person</title>
+    <link href="../../css/Home_Part/Home_Person.css" rel="stylesheet">
+    <script src="../../js/jquery-3.4.1.min.js"></script>
+    <script src="../../js/jquery.form.js"></script>
+    <script>
+        $(function () {
+
+            //点击“点击更换头像”按钮
+            $("#change_logo1_click").click(function () {
+                $("#change_logo1").css("display","none");
+                $("#change_logo2").css("display","inline");
+            })
+            //点击 “取消” 按钮
+            $("#cancel_change").click(function () {
+                $("#change_logo2").css("display","none");
+                $("#change_logo1").css("display","inline");
+
+            })
+            //点击 “确定更换”
+            $("#form1").ajaxForm(function (data) {
+                alert("进入提交");
+                alert(data);
+                $("#user_logo_img").attr("src",data);
+                alert("文件提交已成功！")
+            })
+
+            //点击取消保存
+            $("#delete_update").click(function () {
+                alert("取消保存");
+                // $("#user_logo_img").attr("src","http://localhost:8080/temp-rainy/dab45fdd-2136-496d-a3a1-b63ce0de385b.jpg");
+                alert("文件提交已成功！")
+            })
+
+
+            // $("#save_update").click(function () {
+            //     alert("保存修改")
+            //     var form=$("#form1");
+            //     var filepart=new FormData(form);
+            //     alert(filepart);
+            //
+            //     $.ajax({
+            //         url: "http://localhost:8080/userinfo/updateInfo",
+            //         type: "post",
+            //         dataType:"json",
+            //         data: form,
+            //         async: false,
+            //         cache: false,
+            //         contentType: false,
+            //         processData: false,
+            //         // filepart: $("#new_head").val()
+            //         success: function (data) {
+            //             alert("success")
+            //         },
+            //         error: function (data) {
+            //             alert(data)
+            //             alert("error")
+            //         }
+            //     })
+            // })
+        })
+    </script>
+</head>
+
+<body>
+<!--左侧好友列表-->
+<div id="letf_part">
+    <div id="overview">
+        <li><div>说说： </div><p>****</p></li>
+        <li><div>留言： </div><p>****</p></li>
+        <li><div>相册： </div><p>****</p></li>
+    </div>
+
+</div>
+<!--      中间的好友动态部分-->
+<div id="center_part"></div>
+<!--右侧的搜索-->
+<div id="right_part">
+    <div id="info">
+<!--        <form id="form1">-->
+       <div id="user_logo"><img id="user_logo_img" src="../../images/登录背景1.jpg"/></div>
+<!--        <div id="user_logo"><img id="user_logo_img" src="D:\temp-rainy\df595008-5cae-448a-a2cb-c42719f623f7.jpg"/></div>-->
+        <!--      修改头像替换模块1-->
+        <div id="change_logo1" style="display: inline">
+            <button id="change_logo1_click">点击更换头像</button>
+        </div>
+        <!--      修改头像替换模块2-->
+        <div id="change_logo2" style="display: none">
+         <form action="/userinfo/updateInfo" method="post" enctype="multipart/form-data" id="form1">
+              <input id="new_head" name="file" type="file">
+                <input id="cancel_change" type="button" value="取消">
+                <input id="sure_change" type="submit" value="确定更换">
+         </form>
+        </div>
+        <div id="user_name" >
+            <p>昵称：</p><input type="text" >
+        </div>
+
+        <li><div class="model"><div id="sex" >性别：</div><div class="write"><input type="text" name="sex_type" ></div></div></li>
+        <li><div class="model"><div id="birthday">出生年月日：</div><div class="write"><input type="date" ></div></div></li>
+        <li><div class="model"><div id="constellation">星座：</div><div class="write"><input type="text" ></div></div></li>
+        <li><div class="model"><div id="like">爱好：</div><div class="write"><input type="text" ></div></div></li>
+        <li><div class="model"><div id="sign">个性签名：</div><div class="write"><input type="text" ></div></div></li>
+    <div id="info_bottom">
+        <input id="delete_update" type="button" value="取消修改">
+        <input id="save_update" type="button" value="保存修改">
+    </div>
+    </div>
+</div>
+</body>
+<!--<iframe  id="submitFrame" style="display: none;width:0; height:0" name="submitFrame"  src="about:blank"></iframe>-->
+</html>
