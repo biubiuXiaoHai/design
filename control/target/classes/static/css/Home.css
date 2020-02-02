@@ -138,6 +138,7 @@ body{
 底部设计
 */
 #bottom{
+    margin-top: 30px;
     background-color: #9d9d9d;
     margin-left: 10%;
     width: 80%;

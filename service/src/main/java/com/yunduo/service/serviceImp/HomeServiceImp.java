@@ -13,13 +13,14 @@ public class HomeServiceImp implements HomeService {
     @Autowired
     UsersMapper usersMapper;
 
-    @Override
+//    @Override
     public updUserHeadRsq updphone(updUserHeadReq model) {
-        Users user=new Users();
-        user.setAvatar( model.getPhoto());
-        usersMapper.updateByPrimaryKeySelective(user);
-        updUserHeadRsq result=new updUserHeadRsq();
-        result.setPhoto(model.getPhoto());
-        return result;
+////        Users user=new Users();
+////        user.setAvatar( model.getPhoto());
+////        usersMapper.updateByPrimaryKeySelective(user);
+////        updUserHeadRsq result=new updUserHeadRsq();
+////        result.setPhoto(model.getPhoto());
+////        return result;
+    return null;
     }
 }

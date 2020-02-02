@@ -4,6 +4,14 @@ spring:
     url: jdbc:mysql://localhost:3306/design
     username: root
     password: tiger
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 50MB
 
+#  http:
+#    multipart:
+#      enabled: true
 mybatis:
   mapper-locations: classpath:com/yunduo/mapper/*Mapper.xml

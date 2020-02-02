@@ -9,6 +9,10 @@ import java.io.File;
 
 @RestController
 public class test {
+    @PostMapping("test_one")
+    public String test_one(int model){
+        return "it was ok ";
+    }
     @GetMapping("test")
     public String test(MultipartFile file ){
         if(file.isEmpty())
