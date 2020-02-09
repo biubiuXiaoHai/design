@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+<!--    <version>1.0.0</version>-->
 
     <parent>
         <groupId>com.design</groupId>
@@ -10,7 +11,12 @@
         <version>1.0.0</version>
     </parent>
 
+    <groupId>com.design</groupId>
     <artifactId>control</artifactId>
+    <name>control</name>
+    <packaging>jar</packaging>
+    <version>1.0.0</version>
+
     <dependencies>
     <!--        只要配好这个web框架，就可以了访问controller层，用相应的了-->
     <dependency>
@@ -23,6 +29,13 @@
             <version>1.0.0</version>
         </dependency>
     </dependencies>
-
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
 
 </project>

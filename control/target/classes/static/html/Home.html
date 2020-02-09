@@ -5,8 +5,34 @@
     <title>Home</title>
     <link href="../css/Home.css" rel="stylesheet">
     <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/vue.min.js"></script>
     <script>
         $(function () {
+            //获取cookie
+            function getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for(var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+            var username=getCookie("cookie_username");
+            alert(username);
+
+            var userinfo_name=new Vue({
+                el:"#person",
+                data:{
+                    user: username
+                }
+            })
             //点击头部 “个人首页”
             $("input[name='home']").click(function () {
                 // alert("home");
@@ -55,13 +81,13 @@
         </div>
         <div id="person">
             <div id="person_space">
-                <b id="user_title"><b class="user_name">****</b>的云朵空间</b>
+                <b id="user_title"><b class="user_name"> {{user}}</b> &nbsp&nbsp的云朵空间</b>
             </div>
             <div id="head"><img src="../images/注册背景1.jpg"></div>
             <div id="detail">
-                <div class="user_name" id="detail1">
-                    ******
-                </div>
+                <b class="user_name" id="detail1">
+                     &nbsp;&nbsp;{{user}}
+                </b>
                 <div id="detail2">您已连续登录 <b id="N">N</b> 天</div>
                 <div id="detail3"><input type="button" value="开通云朵会员"></input></div>
                 <div id="detail4">

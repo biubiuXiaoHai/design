@@ -54,7 +54,7 @@ body{
 #info{
     margin-top: 10%;
     width: 100%;
-    height: 300px;
+    height: 400px;
     background-color: #9d9d9d;
 
 }
@@ -135,24 +135,71 @@ body{
     float: left;
     background-color: red;
 }
+input[name="sex_type"]{
+    width: 80px;
+    border-radius: 3px;
+}
 #birthday{
     float: left;
     background-color: red;
+}
+input[name="birthday"]{
+    /*width: 80px;*/
+    border-radius: 3px;
 }
 #constellation{
     float: left;
     background-color: red;
 }
+input[name="constellation"]{
+    width: 80px;
+    border-radius: 3px;
+}
 #like{
-
     float: left;
     background-color: red;
+}
+input[name="like"]{
+    width: 180px;
+    border-radius: 3px;
 }
 #sign{
-
     float: left;
     background-color: red;
 }
+#change_password{
+    border-radius: 5px;
+    margin-left: 80px;
+}
+.change_pass{
+    /*display: none;*/
+    margin-left: 10px;
+}
+#password_change1{
+    float: left;
+    background-color: red;
+}
+input[name="password_change1"]{
+    border-radius: 3px;
+    width: 100px;
+}
+#password_change2{
+    float: left;
+    background-color: red;
+}
+input[name="password_change2"]{
+    border-radius: 3px;
+    width: 100px;
+}
+#phone{
+    float: left;
+    background-color: red;
+}
+input[name="phone"]{
+    border-radius: 3px;
+    width:100px;
+}
+
 .write{
     float: left;
     background-color: #269abc;

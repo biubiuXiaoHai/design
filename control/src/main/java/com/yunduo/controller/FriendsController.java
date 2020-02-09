@@ -10,5 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("friends")
 public class FriendsController {
 //    @Autowired
+    /**
+     *
+     */
 
 }

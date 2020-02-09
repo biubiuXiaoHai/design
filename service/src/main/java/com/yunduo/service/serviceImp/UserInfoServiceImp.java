@@ -1,13 +1,11 @@
 package com.yunduo.service.serviceImp;
 
-import com.yunduo.bean.LoginReq;
-import com.yunduo.bean.LoginRsq;
-import com.yunduo.bean.RegisterReq;
-import com.yunduo.bean.RegisterRsq;
+import com.yunduo.bean.*;
 import com.yunduo.dao.UsersMapper;
 import com.yunduo.entities.Users;
 import com.yunduo.service.UserInfoService;
 import com.yunduo.utils.CloneUtil;
+import org.apache.tomcat.jni.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +28,7 @@ public class UserInfoServiceImp  implements UserInfoService {
             if(user.getPassword().equals(model.getPassword())) {
                 loginRsq.setResult(1);
                 loginRsq.setAccount(user.getAccount());
+                loginRsq.setName(user.getName());
                 return loginRsq;
             }
             loginRsq.setResult(3);
@@ -41,6 +40,7 @@ public class UserInfoServiceImp  implements UserInfoService {
             if(user.getPassword().equals(model.getPassword())) {
                 loginRsq.setResult(1);
                 loginRsq.setAccount(user.getAccount());
+                loginRsq.setName(user.getName());
                 return loginRsq;
             }
             loginRsq.setResult(3);
@@ -66,11 +66,25 @@ public class UserInfoServiceImp  implements UserInfoService {
             registerRsq.setResult(1);
             registerRsq.setAccount(user.getAccount());
             registerRsq.setPassword(user.getPassword());
-//            registerRsq.setCreate_time(user.getCreate_time().toString());
             return registerRsq;
         }else{
             registerRsq.setResult(2);
             return registerRsq;
         }
+    }
+
+    /**
+     * 获取用户信息
+     * @param userid
+     * @return
+     */
+    @Override
+    public FindUserInfoRsq findUserInfo(Integer userid) {
+        Users users =usersMapper.selectByPrimaryKey(userid);
+        if(users.getAvatar().equals(null)){
+            users.setAvatar("../../images/兔子.jpg");
+        }
+        FindUserInfoRsq userInfoRsq=CloneUtil.cloneObj(users,FindUserInfoRsq.class);
+        return userInfoRsq;
     }
 }

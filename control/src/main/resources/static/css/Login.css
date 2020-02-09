@@ -118,6 +118,7 @@ body{
     border-radius: 10px;
     font-size: 30px;
     text-align: center;
+    /*background-color: #286090;*/
 }
 #login_button a{
     color: whitesmoke;

@@ -13,7 +13,6 @@ public class RegisterRsq {
     private Integer account;
     @ApiModelProperty("登录密码")
     private String password;
-//    @ApiModelProperty("创建账号日期")
-//    private String create_time;
+
 
 }

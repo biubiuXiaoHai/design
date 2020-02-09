@@ -11,4 +11,6 @@ public class LoginRsq {
     private Integer result;
     @ApiModelProperty("登录成功用户的id")
     private Integer account;
+    @ApiModelProperty("登录成功用户的名字")
+    private String name;
 }

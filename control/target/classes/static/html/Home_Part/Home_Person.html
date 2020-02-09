@@ -20,6 +20,12 @@
                 $("#change_logo1").css("display","inline");
 
             })
+            $("input[name='change_password']").click(function () {
+                alert("it click it")
+                $("#pass_button").css("display","none");
+                $(".change_pass").css("display","inline");
+
+            })
             //点击 “确定更换”
             $("#form1").ajaxForm(function (data) {
                 alert("进入提交");
@@ -28,11 +34,9 @@
                 alert("文件提交已成功！")
             })
 
-            //点击取消保存
+            //点击取消修改
             $("#delete_update").click(function () {
-                alert("取消保存");
-                // $("#user_logo_img").attr("src","http://localhost:8080/temp-rainy/dab45fdd-2136-496d-a3a1-b63ce0de385b.jpg");
-                alert("文件提交已成功！")
+                window.location.reload();
             })
 
 
@@ -100,11 +104,20 @@
         </div>
 
         <li><div class="model"><div id="sex" >性别：</div><div class="write"><input type="text" name="sex_type" ></div></div></li>
-        <li><div class="model"><div id="birthday">出生年月日：</div><div class="write"><input type="date" ></div></div></li>
-        <li><div class="model"><div id="constellation">星座：</div><div class="write"><input type="text" ></div></div></li>
-        <li><div class="model"><div id="like">爱好：</div><div class="write"><input type="text" ></div></div></li>
-        <li><div class="model"><div id="sign">个性签名：</div><div class="write"><input type="text" ></div></div></li>
-    <div id="info_bottom">
+        <li><div class="model"><div id="birthday">出生年月日：</div><div class="write"><input type="date" name="birthday" ></div></div></li>
+        <li><div class="model"><div id="constellation">星座：</div><div class="write"><input type="text" name="constellation" ></div></div></li>
+        <li><div class="model"><div id="like">爱好：</div><div class="write"><input type="text" name="like"></div></div></li>
+        <li><div class="model"><div id="sign">个性签名：</div><div class="write"><input type="text" name="sign" ></div></div></li>
+
+        <li id="pass_button"><div class="model"><div class="write" id="change_password"><input  name="change_password" type="button" value="修改密码"></input></div></div></li>
+
+        <li class="change_pass" style="display: none"><div class="model"><div id="password_change1">密码：</div><div class="write"><input type="password" name="password_change1"></div></div></li>
+        <li class="change_pass" style="display: none"><div class="model"><div id="password_change2">确认新密码：</div><div class="write"><input type="password" name="password_change2"></div></div></li>
+
+        <li><div class="model"><div id="phone">电话号码：</div><div class="write"><input type="text" name="phone"></div></div></li>
+
+
+        <div id="info_bottom">
         <input id="delete_update" type="button" value="取消修改">
         <input id="save_update" type="button" value="保存修改">
     </div>

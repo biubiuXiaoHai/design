@@ -4,7 +4,6 @@ import com.yunduo.bean.*;
 import com.yunduo.service.UserInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +44,28 @@ public class UserInfoController {
         return userInfoService.register(model);
     }
 
+    /**
+     * 获取个人用户信息
+     */
+    @PostMapping("findUserInfo")
+    @ApiOperation("获取用户个人信息")
+    public FindUserInfoRsq findUserInfo(Integer userid){
+     return   userInfoService.findUserInfo(userid);
+    }
+
+    /**
+     * 修改用户信息
+     */
+    @PostMapping("updUserInfo")
+    @ApiOperation("修改用户个人信息")
+    public Integer updUserInfo(UpdUserInfoReq model){
+    return null;
+    }
+    /**
+     * 更换头像 (转换显示)
+     * @param file
+     * @return
+     */
     @PostMapping("updateInfo")
     public String updateInfo(@RequestParam("file") MultipartFile file){
         System.out.println("ok it work");
@@ -68,9 +89,24 @@ public class UserInfoController {
         }
             System.out.println(dest.getPath());
         System.out.println("路径："+dest.getPath()+"    文件名"+dest.getName());
-        return "http://localhost:8080/temp-rainy/"+fileName;
-//        return null;
+        return "http://49.235.40.252:8090/temp-rainy/"+fileName;
     }
+
+    /**
+     * 左侧统计总览信息（说说/留言/相册数量）
+     */
+
+    /**好友动态页的
+     *
+     * 好友列表
+     * 入：主id
+     * 出：好友头像和昵称，id
+     */
+
+    /**好友动态页的
+     *
+     * 搜索好友
+     */
 }
 
 
