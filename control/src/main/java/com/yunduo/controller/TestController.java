@@ -1,7 +1,7 @@
 package com.yunduo.controller;
 
 import com.yunduo.bean.UpdUserInfoReq;
-import com.yunduo.bean.updUserInfoRsq;
+import com.yunduo.bean.updUserInfoRsp;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,7 +45,7 @@ public class TestController {
     }
 
     @PostMapping("updUsersInfo")
-    public updUserInfoRsq updUserInfo(UpdUserInfoReq model)
+    public updUserInfoRsp updUserInfo(UpdUserInfoReq model)
     {
         return null;
     }

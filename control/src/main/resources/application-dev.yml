@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://49.235.40.252:3306/design
+    url: jdbc:mysql://49.235.40.252:3306/design?useUnicode=true&characterEncoding=utf-8
     username: root
     password: tiger
   servlet:

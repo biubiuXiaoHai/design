@@ -23,6 +23,7 @@ public class Users {
 
     private Byte vip_static;
 
+    private String last_date;
     private Integer sum_date;
 
     public Integer getAccount() {
@@ -111,6 +112,14 @@ public class Users {
 
     public void setVip_static(Byte vip_static) {
         this.vip_static = vip_static;
+    }
+
+    public String getLast_date() {
+        return last_date;
+    }
+
+    public void setLast_date(String last_date) {
+        this.last_date = last_date;
     }
 
     public Integer getSum_date() {

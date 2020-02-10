@@ -1,4 +1,4 @@
 package com.yunduo.bean;
 
-public class FindUserRsq {
+public class FindUserRsp {
 }

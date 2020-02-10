@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @ApiModel(description = "注册结果响应")
-public class RegisterRsq {
+public class RegisterRsp {
     @ApiModelProperty("1.注册成功,2.注册失败（手机号已经被注册）")
     private Integer result;
     @ApiModelProperty("云朵账号")

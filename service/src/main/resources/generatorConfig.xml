@@ -47,15 +47,15 @@
                enableSelectByExample="false" enableUpdateByExample="false">
             <property name="useActualColumnNames" value="true" />
         </table>
-        <table tableName="friends" domainObjectName="Friends"
-               enableCountByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" enableUpdateByExample="false">
-            <property name="useActualColumnNames" value="true" />
-        </table>
-        <table tableName="share" domainObjectName="Share"
-               enableCountByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" enableUpdateByExample="false">
-            <property name="useActualColumnNames" value="true" />
-        </table>
+<!--        <table tableName="friends" domainObjectName="Friends"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false">-->
+<!--            <property name="useActualColumnNames" value="true" />-->
+<!--        </table>-->
+<!--        <table tableName="share" domainObjectName="Share"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false">-->
+<!--            <property name="useActualColumnNames" value="true" />-->
+<!--        </table>-->
     </context>
 </generatorConfiguration>

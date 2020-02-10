@@ -3,10 +3,8 @@ package com.yunduo.dao;
 import com.yunduo.entities.Users;
 
 public interface UsersMapper {
-
     int selectByPhone(String phone);
     Users selectByPhoneAll(String phone);
-
 
     int deleteByPrimaryKey(Integer account);
 

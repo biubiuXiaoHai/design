@@ -13,14 +13,14 @@
     <result column="fondness" jdbcType="VARCHAR" property="fondness" />
     <result column="signature" jdbcType="VARCHAR" property="signature" />
     <result column="vip_static" jdbcType="TINYINT" property="vip_static" />
+    <result column="last_date" jdbcType="VARCHAR" property="last_date" />
     <result column="sum_date" jdbcType="INTEGER" property="sum_date" />
   </resultMap>
   <sql id="Base_Column_List">
     account, name, password, phone, avatar, sex, birthday, constellationsid, fondness, 
-    signature, vip_static, sum_date
+    signature, vip_static,last_date, sum_date
   </sql>
-
-
+  <!--新增的SQL-->
   <select id="selectByPhone" parameterType="java.lang.String" resultType="java.lang.Integer">
     select count(*) from users where phone=${phone};
   </select>
@@ -28,7 +28,6 @@
   <select id="selectByPhoneAll" parameterType="java.lang.String" resultMap="BaseResultMap">
     select * from users where  phone=${phone};
   </select>
-
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -44,11 +43,11 @@
     insert into users (account, name, password, 
       phone, avatar, sex, birthday, 
       constellationsid, fondness, signature, 
-      vip_static, sum_date)
+      vip_static,last_date, sum_date)
     values (#{account,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{phone,jdbcType=CHAR}, #{avatar,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=INTEGER}, 
       #{constellationsid,jdbcType=TINYINT}, #{fondness,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, 
-      #{vip_static,jdbcType=TINYINT}, #{sum_date,jdbcType=INTEGER})
+      #{vip_static,jdbcType=TINYINT}, #{last_date,jdbcType=VARCHAR},#{sum_date,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.yunduo.entities.Users">
     insert into users
@@ -85,6 +84,9 @@
       </if>
       <if test="vip_static != null">
         vip_static,
+      </if>
+      <if test="last_date != null">
+        last_date,
       </if>
       <if test="sum_date != null">
         sum_date,
@@ -124,6 +126,9 @@
       <if test="vip_static != null">
         #{vip_static,jdbcType=TINYINT},
       </if>
+      <if test="last_date !=null">
+        #{last_date,jdbcType=INTEGER},
+      </if>
       <if test="sum_date != null">
         #{sum_date,jdbcType=INTEGER},
       </if>
@@ -162,6 +167,9 @@
       <if test="vip_static != null">
         vip_static = #{vip_static,jdbcType=TINYINT},
       </if>
+      <if test="last_date != null">
+      last_date = #{last_date,jdbcType=VARCHAR},
+      </if>
       <if test="sum_date != null">
         sum_date = #{sum_date,jdbcType=INTEGER},
       </if>
@@ -180,6 +188,7 @@
       fondness = #{fondness,jdbcType=VARCHAR},
       signature = #{signature,jdbcType=VARCHAR},
       vip_static = #{vip_static,jdbcType=TINYINT},
+      last_date =#{last_date,jdbcType=VARCHAR},
       sum_date = #{sum_date,jdbcType=INTEGER}
     where account = #{account,jdbcType=INTEGER}
   </update>

@@ -8,7 +8,26 @@
     <script src="../../js/jquery.form.js"></script>
     <script>
         $(function () {
+            function getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for(var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+            // var username=getCookie("cookie_username");
+            var account=getCookie("cookie_account");
 
+
+            var formdata=new FormData();
             //点击“点击更换头像”按钮
             $("#change_logo1_click").click(function () {
                 $("#change_logo1").css("display","none");
@@ -20,6 +39,7 @@
                 $("#change_logo1").css("display","inline");
 
             })
+            //点击 “修改密码” 按钮
             $("input[name='change_password']").click(function () {
                 alert("it click it")
                 $("#pass_button").css("display","none");
@@ -37,6 +57,56 @@
             //点击取消修改
             $("#delete_update").click(function () {
                 window.location.reload();
+            })
+            //点击 “保存修改” 按钮
+            $("#save_update").click(function () {
+                alert(account),
+                formdata.append("account",account),
+                formdata.append("file",$("#new_head")[0].files[0]),
+                formdata.append("name",$("#name").val()),
+                formdata.append("sex",$("#sex_type").val()),
+                formdata.append("birthday",$("#birthdaydate").val()),
+                formdata.append("fondness",$("#fondness").val()),
+                formdata.append("signature",$("#signature").val()),
+                formdata.append("phone",$("#phonenumber").val()),
+                formdata.append("password",$("#passwordnumber").val())
+                $.ajax({
+                        url:"http://127.0.0.1:8090/userinfo/updUserInfo",
+                            type:"post",
+                            dataType:"json",
+                            data:formdata,
+                            contentType: false,
+                            processData: false,
+                        success:function (data) {
+                            if(data==1)
+                                window.location.href="http://127.0.0.1:8090/html/home.html";
+                            alert("成功了")
+                        },error:function (data) {
+                            alert("失败了")
+                        }
+                    })
+                // $.ajax({
+                //     url:"http://127.0.0.1:8090/userinfo/updUserInfo",
+                //     type:"post",
+                //     dataType:"json",
+                //     data:{
+                //         file:$("#new_head").files[0],
+                //         name:$("#name").val(),
+                //         sex:$("#sex_type").val(),
+                //         birthday:$("#birthdaydate").val(),
+                //         fondness:$("#fondness").val(),
+                //         signature:$("#signature"),
+                //         phone:$("#phonenumber").val(),
+                //         password:$("#passwordnumber"),
+                //     }
+                //     ,success:function (data) {
+                //         alert("成功")
+                //     },error:function (data) {
+                //         alert("失败")
+                //     }
+                // })
+
+
             })
 
 
@@ -100,21 +170,22 @@
          </form>
         </div>
         <div id="user_name" >
-            <p>昵称：</p><input type="text" >
+            <p>昵称：</p><input type="text" id="name" >
         </div>
 
-        <li><div class="model"><div id="sex" >性别：</div><div class="write"><input type="text" name="sex_type" ></div></div></li>
-        <li><div class="model"><div id="birthday">出生年月日：</div><div class="write"><input type="date" name="birthday" ></div></div></li>
-        <li><div class="model"><div id="constellation">星座：</div><div class="write"><input type="text" name="constellation" ></div></div></li>
-        <li><div class="model"><div id="like">爱好：</div><div class="write"><input type="text" name="like"></div></div></li>
-        <li><div class="model"><div id="sign">个性签名：</div><div class="write"><input type="text" name="sign" ></div></div></li>
+        <li><div class="model"><div id="sex" >性别：</div><div class="write"><input type="text" id="sex_type" ></div></div></li>
+        <li><div class="model"><div id="birthday">出生年月日：</div><div class="write"><input type="date" id="birthdaydate" ></div></div></li>
+<!--  先不做星座的，从简单的做
+     <li><div class="model"><div id="constellation">星座：</div><div class="write"><input type="text" name="constellation" ></div></div></li>-->
+        <li><div class="model"><div id="like">爱好：</div><div class="write"><input type="text" id="fondness"></div></div></li>
+        <li><div class="model"><div id="sign">个性签名：</div><div class="write"><input type="text" id="signature" ></div></div></li>
 
         <li id="pass_button"><div class="model"><div class="write" id="change_password"><input  name="change_password" type="button" value="修改密码"></input></div></div></li>
 
-        <li class="change_pass" style="display: none"><div class="model"><div id="password_change1">密码：</div><div class="write"><input type="password" name="password_change1"></div></div></li>
+        <li class="change_pass" style="display: none"><div class="model"><div id="password_change1">密码：</div><div class="write"><input type="password" name="password_change1" id="passwordnumber"></div></div></li>
         <li class="change_pass" style="display: none"><div class="model"><div id="password_change2">确认新密码：</div><div class="write"><input type="password" name="password_change2"></div></div></li>
 
-        <li><div class="model"><div id="phone">电话号码：</div><div class="write"><input type="text" name="phone"></div></div></li>
+        <li><div class="model"><div id="phone">电话号码：</div><div class="write"><input type="text" id="phonenumber"></div></div></li>
 
 
         <div id="info_bottom">

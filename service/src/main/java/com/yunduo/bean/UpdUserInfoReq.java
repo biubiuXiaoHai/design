@@ -1,9 +1,14 @@
 package com.yunduo.bean;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
+
 
 @Data
 public class UpdUserInfoReq {
+    private Integer account;
+//    头像图片
+    private MultipartFile  file;
 
     private String name;
 
@@ -15,16 +20,13 @@ public class UpdUserInfoReq {
 
     private String sex;
 
-    private Integer birthday;
+    private String  birthday;
 
-    private Byte constellationsid;
+//    private Byte constellationsid;
 
     private String fondness;
 
     private String signature;
 
-    private Byte vip_static;
-
-    private Integer sum_date;
 
 }

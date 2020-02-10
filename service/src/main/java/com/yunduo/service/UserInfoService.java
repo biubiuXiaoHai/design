@@ -3,7 +3,9 @@ package com.yunduo.service;
 import com.yunduo.bean.*;
 
 public interface UserInfoService {
-    public LoginRsq Login(LoginReq model);
-    public RegisterRsq register(RegisterReq model);
-    public FindUserInfoRsq findUserInfo(Integer userid);
+    public LoginRsp Login(LoginReq model);
+    public RegisterRsp register(RegisterReq model);
+    public Integer updUserInfo(UpdUserInfoReq model);
+    public FindUserInfoRsp findUserInfo(Integer userid);
+    public StatisticsInfoRsp statisticsInfo(Integer account);
 }

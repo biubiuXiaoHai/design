@@ -3,7 +3,7 @@ package com.yunduo.bean;
 import lombok.Data;
 
 @Data
-public class FindUserInfoRsq {
+public class FindUserInfoRsp {
     private Integer account;
 
     private String name;
@@ -18,7 +18,7 @@ public class FindUserInfoRsq {
 
     private Integer birthday;
 
-    private Byte constellationsid;
+//    private Byte constellationsid;
 
     private String fondness;
 

@@ -4,17 +4,12 @@ import com.yunduo.bean.*;
 import com.yunduo.service.HomeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.management.relation.Relation;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @RestController
@@ -40,7 +35,7 @@ public class HomeController {
 //        return null;
 //
 //    }
-    public  updUserHeadRsq updUserHead(MultipartFile filePart) throws IOException {
+    public updUserHeadRsp updUserHead(MultipartFile filePart) throws IOException {
             /**
              * 可以加注解的形式给简化
             * */
@@ -59,14 +54,14 @@ public class HomeController {
 
     @PostMapping("findUserInfo")
     @ApiOperation("获取用户个人资料")
-    public FindUserRsq findUserInfo (FindUserReq model){
+    public FindUserRsp findUserInfo (FindUserReq model){
 
         return null;
     }
 
     @PostMapping("findOverView")
     @ApiOperation("获取左侧的总览信息")
-    public findOverViewRsq findOverView(findOverViewReq model){
+    public findOverViewRsp findOverView(findOverViewReq model){
         return null;
     }
 }

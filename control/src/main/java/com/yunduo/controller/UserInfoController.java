@@ -29,7 +29,7 @@ public class UserInfoController {
      */
     @PostMapping("login")
     @ApiOperation("登录信息")
-    public LoginRsq Login(LoginReq model){
+    public LoginRsp Login(LoginReq model){
         return userInfoService.Login(model);
     }
 
@@ -40,7 +40,7 @@ public class UserInfoController {
      */
     @PostMapping("register")
     @ApiOperation("注册信息填写")
-    public RegisterRsq Register(RegisterReq model){
+    public RegisterRsp Register(RegisterReq model){
         return userInfoService.register(model);
     }
 
@@ -49,7 +49,7 @@ public class UserInfoController {
      */
     @PostMapping("findUserInfo")
     @ApiOperation("获取用户个人信息")
-    public FindUserInfoRsq findUserInfo(Integer userid){
+    public FindUserInfoRsp findUserInfo(Integer userid){
      return   userInfoService.findUserInfo(userid);
     }
 
@@ -59,7 +59,7 @@ public class UserInfoController {
     @PostMapping("updUserInfo")
     @ApiOperation("修改用户个人信息")
     public Integer updUserInfo(UpdUserInfoReq model){
-    return null;
+        return userInfoService.updUserInfo(model);
     }
     /**
      * 更换头像 (转换显示)
@@ -89,12 +89,16 @@ public class UserInfoController {
         }
             System.out.println(dest.getPath());
         System.out.println("路径："+dest.getPath()+"    文件名"+dest.getName());
-        return "http://49.235.40.252:8090/temp-rainy/"+fileName;
+        return "http://127.0.0.1:8090/temp-rainy/"+fileName;
     }
 
     /**
      * 左侧统计总览信息（说说/留言/相册数量）
      */
+    @PostMapping("statisticsInfo")
+    public StatisticsInfoRsp statisticsInfo(Integer account){
+        return userInfoService.statisticsInfo(account);
+    }
 
     /**好友动态页的
      *

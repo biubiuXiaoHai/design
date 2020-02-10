@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @ApiModel("总览信息响应")
-public class findOverViewRsq {
+public class findOverViewRsp {
     @ApiModelProperty("留言数量")
     private int message;
     @ApiModelProperty("说说数量")

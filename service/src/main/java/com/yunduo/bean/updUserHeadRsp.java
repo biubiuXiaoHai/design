@@ -3,6 +3,6 @@ package com.yunduo.bean;
 import lombok.Data;
 
 @Data
-public class updUserHeadRsq {
+public class updUserHeadRsp {
     private byte[] photo;
 }
