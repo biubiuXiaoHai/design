@@ -28,6 +28,9 @@
   <select id="selectByPhoneAll" parameterType="java.lang.String" resultMap="BaseResultMap">
     select * from users where  phone=${phone};
   </select>
+  <select id="findUserFriend" resultType="com.yunduo.entities.Users">
+    select * from users where name=${info} or phone=${info} or account=${info};
+  </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

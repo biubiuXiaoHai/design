@@ -1,6 +1,8 @@
 package com.yunduo.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.yunduo.bean.*;
+import com.yunduo.entities.Users;
 import com.yunduo.service.UserInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Api(value = "UserInfoController" ,description = "用户信息")
@@ -67,6 +70,7 @@ public class UserInfoController {
      * @return
      */
     @PostMapping("updateInfo")
+    @ApiOperation("仅仅只是转换头像的实时显示而已，不改数据库")
     public String updateInfo(@RequestParam("file") MultipartFile file){
         System.out.println("ok it work");
         //获取原来的文件名
@@ -87,8 +91,8 @@ public class UserInfoController {
             System.out.println("传输过程有误！");
             e.printStackTrace();
         }
-            System.out.println(dest.getPath());
-        System.out.println("路径："+dest.getPath()+"    文件名"+dest.getName());
+//            System.out.println(dest.getPath());
+//        System.out.println("路径："+dest.getPath()+"    文件名"+dest.getName());
         return "http://127.0.0.1:8090/temp-rainy/"+fileName;
     }
 
@@ -96,6 +100,7 @@ public class UserInfoController {
      * 左侧统计总览信息（说说/留言/相册数量）
      */
     @PostMapping("statisticsInfo")
+    @ApiOperation("左侧统计总览信息（说说/留言/相册数量）")
     public StatisticsInfoRsp statisticsInfo(Integer account){
         return userInfoService.statisticsInfo(account);
     }
@@ -111,6 +116,11 @@ public class UserInfoController {
      *
      * 搜索好友
      */
+    @PostMapping("findUserFriend")
+    @ApiOperation("搜索好友(通过账号，手机号，昵称等搜素)")
+    public List<Users> findUserFriend(String  info){
+        return userInfoService.findUserFriend(info);
+    }
 }
 
 

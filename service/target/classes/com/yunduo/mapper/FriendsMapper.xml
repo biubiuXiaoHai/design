@@ -9,6 +9,14 @@
   <sql id="Base_Column_List">
     id, master_id, friend_id
   </sql>
+  <select id="findFriendNumber" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+    select count (*) from friends where master_id=${master_id, jdbcType=INTEGER}
+  </select>
+  <select id="findFriendList" parameterType="java.lang.Integer" resultType="com.yunduo.entities.Users">
+    select * from users inner join friends on users.account=friends.master_id  where friends.master_id=${account,jdbcType=INTEGER}
+  </select>
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

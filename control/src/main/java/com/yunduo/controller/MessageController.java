@@ -1,4 +1,14 @@
 package com.yunduo.controller;
 
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("message")
 public class MessageController {
+    @PostMapping("findMessage")
+    public  String findMessage(String  model){
+        return null;
+    }
 }

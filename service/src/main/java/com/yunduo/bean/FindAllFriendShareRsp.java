@@ -1,10 +1,9 @@
-package com.yunduo.entities;
+package com.yunduo.bean;
 
 import lombok.Data;
 
-import java.util.Date;
 @Data
-public class Share {
+public class FindAllFriendShareRsp {
     private Integer id;
 
     private Integer master_id;

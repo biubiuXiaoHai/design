@@ -1,5 +1,6 @@
 package com.yunduo.service.serviceImp;
 
+import com.github.pagehelper.PageInfo;
 import com.yunduo.bean.*;
 import com.yunduo.dao.UsersMapper;
 import com.yunduo.entities.Users;
@@ -12,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -136,5 +138,15 @@ public class UserInfoServiceImp  implements UserInfoService {
     public StatisticsInfoRsp statisticsInfo(Integer account) {
 //        等后期再开发
         return null;
+    }
+
+    /**
+     * 查找好友用户
+     * @param info
+     * @return
+     */
+    @Override
+    public List<Users> findUserFriend(String info) {
+    return  usersMapper.findUserFriend(info);
     }
 }

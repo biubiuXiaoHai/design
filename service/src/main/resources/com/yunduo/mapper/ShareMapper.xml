@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.yunduo.entities.Share">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="master_id" jdbcType="INTEGER" property="master_id" />
-    <result column="share_time" jdbcType="TIMESTAMP" property="share_time" />
+    <result column="share_time" jdbcType="VARCHAR" property="share_time" />
     <result column="picture1" jdbcType="VARCHAR" property="picture1" />
     <result column="picture2" jdbcType="VARCHAR" property="picture2" />
     <result column="picture3" jdbcType="VARCHAR" property="picture3" />
@@ -21,6 +21,14 @@
     id, master_id, share_time, picture1, picture2, picture3, picture4, picture5, picture6, 
     picture7, picture8, picture9, words, saw_time
   </sql>
+  <select id="selectByMasteridAndTime" resultType="com.yunduo.entities.Share">
+    select * from share where master_id=#{master_id} and share_time=#{share_time};
+  </select>
+  <select id="findAllFriendShare" parameterType="java.lang.Integer" resultType="com.yunduo.entities.Share">
+    select * from share where master_id=#{master_id};
+  </select>
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -37,7 +45,7 @@
       picture4, picture5, picture6, 
       picture7, picture8, picture9, 
       words, saw_time)
-    values (#{id,jdbcType=INTEGER}, #{master_id,jdbcType=INTEGER}, #{share_time,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{master_id,jdbcType=INTEGER}, #{share_time,jdbcType=VARCHAR},
       #{picture1,jdbcType=VARCHAR}, #{picture2,jdbcType=VARCHAR}, #{picture3,jdbcType=VARCHAR}, 
       #{picture4,jdbcType=VARCHAR}, #{picture5,jdbcType=VARCHAR}, #{picture6,jdbcType=VARCHAR}, 
       #{picture7,jdbcType=VARCHAR}, #{picture8,jdbcType=VARCHAR}, #{picture9,jdbcType=VARCHAR}, 
@@ -97,7 +105,7 @@
         #{master_id,jdbcType=INTEGER},
       </if>
       <if test="share_time != null">
-        #{share_time,jdbcType=TIMESTAMP},
+        #{share_time,jdbcType=VARCHAR},
       </if>
       <if test="picture1 != null">
         #{picture1,jdbcType=VARCHAR},
@@ -141,7 +149,7 @@
         master_id = #{master_id,jdbcType=INTEGER},
       </if>
       <if test="share_time != null">
-        share_time = #{share_time,jdbcType=TIMESTAMP},
+        share_time = #{share_time,jdbcType=VARCHAR},
       </if>
       <if test="picture1 != null">
         picture1 = #{picture1,jdbcType=VARCHAR},
@@ -182,7 +190,7 @@
   <update id="updateByPrimaryKey" parameterType="com.yunduo.entities.Share">
     update share
     set master_id = #{master_id,jdbcType=INTEGER},
-      share_time = #{share_time,jdbcType=TIMESTAMP},
+      share_time = #{share_time,jdbcType=VARCHAR},
       picture1 = #{picture1,jdbcType=VARCHAR},
       picture2 = #{picture2,jdbcType=VARCHAR},
       picture3 = #{picture3,jdbcType=VARCHAR},

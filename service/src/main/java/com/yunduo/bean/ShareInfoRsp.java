@@ -1,13 +1,10 @@
-package com.yunduo.entities;
+package com.yunduo.bean;
 
 import lombok.Data;
 
-import java.util.Date;
 @Data
-public class Share {
+public class ShareInfoRsp {
     private Integer id;
-
-    private Integer master_id;
 
     private String share_time;
 
@@ -32,5 +29,8 @@ public class Share {
     private String words;
 
     private Integer saw_time;
-
+    //用户信息
+    private Integer account;
+    private String avatar;
+    private String name;
 }
