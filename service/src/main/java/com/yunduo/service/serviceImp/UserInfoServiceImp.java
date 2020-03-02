@@ -112,8 +112,9 @@ public class UserInfoServiceImp  implements UserInfoService {
             System.out.println("传输过程异常！");
             e.printStackTrace();
         }
-        model.setAvatar(filepath+filename);
+//        model.setAvatar(filepath+filename);
         Users user=CloneUtil.cloneObj(model,Users.class);
+        user.setAvatar(filepath+filename);
         usersMapper.updateByPrimaryKeySelective(user);
         System.out.println("更新成功了！");
         return 1;

@@ -83,7 +83,7 @@
             <version>2.6.1</version>
         </dependency>
 
-        <!--                一定要引入mybatis的启动项，就是在启动项目的时候会去加载mybatis，进行检查，被卡了一天-->
+        <!--一定要引入mybatis的启动项，就是在启动项目的时候会去加载mybatis，进行检查，被卡了一天-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>

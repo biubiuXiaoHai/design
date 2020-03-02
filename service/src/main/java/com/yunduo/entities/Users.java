@@ -1,5 +1,8 @@
 package com.yunduo.entities;
 
+import io.swagger.annotations.ApiModel;
+
+@ApiModel("用户信息")
 public class Users {
     private Integer account;
 

@@ -1,4 +1,4 @@
-//import org.mybatis.spring.annotation.MapperScan;
+
 package com.yunduo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

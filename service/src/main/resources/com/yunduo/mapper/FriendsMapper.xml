@@ -5,17 +5,24 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="master_id" jdbcType="INTEGER" property="master_id" />
     <result column="friend_id" jdbcType="INTEGER" property="friend_id" />
+    <result column="add_time" jdbcType="VARCHAR" property="add_time" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, master_id, friend_id
+    id, master_id, friend_id, add_time
   </sql>
+
+  <update id="updBecomeFriendTime" parameterType="com.yunduo.entities.Friends" >
+    update friends
+    set add_time=#{add_time}
+    where master_id=#{friend_id} and friend_id=#{master_id};
+  </update>
+
   <select id="findFriendNumber" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
-    select count (*) from friends where master_id=${master_id, jdbcType=INTEGER}
+    select count(*) from friends where master_id=${master_id, jdbcType=INTEGER};
   </select>
   <select id="findFriendList" parameterType="java.lang.Integer" resultType="com.yunduo.entities.Users">
     select * from users inner join friends on users.account=friends.master_id  where friends.master_id=${account,jdbcType=INTEGER}
   </select>
-
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -28,10 +35,10 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.yunduo.entities.Friends">
-    insert into friends (id, master_id, friend_id
-      )
-    values (#{id,jdbcType=INTEGER}, #{master_id,jdbcType=INTEGER}, #{friend_id,jdbcType=INTEGER}
-      )
+    insert into friends (id, master_id, friend_id, 
+      add_time)
+    values (#{id,jdbcType=INTEGER}, #{master_id,jdbcType=INTEGER}, #{friend_id,jdbcType=INTEGER}, 
+      #{add_time,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.yunduo.entities.Friends">
     insert into friends
@@ -45,6 +52,9 @@
       <if test="friend_id != null">
         friend_id,
       </if>
+      <if test="add_time != null">
+        add_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -55,6 +65,9 @@
       </if>
       <if test="friend_id != null">
         #{friend_id,jdbcType=INTEGER},
+      </if>
+      <if test="add_time != null">
+        #{add_time,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -67,13 +80,17 @@
       <if test="friend_id != null">
         friend_id = #{friend_id,jdbcType=INTEGER},
       </if>
+      <if test="add_time != null">
+        add_time = #{add_time,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.yunduo.entities.Friends">
     update friends
     set master_id = #{master_id,jdbcType=INTEGER},
-      friend_id = #{friend_id,jdbcType=INTEGER}
+      friend_id = #{friend_id,jdbcType=INTEGER},
+      add_time = #{add_time,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -6,8 +6,9 @@ import com.yunduo.entities.Users;
 import java.util.List;
 
 public interface FriendsMapper {
-    int findFriendNumber(Integer master_id);
-    List<Users>findFriendList(Integer account );
+    Integer updBecomeFriendTime(Friends model);
+    Integer findFriendNumber(Integer master_id);
+    List<Users> findFriendList(Integer account );
 
     int deleteByPrimaryKey(Integer id);
 

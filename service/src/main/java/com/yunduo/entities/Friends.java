@@ -7,6 +7,8 @@ public class Friends {
 
     private Integer friend_id;
 
+    private String add_time;
+
     public Integer getId() {
         return id;
     }
@@ -29,5 +31,13 @@ public class Friends {
 
     public void setFriend_id(Integer friend_id) {
         this.friend_id = friend_id;
+    }
+
+    public String getAdd_time() {
+        return add_time;
+    }
+
+    public void setAdd_time(String add_time) {
+        this.add_time = add_time == null ? null : add_time.trim();
     }
 }

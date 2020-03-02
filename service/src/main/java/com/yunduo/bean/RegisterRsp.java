@@ -13,6 +13,4 @@ public class RegisterRsp {
     private Integer account;
     @ApiModelProperty("登录密码")
     private String password;
-
-
 }

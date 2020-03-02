@@ -25,7 +25,7 @@ public class UserInfoController {
     @Autowired
     UserInfoService userInfoService;
 
-    /***
+    /***   已完成无误
      * 登录
      * @param model
      * @return
@@ -36,7 +36,7 @@ public class UserInfoController {
         return userInfoService.Login(model);
     }
 
-    /**
+    /**  已完成无误
      * 注册
      * @param model
      * @return
@@ -56,7 +56,7 @@ public class UserInfoController {
      return   userInfoService.findUserInfo(userid);
     }
 
-    /**
+    /**  已完成
      * 修改用户信息
      */
     @PostMapping("updUserInfo")

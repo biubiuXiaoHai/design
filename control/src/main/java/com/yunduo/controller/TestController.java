@@ -2,6 +2,7 @@ package com.yunduo.controller;
 
 import com.yunduo.bean.UpdUserInfoReq;
 import com.yunduo.bean.updUserInfoRsp;
+import io.swagger.annotations.Api;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 @RestController
+@Api(value = "TestController" ,description = "测试接口的集合")
 public class TestController {
     @GetMapping(value = "/file")
     public String file() {

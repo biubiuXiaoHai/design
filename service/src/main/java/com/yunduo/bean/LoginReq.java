@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 @ApiModel("登录请求")
 public class LoginReq {
-    @ApiModelProperty("账号")
+    @ApiModelProperty("账号/手机号")
     private Integer account;
-    @ApiModelProperty
+    @ApiModelProperty("密码")
     private String password;
 }

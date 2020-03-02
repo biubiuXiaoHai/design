@@ -21,8 +21,8 @@ public class SwaggerConfig {
                 .apiInfo(getApiInfo())
                 .select()// 选择那些路径和api会生成document
 
-//                .apis(RequestHandlerSelectors.basePackage(""))// 对所有api进行监控  //错误路径不监控
-//                .paths(PathSelectors.any()) // 对根下所有路径进行监控
+                .apis(RequestHandlerSelectors.basePackage(""))// 对所有api进行监控  //错误路径不监控
+                .paths(PathSelectors.any()) // 对根下所有路径进行监控
                 .build();
     }
 

@@ -52,10 +52,15 @@
 <!--               enableSelectByExample="false" enableUpdateByExample="false">-->
 <!--            <property name="useActualColumnNames" value="true" />-->
 <!--        </table>-->
-        <table tableName="share" domainObjectName="Share"
+        <table tableName="friendapplication" domainObjectName="FriendApplication"
                enableCountByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" enableUpdateByExample="false">
             <property name="useActualColumnNames" value="true" />
         </table>
+<!--        <table tableName="share" domainObjectName="Share"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false">-->
+<!--            <property name="useActualColumnNames" value="true" />-->
+<!--        </table>-->
     </context>
 </generatorConfiguration>

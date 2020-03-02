@@ -5,10 +5,10 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-@ApiModel
-public class AddFriendReq {
+@ApiModel("删除好友请求")
+public class DeleteFriendReq {
     @ApiModelProperty("主人的id")
     private Integer master_id;
-    @ApiModelProperty("好友的id")
+    @ApiModelProperty("被删除者的id")
     private Integer friend_id;
 }
