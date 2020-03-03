@@ -3,7 +3,10 @@ package com.yunduo.bean;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Date;
 
 
 @Data
@@ -13,7 +16,7 @@ public class UpdUserInfoReq {
     private Integer account;
 //    头像图片
     @ApiModelProperty("账号")
-    private MultipartFile  file;
+    private MultipartFile  file=null;
     @ApiModelProperty("昵称")
     private String name;
     @ApiModelProperty("密码")
@@ -24,8 +27,9 @@ public class UpdUserInfoReq {
     private String avatar;
     @ApiModelProperty("性别")
     private String sex;
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     @ApiModelProperty("生日")
-    private String  birthday;
+    private Date birthday;
 
 //    private Byte constellationsid;
     @ApiModelProperty("爱好")

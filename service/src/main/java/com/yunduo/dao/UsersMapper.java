@@ -5,9 +5,11 @@ import com.yunduo.entities.Users;
 import java.util.List;
 
 public interface UsersMapper {
+
     int selectByPhone(String phone);
     Users selectByPhoneAll(String phone);
     List<Users> findUserFriend(String info);
+
 
     int deleteByPrimaryKey(Integer account);
 

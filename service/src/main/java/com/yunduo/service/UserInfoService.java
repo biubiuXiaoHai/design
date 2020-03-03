@@ -1,6 +1,5 @@
 package com.yunduo.service;
 
-import com.github.pagehelper.PageInfo;
 import com.yunduo.bean.*;
 import com.yunduo.entities.Users;
 

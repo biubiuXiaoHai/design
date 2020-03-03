@@ -8,7 +8,7 @@
     <result column="phone" jdbcType="CHAR" property="phone" />
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
     <result column="sex" jdbcType="CHAR" property="sex" />
-    <result column="birthday" jdbcType="INTEGER" property="birthday" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
     <result column="constellationsid" jdbcType="TINYINT" property="constellationsid" />
     <result column="fondness" jdbcType="VARCHAR" property="fondness" />
     <result column="signature" jdbcType="VARCHAR" property="signature" />
@@ -18,8 +18,9 @@
   </resultMap>
   <sql id="Base_Column_List">
     account, name, password, phone, avatar, sex, birthday, constellationsid, fondness, 
-    signature, vip_static,last_date, sum_date
+    signature, vip_static, last_date, sum_date
   </sql>
+
   <!--新增的SQL-->
   <select id="selectByPhone" parameterType="java.lang.String" resultType="java.lang.Integer">
     select count(*) from users where phone=${phone};
@@ -28,9 +29,11 @@
   <select id="selectByPhoneAll" parameterType="java.lang.String" resultMap="BaseResultMap">
     select * from users where  phone=${phone};
   </select>
-  <select id="findUserFriend" resultType="com.yunduo.entities.Users">
-    select * from users where name like "%"${info}"%" or phone=${info} or account=${info};
+  <select id="findUserFriend" parameterType="java.lang.String" resultType="com.yunduo.entities.Users">
+    select * from users where name like "%"#{info}"%" or phone=#{info} or account=#{info};
   </select>
+
+
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -46,11 +49,13 @@
     insert into users (account, name, password, 
       phone, avatar, sex, birthday, 
       constellationsid, fondness, signature, 
-      vip_static,last_date, sum_date)
+      vip_static, last_date, sum_date
+      )
     values (#{account,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=CHAR}, #{avatar,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=INTEGER}, 
+      #{phone,jdbcType=CHAR}, #{avatar,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=TIMESTAMP}, 
       #{constellationsid,jdbcType=TINYINT}, #{fondness,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, 
-      #{vip_static,jdbcType=TINYINT}, #{last_date,jdbcType=VARCHAR},#{sum_date,jdbcType=INTEGER})
+      #{vip_static,jdbcType=TINYINT}, #{last_date,jdbcType=VARCHAR}, #{sum_date,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.yunduo.entities.Users">
     insert into users
@@ -115,7 +120,7 @@
         #{sex,jdbcType=CHAR},
       </if>
       <if test="birthday != null">
-        #{birthday,jdbcType=INTEGER},
+        #{birthday,jdbcType=TIMESTAMP},
       </if>
       <if test="constellationsid != null">
         #{constellationsid,jdbcType=TINYINT},
@@ -129,8 +134,8 @@
       <if test="vip_static != null">
         #{vip_static,jdbcType=TINYINT},
       </if>
-      <if test="last_date !=null">
-        #{last_date,jdbcType=INTEGER},
+      <if test="last_date != null">
+        #{last_date,jdbcType=VARCHAR},
       </if>
       <if test="sum_date != null">
         #{sum_date,jdbcType=INTEGER},
@@ -156,7 +161,7 @@
         sex = #{sex,jdbcType=CHAR},
       </if>
       <if test="birthday != null">
-        birthday = #{birthday,jdbcType=INTEGER},
+        birthday = #{birthday,jdbcType=TIMESTAMP},
       </if>
       <if test="constellationsid != null">
         constellationsid = #{constellationsid,jdbcType=TINYINT},
@@ -171,7 +176,7 @@
         vip_static = #{vip_static,jdbcType=TINYINT},
       </if>
       <if test="last_date != null">
-      last_date = #{last_date,jdbcType=VARCHAR},
+        last_date = #{last_date,jdbcType=VARCHAR},
       </if>
       <if test="sum_date != null">
         sum_date = #{sum_date,jdbcType=INTEGER},
@@ -186,12 +191,12 @@
       phone = #{phone,jdbcType=CHAR},
       avatar = #{avatar,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=CHAR},
-      birthday = #{birthday,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
       constellationsid = #{constellationsid,jdbcType=TINYINT},
       fondness = #{fondness,jdbcType=VARCHAR},
       signature = #{signature,jdbcType=VARCHAR},
       vip_static = #{vip_static,jdbcType=TINYINT},
-      last_date =#{last_date,jdbcType=VARCHAR},
+      last_date = #{last_date,jdbcType=VARCHAR},
       sum_date = #{sum_date,jdbcType=INTEGER}
     where account = #{account,jdbcType=INTEGER}
   </update>

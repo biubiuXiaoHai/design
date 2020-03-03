@@ -9,6 +9,37 @@
     2.我已阅读。。。必须要打钩才能提交
     3.提交跳转（验证信息，手机号是否被注册）
 -->
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#nowregister").click(function () {
+                alert("立即注册")
+                $.ajax({
+                    url:"http://127.0.0.1:8090/userinfo/register",
+                    dataType:"json",
+                    type:"post",
+                    data:{
+                        name:$("input[name='name']").val(),
+                        password:$("input[name='password']").val(),
+                        phone:$("input[name='phone']").val(),
+                    },
+                    success:function (data) {
+                        if(data.result==1){
+                            alert("注册成功")
+                            //还有注册成功提示框：显示账号密码的没做
+                            window.location.href="http://127.0.01:8090/html/Login.html"
+                        }if(data.result==2){
+                            alert("该手机号已经被注册")
+                        }
+                    },error: function (data) {
+                        alert("注册失败,请联系兰国海")
+                    }
+
+                })
+            })
+        })
+    </script>
+
 </head>
 <body>
 <!--左侧部分-->
@@ -25,11 +56,11 @@
      </div>
          <div id="Register">
              <ul>
-             <li class="box_big"><input type="text" value placeholder="请输入您的 昵称 "></li>
+             <li class="box_big"><input name="name" type="text" value placeholder="请输入您的 昵称 "></li>
              <li class="box_small"><div>该昵称字符长度过长</div></li>
-             <li class="box_big"><input type="password" value placeholder="请输入您的 密码 "></li>
+             <li class="box_big"><input  name="password" type="password" value placeholder="请输入您的 密码 "></li>
              <li class="box_small"><div>该密码不符合规范</div></li>
-             <li class="box_big"><input type="text" value placeholder="请输入手机号码 "></li>
+             <li class="box_big"><input name="phone" type="text" value placeholder="请输入手机号码 "></li>
              <li class="box_small"><div>该手机号已经被注册</div></li>
              </ul>
              <div id="nowregister">

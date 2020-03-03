@@ -1,14 +1,10 @@
 package com.yunduo.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.yunduo.bean.AddFriendReq;
-import com.yunduo.bean.AddFriendSuccessReq;
-import com.yunduo.bean.DeleteFriendReq;
-import com.yunduo.bean.FindFriendListReq;
+import com.yunduo.bean.*;
 import com.yunduo.entities.Users;
 import com.yunduo.service.FriendsService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,7 +37,7 @@ public class FriendsController {
     }
 
     /**
-     * 添加好友功能
+     * 点击 添加好友
      */
     @PostMapping("addFriend")
     @ApiOperation("添加好友功能")
@@ -62,14 +58,17 @@ public class FriendsController {
     /**
      * 对方拒绝了添加为好友
      */
-//    @PostMapping("addFriendfail")
+    @PostMapping("addFriendfail")
+    public Integer addFriendfail(AddFriendfailReq model){
+       return friendsService.addFriendFail(model);
+    }
     /**
      * 删除好友
      */
-//    @PostMapping("deleteFriend")
-//    public Integer deleteFriend(DeleteFriendReq model){
-//        return  friendsService.deleteFriend(model);
-//
-//    }
+    @PostMapping("deleteFriend")
+    public Integer deleteFriend(DeleteFriendReq model){
+        return  friendsService.deleteFriend(model);
+
+    }
 
 }

@@ -1,9 +1,7 @@
 package com.yunduo.service;
 
 import com.github.pagehelper.PageInfo;
-import com.yunduo.bean.AddFriendReq;
-import com.yunduo.bean.AddFriendSuccessReq;
-import com.yunduo.bean.FindFriendListReq;
+import com.yunduo.bean.*;
 import com.yunduo.entities.Users;
 
 public interface FriendsService {
@@ -11,4 +9,6 @@ public interface FriendsService {
     public PageInfo<Users> findFriendList(FindFriendListReq model);
     public Integer addFriend(AddFriendReq model);
     public Integer addFriendSuccess(AddFriendSuccessReq model);
+    public Integer addFriendFail(AddFriendfailReq model);
+    public Integer deleteFriend(DeleteFriendReq model);
 }

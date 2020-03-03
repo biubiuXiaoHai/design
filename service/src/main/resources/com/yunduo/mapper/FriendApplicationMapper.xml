@@ -13,6 +13,11 @@
   <sql id="Base_Column_List">
     id, master_id, friend_id, avatar, name, applicationtime, state
   </sql>
+  <delete id="deleteByMasterIdAndFriendId" parameterType="com.yunduo.bean.AddFriendfailReq">
+    delete friendapplication
+    where master_id=#{master_id} and friend_id=#{friend_id};
+
+  </delete>
   <update id="updApplyInfoState" parameterType="com.yunduo.entities.Friends">
     update friendapplication
     set state=2

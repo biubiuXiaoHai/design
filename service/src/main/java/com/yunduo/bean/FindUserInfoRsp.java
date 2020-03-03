@@ -3,6 +3,9 @@ package com.yunduo.bean;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Data
 @ApiModel("查找用户信息响应")
@@ -18,7 +21,8 @@ public class FindUserInfoRsp {
     @ApiModelProperty("性别")
     private String sex;
     @ApiModelProperty("生日")
-    private Integer birthday;
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    private Date birthday;
     @ApiModelProperty("爱好")
     private String fondness;
     @ApiModelProperty("个性签名")

@@ -31,7 +31,7 @@
                         password: $("#input_password").val()
                     },
                     success:function (data) {
-                      alert("成功了")
+                      // alert("成功了")
                         if(data.result==1){
                             alert("登录成功，欢迎: "+data.name);
                             document.cookie="cookie_username = "+data.name;
@@ -56,7 +56,7 @@
 
             //当 注册新账号 链接被点击时
             $("#nowRegister").click(function () {
-                alert("注册新账号")
+                // alert("注册新账号")
                 window.location.href="http://127.0.0.1:8090/html/Register.html"
             })
         })
@@ -107,6 +107,7 @@
         </div>
         <div id="last_3">
             <p>联系方式：QQ:919901896</p>
+            <p>联系方式：**********</p>
         </div>
     </div>
 </div>

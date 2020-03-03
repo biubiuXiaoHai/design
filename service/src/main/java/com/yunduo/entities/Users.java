@@ -1,8 +1,7 @@
 package com.yunduo.entities;
 
-import io.swagger.annotations.ApiModel;
+import java.util.Date;
 
-@ApiModel("用户信息")
 public class Users {
     private Integer account;
 
@@ -16,7 +15,7 @@ public class Users {
 
     private String sex;
 
-    private Integer birthday;
+    private Date birthday;
 
     private Byte constellationsid;
 
@@ -27,6 +26,7 @@ public class Users {
     private Byte vip_static;
 
     private String last_date;
+
     private Integer sum_date;
 
     public Integer getAccount() {
@@ -77,11 +77,11 @@ public class Users {
         this.sex = sex == null ? null : sex.trim();
     }
 
-    public Integer getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Integer birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
@@ -122,7 +122,7 @@ public class Users {
     }
 
     public void setLast_date(String last_date) {
-        this.last_date = last_date;
+        this.last_date = last_date == null ? null : last_date.trim();
     }
 
     public Integer getSum_date() {

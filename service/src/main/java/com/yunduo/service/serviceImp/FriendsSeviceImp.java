@@ -2,9 +2,7 @@ package com.yunduo.service.serviceImp;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.yunduo.bean.AddFriendReq;
-import com.yunduo.bean.AddFriendSuccessReq;
-import com.yunduo.bean.FindFriendListReq;
+import com.yunduo.bean.*;
 import com.yunduo.dao.FriendApplicationMapper;
 import com.yunduo.dao.FriendsMapper;
 import com.yunduo.dao.UsersMapper;
@@ -87,9 +85,19 @@ public class FriendsSeviceImp  implements FriendsService {
         //更新双方成为好友的时间
         friendsMapper.insertSelective(friend);
         friendsMapper.updBecomeFriendTime(friend);
-
+        //更新为已处理好友申请状态
         friendApplicationMapper.updApplyInfoState(friend);
+        return null;
+    }
 
+    @Override
+    public Integer addFriendFail(AddFriendfailReq model) {
+       return friendApplicationMapper.deleteByMasterIdAndFriendId(model);
+    }
+
+    @Override
+    public Integer deleteFriend(DeleteFriendReq model) {
+        friendsMapper.deleteByMasterIdAndFriendId(model);
         return null;
     }
 }

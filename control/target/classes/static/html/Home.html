@@ -50,7 +50,8 @@
                 },
                 success:function (data) {
                     userinfo.imgurl=data.avatar;
-                    alert("获取个人信息成功！")
+                    //     userinfo.imgurl="/images/兔子.jpg"
+                    // alert("获取个人信息成功！")
                 },error:function () {
                     alert("获取个人信息失败！")
                 }
@@ -58,14 +59,19 @@
 
             //点击头部 “个人首页”
             $("input[name='home']").click(function () {
-                // alert("home");
                 window.location.reload();
             })
-            //点击好友动态
+            //点击 "好友动态"
             // $("input[name='friend']").click(function () {
             //     alert("friend");
-            //     window.location.href
+            //     window.location.href="http://127.0.0.1:8090/html/Register.html"
             // })
+            //点击 “退出登录”
+            $("input[name='exit']").click(function(){
+                alert("点击退出登录")
+                window.location.href="http://127.0.0.1:8090/html/Login.html"
+            })
+
         //    点击个人首页
             $("#home_person").click(function () {
                 // alert("person");
@@ -100,7 +106,7 @@
             <li>
                 <input name="friend" type="button" value="好友动态">
             </li>
-            <li  style="float: right"> <input type="button" value="退出登录"></li>
+            <li  style="float: right"> <input name="exit" type="button" value="退出登录"></li>
         </div>
         <div id="person">
             <div id="person_space">

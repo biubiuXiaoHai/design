@@ -1,6 +1,5 @@
 package com.yunduo.service.serviceImp;
 
-import com.github.pagehelper.PageInfo;
 import com.yunduo.bean.*;
 import com.yunduo.dao.UsersMapper;
 import com.yunduo.entities.Users;
@@ -33,7 +32,7 @@ public class UserInfoServiceImp  implements UserInfoService {
         Users user =usersMapper.selectByPhoneAll(model.getAccount().toString());
         if(user!=null && model.getAccount().toString().equals(user.getPhone())){
             if(user.getPassword().equals(model.getPassword())) {
-                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
                 Date date=new Date();
 //                System.out.println(formatter.format(date));
                 String time=formatter.format(date);
@@ -86,7 +85,7 @@ public class UserInfoServiceImp  implements UserInfoService {
         int result=usersMapper.selectByPhone(model.getPhone());
         if(result==0){
             Users user= CloneUtil.cloneObj(model, Users.class);
-            user.setAvatar("../images/兔子.jpg");
+            user.setAvatar("/images/兔子.jpg");
             usersMapper.insertSelective(user);
             user=usersMapper.selectByPhoneAll(user.getPhone());
             registerRsp.setResult(1);
@@ -114,9 +113,9 @@ public class UserInfoServiceImp  implements UserInfoService {
         }
 //        model.setAvatar(filepath+filename);
         Users user=CloneUtil.cloneObj(model,Users.class);
-        user.setAvatar(filepath+filename);
+        user.setAvatar("/temp-rainy/"+filename);
         usersMapper.updateByPrimaryKeySelective(user);
-        System.out.println("更新成功了！");
+//        System.out.println("更新成功了！");
         return 1;
     }
 

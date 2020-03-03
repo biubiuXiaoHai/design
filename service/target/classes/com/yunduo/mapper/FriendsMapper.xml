@@ -11,6 +11,10 @@
     id, master_id, friend_id, add_time
   </sql>
 
+  <delete id="deleteByMasterIdAndFriendId">
+    delete  * from friends
+    where master_id=#{master_id} and Friend_id=#{friend_id};
+  </delete>
   <update id="updBecomeFriendTime" parameterType="com.yunduo.entities.Friends" >
     update friends
     set add_time=#{add_time}
