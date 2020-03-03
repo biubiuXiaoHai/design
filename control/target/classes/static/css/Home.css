@@ -1,0 +1,154 @@
+/*公共能用 部分的样式-------*/
+* {
+    margin: 0px 0px 0px 0px;
+}
+body{
+    width:1366px ;
+    height: 768px;
+}
+/*------------公共能用 部分的样式*/
+#header{
+    margin-left: 10%;
+    width: 80%;
+    height: 30%;
+    background-color: #eeeeee;
+}
+
+#menu{
+    width: 100%;
+    height: 25%;
+    background-color: #777777;
+}
+#logo{
+    width: 200px;
+    height: 100%;
+    float: left;
+}
+#logo p{
+    font-size: 38px;
+}
+#menu li{
+    margin-top: 6px;
+    margin-left: 10px;
+    list-style: none;
+    float: left;
+    /*background-color: #5bc0de;*/
+}
+#menu li input{
+    font-size: 25px;
+    background-color: #5bc0de;
+    border-radius: 15px;
+    color: #8c8c8c;
+}
+
+#person{
+    width: 100%;
+    height: 75%;
+    /*background-color: #eeeeee;*/
+}
+#person_space{
+    margin-top: 10px;
+    width: 50%;
+    height: 30px;
+    /*background-color: #3c763d;*/
+    align-content: center;
+}
+#user_title{
+    margin-left: 30px;
+    float: left;
+    font-size: 20px;
+}
+.user_name{
+    float: left;
+    font-size:20px;
+    color: cornflowerblue;
+}
+#head{
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 120px;
+    height: 120px;
+    background-color: #269abc;
+    border-radius: 2px;
+    float: left;
+}
+#head img{
+    margin-top: 2px;
+    margin-left: 2px;
+    width: 116px;
+    height: 116px;
+    border-radius: 8px;
+}
+#detail{
+    width:920px ;
+    height: 120px;
+    /*background-color: #9d9d9d;*/
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+#detail1{
+    /*background-color: red;*/
+    width: 920px;
+    height: 30px;
+}
+#detail2{
+    float: left;
+    /*background-color: yellow;*/
+    width: 200px;
+    height: 30px;
+    /*text-align: center;*/
+}
+#N{
+    color: red;
+}
+#detail3{
+    float: left;
+    background-color: whitesmoke;
+    width: 110px;
+    height: 40px;
+}
+#detail3  input{
+    width: 110px;
+    height: 40px;
+    font-size: 15px;
+    background-color: aqua;
+    border-radius: 10px;
+}
+#detail4{
+    float:none;
+    /*list-style: none;*/
+    margin-top: 80px;
+    margin-left: 30px;
+    width: 450px;
+    height: 40px;
+    /*background-color: #4cae4c;*/
+}
+#detail4 li{
+
+    list-style: none;
+    margin-left: 50px;
+    float: left;
+}
+#detail4 li a{
+    color: #8c8c8c;
+    font-size: 20px;
+}
+#detail4 li a:hover{
+    color: #122b40;
+}
+/*
+底部设计
+*/
+#bottom{
+    margin-top: 30px;
+    background-color: #9d9d9d;
+    margin-left: 10%;
+    width: 80%;
+    height: 100%;
+}
+#contain{
+    width: 100%;
+    height: 100%;
+
+}

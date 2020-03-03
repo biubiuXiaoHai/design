@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="../css/Login.css" rel="stylesheet">
+<!--    <link href="../css/bootstrap.min.css" rel="stylesheet">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,-->
+<!--                                     user-scalable=no">-->
+<!--   功能点清单：
+       1.输入账号密码登录，登录的信息提交
+       验证结果展示失败提醒，成功跳转页面（并记录cookie)
+       2.注册页的链接跳转
+-->
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+            //当鼠标移动到登录按时（应该是当账号，密码不为空时，按钮变深色）
+            // $("#login_button").hover(function () {
+            //     $(this).css("background-color","#286090")
+            // })
+            //当 登录 按钮被点击时
+            $("#login_button").click(function () {
+                // alert("ok");
+                $.ajax({
+                    url:"http://127.0.0.1:8090/userinfo/login",
+                    dataType:"json",
+                    type:"post",
+                    data:{
+                        account: $("#input_username").val(),
+                        password: $("#input_password").val()
+                    },
+                    success:function (data) {
+                      // alert("成功了")
+                        if(data.result==1){
+                            alert("登录成功，欢迎: "+data.name);
+                            document.cookie="cookie_username = "+data.name;
+                            document.cookie="cookie_account = "+data.account;
+                            window.location.href="http://127.0.0.1:8090/html/Home.html";
+                        }else if(data.result==2){
+                            $("#warmming").css("display","inline");
+                            $("#warm_info").attr("value","该账号不存在")
+                        }else if(data.result==3){
+                            $("#warmming").css("display","inline");
+                            $("#warm_info").attr("value","密码错误")
+                    }else{
+                            alert("这是个bug,请联系兰国海处理...")
+                        }
+                    },
+                    error:function () {
+                        alert("失败了,请联系兰国海处理...")
+                    }
+                })
+
+            })
+
+            //当 注册新账号 链接被点击时
+            $("#nowRegister").click(function () {
+                // alert("注册新账号")
+                window.location.href="http://127.0.0.1:8090/html/Register.html"
+            })
+        })
+    </script>
+</head>
+<body >
+<div class="base">
+<!--    左上的logo-->
+    <div class="logo">
+        <p id="word_big">&云朵空间</p>
+        <p id="underline">-------------------------------------</p>
+        <p id="word_small">记录美好生活，伴你成长每一天</p>
+    </div>
+<!--    核心的登录框-->
+    <div class="login">
+        <div id="title">账号密码登录</div>
+        <div id="username">
+            <input id="input_username" type="text" value placeholder=" 云朵账号/手机号"></input>
+        </div>
+        <div id="password">
+            <input id="input_password" type="password" value placeholder=" 密码">
+        </div>
+        <div id="warmming" style="display: none"><p id="warm_info">账号/密码错误</p></div>
+        <div id="login_button"><a>登 录</a></div>
+        <div id="last">
+            <li><a id="nowRegister">注册新账号</a></li>
+            <li><div id="black"> | </div></li>
+            <li><a id="foundPassword">找回密码</a></li>
+        </div>
+    </div>
+<!--    底部说明-->
+    <div class="bottom">
+        <div id="last_1">
+            <div id="last_1_local">
+        <li><a> 联系我们&nbsp</a></li>
+        <li><p>|</p></li>
+        <li><a> &nbsp常见问题解答&nbsp </a></li>
+        <li><p>|</p></li>
+        <li><a> &nbsp问题反馈&nbsp </a></li>
+        <li><p>|</p></li>
+        <li><a> &nbsp用户体验调查&nbsp </a></li>
+        <li><p>|</p></li>
+        <li><a> &nbsp改进意见&nbsp </a></li>
+            </div>
+        </div>
+        <div id="last_2">
+            <p>版权所有：<a>青岛大学</a>/<a>计算机科学技术学院</a>/<a>兰国海</a>/<a>梁昌腾</a></p>
+        </div>
+        <div id="last_3">
+            <p>联系方式：QQ:919901896</p>
+            <p>联系方式：**********</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

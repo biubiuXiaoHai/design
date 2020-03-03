@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Active</title>
+    <link href="../css/Home.css" rel="stylesheet">
+    <link href="../css/Active.css" rel="stylesheet">
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/vue.min.js"></script>
+    <script>
+        $(function () {
+                //获取cookie
+                //取出名字和用户的账号
+                function getCookie(cname) {
+                    var name = cname + "=";
+                    var decodedCookie = decodeURIComponent(document.cookie);
+                    var ca = decodedCookie.split(';');
+                    for (var i = 0; i < ca.length; i++) {
+                        var c = ca[i];
+                        while (c.charAt(0) == ' ') {
+                            c = c.substring(1);
+                        }
+                        if (c.indexOf(name) == 0) {
+                            return c.substring(name.length, c.length);
+                        }
+                    }
+                    return "";
+                }
+                var username = getCookie("cookie_username");
+                var account = getCookie("cookie_account");
+
+                //顶部的不动信息
+                var userinfo=new Vue({
+                    el:"#header",
+                    data:{
+                        username:username,
+                        imgurl:{},
+                        friendnumber:{},
+                    }
+                })
+                //右侧的搜索数据绑定
+                var searchlist=new Vue({
+                    el:"#search_content",
+                    data:{
+                        list:{}
+                    }
+                })
+            //获取用户的基本个人信息
+                $.ajax({
+                    url:"http://127.0.0.1:8090/userinfo/findUserInfo",
+                    dataType:"json",
+                    type:"post",
+                    data:{
+                        userid:account
+                    }
+                    ,success:function (data) {
+                        alert("获取个人信息成功")
+                        userinfo.imgurl=data.avatar;
+                    },error:function () {
+                        alert("网络开小差了。。。。")
+                    }
+                })
+            //获取用户好友数量
+            $.ajax({
+                url:"http://127.0.0.1:8090/friends/findFriendNumber",
+                dataType:"json",
+                type:"post",
+                data:{
+                    userid:account
+                }
+                ,success:function (data) {
+                    userinfo.friendnumber=data
+                },error:function () {
+                    alert("网络开小差了。。。。")
+                }
+            })
+            //点击 搜索
+            $("#search_button").click(function () {
+                alert("搜索")
+                $.ajax({
+                    url:"http://127.0.0.1:8090/userinfo/findUserFriend",
+                    dataType:"json",
+                    type:"post",
+                    data:{
+                        info:$("#search_input").val(),
+                    },
+                    success:function (data) {
+                        alert("搜索成功")
+                        alert(data);
+                        searchlist.list=data;
+
+                    },error:function () {
+                        alert("请联系兰国海解决问题")
+                    }
+
+                })
+            })
+
+            //点击顶部的 个人首页
+            $("#home").click(function () {
+                window.location.href="http://127.0.0.1:8090/html/Home.html"
+            })
+            //点击顶部的 好友动态
+            $("#active").click(function () {
+                window.location.reload();
+            })
+            //点击顶部的 退出登录
+            $("#exit").click(function () {
+                window.location.href="http://127.0.0.1/8090/html/Login.html"
+            })
+
+            })
+    </script>
+</head>
+<body>
+<!--    固定的头部-->
+<div id="header">
+    <div id="menu">
+        <div id="logo"><p>&云朵空间</p></div>
+        <li>
+            <input id="home" type="button" value="个人首页">
+        </li>
+        <li>
+            <input id="active" type="button" value="好友动态">
+        </li>
+        <li  style="float: right"> <input id="exit" type="button" value="退出登录"></li>
+    </div>
+    <div id="person">
+        <div id="person_space">
+            <b id="user_title"><b class="user_name">{{username}}</b>的好友动态</b>
+        </div>
+        <div id="head"><img v-bind:src="imgurl"></div>
+        <div id="detail">
+            <div class="user_name" id="detail1">
+                {{username}}
+            </div>
+            <div id="detail2">已有 <b id="N">{{friendnumber}}</b> 位云朵空间好友</div>
+            <div id="detail3"><input type="button" value="开通云朵会员"></input></div>
+            <div id="detail4">
+                <li><a>说说</a></li>
+                <li><a>留言</a></li>
+                <li><a>相册</a></li>
+            </div>
+        </div>
+    </div>
+</div>
+<!--变换的底部-->
+<div id="bottom">
+        <div id="left">
+            <div id="left_list">
+                <div id="left_list_title">好友列表</div>
+                <div id="left_list_content">
+                        <div class="friendmodel" >
+                            <img src="../images/兔子.jpg"><p>用户的昵称</p><div>删除好友</div>
+                        </div>
+                </div>
+                <div id="left_list_page"><p>首页</p><p>上一页</p><p>下一页</p><p>尾页</div>
+            </div>
+        </div>
+        <div id="center"></div>
+        <div id="right">
+            <div id="search">
+                <div id="search_top">
+                        <div id="right_title">搜索添加云朵好友</div>
+                        <div id="right_content"><input id="search_input" type="text" value placeholder="云朵账号/电话/昵称/关键字"><div id="search_button">搜索</div></div>
+                </div>
+                <div id="search_content">
+                    <div class="result_model" v-for="(user,i) in list">
+                        <img v-bind:src="user.avatar"><p>{{user.name}}</p><div>添加好友</div>
+                    </div>
+                </div>
+                <div id="right_list_page"><p>首页</p><p>上一页</p><p>下一页</p><p>尾页</p></div>
+            </div>
+        </div>
+
+</div>
+
+</body>
+</html>
