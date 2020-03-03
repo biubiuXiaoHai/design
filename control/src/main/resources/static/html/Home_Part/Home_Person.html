@@ -101,6 +101,8 @@
                     alert("进入测试集")
                     alert($("#passwordnumber").val());
                 formdata.append("account",account),
+
+                    //有bug需要选择判断需要传的数据才传
                 // var files=$("#new_head").[0].files[0];
                 // if($("#new_head").value.length>0) {
                 //     alert("头像为空");
@@ -115,11 +117,13 @@
                 formdata.append("birthday",$("#birthdaydate").val()),
                 formdata.append("fondness",$("#fondness").val()),
                 formdata.append("signature",$("#signature").val()),
-                if($("#passwordnumber").val()==null||$("#passwordnumber").val()==""){
-                    //密码为空则不修改
-                }else{
-                    formdata.append("password", $("#passwordnumber").val())
-                }
+                // if($("#passwordnumber").val()==null||$("#passwordnumber").val()==""){
+                //     //密码为空则不修改
+                // }else{
+                //     formdata.append("password", $("#passwordnumber").val())
+                // }
+
+                formdata.append("password", $("#passwordnumber").val())
                 formdata.append("phone",$("#phonenumber").val()),
 
                 $.ajax({
