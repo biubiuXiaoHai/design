@@ -21,9 +21,9 @@ public class FriendsController {
     /**
      * 获取好友数量
      */
-    @PostMapping("friendNumber")
+    @PostMapping("findFriendNumber")
     @ApiOperation("获取好友数量")
-    public Integer friendNumber(Integer account) {
+    public Integer findFiendNumber(Integer account) {
         return friendsService.friendNumber(account);
     }
 

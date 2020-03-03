@@ -62,10 +62,9 @@
                 window.location.reload();
             })
             //点击 "好友动态"
-            // $("input[name='friend']").click(function () {
-            //     alert("friend");
-            //     window.location.href="http://127.0.0.1:8090/html/Register.html"
-            // })
+            $("input[name='active']").click(function () {
+                window.location.href="http://127.0.0.1:8090/html/Active.html"
+            })
             //点击 “退出登录”
             $("input[name='exit']").click(function(){
                 alert("点击退出登录")
@@ -104,7 +103,7 @@
                 <input name="home" type="button" value="个人首页">
             </li>
             <li>
-                <input name="friend" type="button" value="好友动态">
+                <input name="active" type="button" value="好友动态">
             </li>
             <li  style="float: right"> <input name="exit" type="button" value="退出登录"></li>
         </div>
