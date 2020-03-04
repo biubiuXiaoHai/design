@@ -8,10 +8,6 @@
     <script src="../js/vue.min.js"></script>
     <script>
         $(function () {
-            // var vue=new Vue({
-            //     el:
-            // })
-
             //获取cookie
             //取出名字和用户的账号
             function getCookie(cname) {
@@ -31,12 +27,13 @@
             }
             var username=getCookie("cookie_username");
             var account=getCookie("cookie_account");
-            alert(username);
+
             var userinfo=new Vue({
                 el:"#person",
                 data:{
                     user: username,
-                    imgurl: {}
+                    imgurl: {},
+                    N:""
                 }
             })
 
@@ -50,8 +47,7 @@
                 },
                 success:function (data) {
                     userinfo.imgurl=data.avatar;
-                    //     userinfo.imgurl="/images/兔子.jpg"
-                    // alert("获取个人信息成功！")
+                    userinfo.N=data.sum_date;
                 },error:function () {
                     alert("获取个人信息失败！")
                 }
@@ -73,22 +69,18 @@
 
         //    点击个人首页
             $("#home_person").click(function () {
-                // alert("person");
                 $("#contain").attr("src","Home_Part/Home_Person.html")
             })
         //    点击说说
             $("#home_share").click(function () {
-                // alert("share");
                 $("#contain").attr("src","Home_Part/Home_Share.html")
             })
         //    点击留言板
             $("#home_message").click(function () {
-                // alert("message");
                 $("#contain").attr("src","Home_Part/Home_Message.html")
             })
         //    点击相册
             $("#home_photo").click(function () {
-                // alert("photo");
                 $("#contain").attr("src","Home_Part/Home_Photo.html")
             })
         })
@@ -116,7 +108,7 @@
                 <b class="user_name" id="detail1">
                      &nbsp;&nbsp;{{user}}
                 </b>
-                <div id="detail2">您已累计登录 <b id="N">N</b> 天</div>
+                <div id="detail2">您已累计登录 <b id="N">{{N}}</b> 天</div>
                 <div id="detail3"><input type="button" value="开通云朵会员"></input></div>
                 <div id="detail4">
                     <li><a id="home_person">个人主页</a></li>

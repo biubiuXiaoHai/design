@@ -24,12 +24,18 @@
     height: 86%;
     background-color: #8c8c8c;
 }
+
 .friendmodel{
     width: 98%;
     height: 10%;
     background-color: #eeeeee;
     margin-left: 1%;
     margin-top: 3%;
+}
+.friend_home{
+    float: left;
+    width: 80%;
+    height: 100%;
 }
 .friendmodel img{
     width: 25%;
@@ -46,7 +52,7 @@
     float: left;
     margin-left: 5%;
 }
-.friendmodel div{
+.deletefriend{
     width: 20%;
     height: 100%;
     background-color: #c9302c;

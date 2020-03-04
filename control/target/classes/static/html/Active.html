@@ -66,11 +66,38 @@
                         }
                     }
                 })
+
            //左侧的好友列表数据绑定
            var friendlist=new Vue({
                el:"#left_list_content",
                data:{
                    list:{}
+               },
+               methods:{
+                   //进入好友的首页
+                   friend_home: function(friend){
+                       document.cookie="cookie_friendname = "+friend.name,
+                       document.cookie="cookie_friendaccount = "+friend.account,
+                       window.location.href="http://127.0.0.1:8090/html/Friend_Home.html"
+                   },
+                   //删除好友
+                   deletefriend:function (friend) {
+                       alert("正在删除")
+                       $.ajax({
+                           url:"http://127.0.0.1:8090/friends/deleteFriend",
+                           dataType:"json",
+                           type:"post",
+                           data:{
+                               master_id:account,
+                               friend_id:friend.account
+                           }, success: function (data) {
+                               alert("删除成功")
+                               window.location.reload();
+                           },error:function () {
+                               alert("删除失败")
+                           }
+                       })
+                   }
                }
            })
 
@@ -83,7 +110,6 @@
                         userid:account
                     }
                     ,success:function (data) {
-                        alert("获取个人信息成功")
                         userinfo.imgurl=data.avatar;
                     },error:function () {
                         alert("网络开小差了。。。。")
@@ -115,8 +141,6 @@
                     pageNumber:0
                 },
                 success:function (data) {
-                    alert("获取好友列表")
-                    alert(data);
                     friendlist.list=data.list;
                 },error:function () {
                     alert("请联系兰国海解决问题")
@@ -135,10 +159,7 @@
                         info:$("#search_input").val(),
                     },
                     success:function (data) {
-                        alert("搜索成功")
-                        alert(data);
                         searchlist.list=data;
-
                     },error:function () {
                         alert("请联系兰国海解决问题")
                     }
@@ -202,7 +223,12 @@
                 <div id="left_list_title">好友列表</div>
                 <div id="left_list_content">
                         <div class="friendmodel" v-for="(friend,i) in list" >
-                            <img v-bind:src="friend.avatar"><p>{{friend.name}}</p><div>删除好友</div>
+                            <div class="friend_home" v-on:click="friend_home(friend)">
+                                <img v-bind:src="friend.avatar">
+                                <p>{{friend.name}}</p>
+<!--                                <p>{{friend.account}}</p>-->
+                            </div>
+                            <div class="deletefriend" v-on:click="deletefriend(friend)">删除好友</div>
                         </div>
                 </div>
                 <div id="left_list_page"><p>首页</p><p>上一页</p><p>下一页</p><p>尾页</div>

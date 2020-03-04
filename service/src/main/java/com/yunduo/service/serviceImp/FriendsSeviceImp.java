@@ -56,11 +56,16 @@ public class FriendsSeviceImp  implements FriendsService {
      */
     @Override
     public Integer addFriend(AddFriendReq model) {
-        Friends friends=new Friends();
-        //单方面将对方加为好友
-        friends.setMaster_id(model.getMaster_id());
-        friends.setFriend_id(model.getFriend_id());
-        friendsMapper.insertSelective(friends);
+        //如果自己的好友列表已经有该好友
+        if(friendsMapper.findByMasterIdAndFriendId(model)==1){
+            //则在自己的好友列表中不重复添加
+        }else {
+            //单方面将对方加为好友
+            Friends friends = new Friends();
+            friends.setMaster_id(model.getMaster_id());
+            friends.setFriend_id(model.getFriend_id());
+            friendsMapper.insertSelective(friends);
+        }
         //给对方创建一条好友请求信息
         FriendApplication friendApplication=new FriendApplication();
         friendApplication.setMaster_id(model.getFriend_id());

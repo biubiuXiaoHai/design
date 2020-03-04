@@ -1,5 +1,6 @@
 package com.yunduo.dao;
 
+import com.yunduo.bean.AddFriendReq;
 import com.yunduo.bean.DeleteFriendReq;
 import com.yunduo.entities.Friends;
 import com.yunduo.entities.Users;
@@ -7,6 +8,7 @@ import com.yunduo.entities.Users;
 import java.util.List;
 
 public interface FriendsMapper {
+    Integer findByMasterIdAndFriendId(AddFriendReq model);
     Integer deleteByMasterIdAndFriendId(DeleteFriendReq model);
     Integer updBecomeFriendTime(Friends model);
     Integer findFriendNumber(Integer master_id);
