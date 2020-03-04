@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .float{
+            float:left;
+            width : 100px;
+            height: 100px;
+            overflow: hidden;
+            border: 1px solid #CCCCCC;
+            border-radius: 10px;
+            padding: 5px;
+            margin: 5px;
+        }
+        img{
+            position: relative;
+        }
+        .result{
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+
+        #file_input{
+            display: none;
+        }
+
+
+        .delete{
+            width: 100px;
+            height:100px;
+            position: absolute;
+            text-align: center;
+            line-height: 100px;
+            z-index: 10;
+            font-size: 30px;
+            background-color: rgba(255,255,255,0.8);
+            color: #777;
+            opacity: 0;
+            transition-duration: 0.7s;
+            -webkit-transition-duration: 0.7s;
+        }
+
+
+        .delete:hover{
+            cursor: pointer;
+            opacity: 1;
+        }
+        button {
+            border-color: #4898d5;
+            /*background-color: #2e8ded;*/
+            background-color:#62BF00;
+            color: #fff;
+            height: 28px;
+            line-height: 28px;
+            margin: 0 6px;
+            padding: 0 15px;
+            border: 1px solid #dedede;
+            border-radius: 2px;
+            font-weight: 400;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        #submit {
+            background-color: #2e8ded;
+        }
+        #clear {
+            background-color: #FAAC58;
+        }
+
+    </style>
+    <script>
+        var input = document.getElementById("file_input");
+        var result;
+        var dataArr = []; // 储存所选图片的结果(文件名和base64数据)
+        var fd;  //FormData方式发送请求
+        var oSelect = document.getElementById("select");
+        var oAdd = document.getElementById("add");
+        var oSubmit = document.getElementById("submit");
+        var oInput = document.getElementById("file_input");
+        var oClear = document.getElementById("clear");
+
+        if(typeof FileReader==='undefined'){
+            alert("抱歉，你的浏览器不支持 FileReader");
+            input.setAttribute('disabled','disabled');
+        } else {
+            input.addEventListener('change',readFile,false);
+        }
+        oSelect.onclick=function(){
+            oInput.value = "";
+            //清空已选图片
+            $('.float').remove();
+            dataArr = [];
+            index = 0;
+            oInput.click();
+        }
+
+        oClear.onclick = function () {
+            oInput.value = "";
+            //清空已选图片
+            $('.float').remove();
+            dataArr = [];
+            index = 0;
+        }
+
+        function readFile() {
+            fd = new FormData();
+            var iLen = this.files.length;
+            var index = 0;
+            for (var i = 0; i < iLen; i++) {
+                //if (!(input['value'].match(/.jpg|.gif|.png|.jpeg|.bmp/i))) {　　//判断上传文件格式
+                if (!this.files[i].name.match(/.jpg|.gif|.png|.jpeg|.bmp/i)) {　　//判断上传文件格式
+                    return alert("上传的图片中含有格式不正确的图片，请重新选择!请选择.jpg|.gif|.png|.jpeg|.bmp格式的图片");
+                }
+                var filereader = new FileReader();
+                filereader.index = i;
+                fd.append(i, this.files[i]);
+                filereader.readAsDataURL(this.files[i]);  //转成base64
+                filereader.fileName = this.files[i].name;
+
+                filereader.onload = function (e) {
+                    var imgMsg = {
+                        name: this.fileName,//获取文件名
+                        base64: this.result   //filereader.readAsDataURL方法执行完后，filereader.result里
+                    }
+                    dataArr.push(imgMsg);
+                    result = '<div class="delete">delete</div><div class="result"><img src="' + this.result + '" alt=""/><br><span style="margin:0 auto;font-size:9px">' + imgMsg.name + '</span></div>';
+                    var div = document.createElement('div');
+                    div.innerHTML = result;
+                    div['className'] = 'float ';
+                    div['index'] = index;
+                    document.getElementsByTagName('body')[0].appendChild(div);  　　//插入dom树
+                    //document.getElementById('append').appendChild(div);
+                    var imgpic = div.getElementsByTagName('img')[0];
+                    imgpic.onload = function () {
+                        var nowHeight = ReSizePic(this); //设置图片大小
+                        this.parentNode.style.display = 'block';
+                        var oParent = this.parentNode;
+                        if (nowHeight) {
+                            oParent.style.paddingTop = (oParent.offsetHeight - nowHeight) / 3 + 'px';
+                        }
+                    }
+
+
+                    div.onclick = function () {
+                        this.remove();                  // 在页面中删除该图片元素
+                        delete dataArr[this.index];  // 删除dataArr对应的数据
+
+                    }
+                    index++;
+                }
+            }
+        }
+
+
+
+
+        function ReSizePic(ThisPic) {
+            var RePicWidth = 100; //这里修改为您想显示的宽度值
+
+            var TrueWidth = ThisPic.width; //图片实际宽度
+            var TrueHeight = ThisPic.height; //图片实际高度
+
+            if (TrueWidth > TrueHeight) {
+                //宽大于高
+                var reWidth = RePicWidth;
+                ThisPic.width = reWidth;
+                //垂直居中
+                var nowHeight = TrueHeight * (reWidth / TrueWidth);
+                return nowHeight;  //将图片修改后的高度返回，供垂直居中用
+            } else {
+                //宽小于高
+                var reHeight = RePicWidth;
+                ThisPic.height = reHeight;
+            }
+
+
+
+
+        }
+
+
+        function submitPhoto() {
+            SubmitPhoto("ControllerName");
+        }
+    </script>
+</head>
+<body>
+
+<table style="width:100%;">
+    <tr>
+        <td style="width:80%">
+            <label>请选择图像文件：</label>
+            <button id="select">选择图片</button>
+            @*<button id="add">追加图片</button>*@
+            <button id="clear">清空图片</button>
+            @*<button id="submit" onclick="submitPhoto()" >上传</button>*@
+        </td>
+        <td style="width:20%">
+            <form id="form1" method="post" enctype="multipart/form-data" style="width:95%;text-align:right;">
+                <input type="file" id="file_input" name="filePath" multiple="multiple"/>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="append" style="width:100%;height:5px;"></div>
+
+
+</body>
+</html>

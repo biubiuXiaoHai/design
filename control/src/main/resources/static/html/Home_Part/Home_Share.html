@@ -3,14 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <title>Home_Share</title>
-    <link href="../../css/Home_Share.css" rel="stylesheet">
+    <link href="../../css/Home_Part/Home_Share.css" rel="stylesheet">
+    <style type="text/css">
+        .float{
+            float:left;
+            width : 100px;
+            height: 100px;
+            overflow: hidden;
+            border: 1px solid #CCCCCC;
+            border-radius: 10px;
+            padding: 5px;
+            margin: 5px;
+        }
+        img{
+            position: relative;
+        }
+        .result{
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            box-sizing: border-box;
+        }
 
+
+        #file_input{
+            display: none;
+        }
+
+
+        .delete{
+            width: 100px;
+            height:100px;
+            position: absolute;
+            text-align: center;
+            line-height: 100px;
+            z-index: 10;
+            font-size: 30px;
+            background-color: rgba(255,255,255,0.8);
+            color: #777;
+            opacity: 0;
+            transition-duration: 0.7s;
+            -webkit-transition-duration: 0.7s;
+        }
+
+
+        .delete:hover{
+            cursor: pointer;
+            opacity: 1;
+        }
+        button {
+            border-color: #4898d5;
+            /*background-color: #2e8ded;*/
+            background-color:#62BF00;
+            color: #fff;
+            height: 28px;
+            line-height: 28px;
+            margin: 0 6px;
+            padding: 0 15px;
+            border: 1px solid #dedede;
+            border-radius: 2px;
+            font-weight: 400;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        #submit {
+            background-color: #2e8ded;
+        }
+        #clear {
+            background-color: #FAAC58;
+        }
+
+    </style>
 </head>
 <body>
-<div class="left_part">
-    <p>你好，这是说说</p>
+    <div id="content">
+<!--        说说相关信息-->
+    <div id="center">
+<!--        <div id="photo" style="display: none"></div>-->
+<!--        <div id="photo">-->
+<!--            <div id="photo_push">-->
+<!--                <li ><img src="../../images/兔子.jpg"></li>-->
+<!--                <li ><img src="../../images/兔子.jpg"></li>-->
+<!--                <li ><img src="../../images/兔子.jpg"></li>-->
+<!--                <li ><img src="../../images/兔子.jpg"></li>-->
+<!--                <li ><img src="../../images/兔子.jpg"></li>-->
+<!--                <li ><img src="../../images/兔子.jpg"></li>-->
+<!--                <li ><img src="../../images/兔子.jpg"></li>-->
+<!--                <li ><img src="../../images/兔子.jpg"></li>-->
+<!--                <li ><img src="../../images/兔子.jpg"></li>-->
+<!--            </div>-->
+<!--            <div id="tip">-->
+<!--                <input type="file" id="file_input" name="filePath" multiple="multiple"/>-->
+<!--&lt;!&ndash;                <input type="file" value="请选择照片">&ndash;&gt;-->
+<!--            </div>-->
 
-</div>
+<!--        </div>-->
+        <div id="photo">
 
+            <table style="width:100%;">
+                <tr>
+                    <td style="width:80%">
+                        <label>请选择图像文件：</label>
+                        <button id="select">选择图片</button>
+                        @*<button id="add">追加图片</button>*@
+                        <button id="clear">清空图片</button>
+                        @*<button id="submit" onclick="submitPhoto()" >上传</button>*@
+                    </td>
+                    <td style="width:20%">
+                        <form id="form1" method="post" enctype="multipart/form-data" style="width:95%;text-align:right;">
+                            <input type="file" id="file_input" name="filePath" multiple="multiple"/>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+
+            <div id="append" style="width:100%;height:5px;"></div>
+
+
+
+        </div>
+
+        <div id="shareinfo">
+            <div id="words" contenteditable="true">请输入文字信息</div>
+            <div id="chose">
+                <div id="add_photo">添加照片</div>
+                <div id="cancer">取消发送</div>
+                <div id="send">发送</div>
+            </div>
+        </div>
+
+    </div>
+<!--        最近访客信息-->
+    <div id="right"></div>
+    </div>
 </body>
 </html>
