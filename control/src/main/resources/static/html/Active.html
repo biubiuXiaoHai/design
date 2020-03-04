@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Active</title>
@@ -28,7 +28,7 @@
                 }
                 var username = getCookie("cookie_username");
                 var account = getCookie("cookie_account");
-
+//数据vue绑定
                 //顶部的不动信息
                 var userinfo=new Vue({
                     el:"#header",
@@ -43,8 +43,37 @@
                     el:"#search_content",
                     data:{
                         list:{}
+                    },
+                    methods:{
+                        //点击 添加好友
+                        addfriend: function (user) {
+                            $.ajax({
+                                url:"http://127.0.0.1:8090/friends/addFriend",
+                                dataType:"json",
+                                type:"post",
+                                data:{
+                                    master_id:account,
+                                    friend_id:user.account
+                                }
+                                ,success:function (data) {
+                                    alert("添加好友成功")
+                                },
+                                error:function () {
+                                    alert("添加好友失败")
+                                }
+                            })
+                            window.location.reload();
+                        }
                     }
                 })
+           //左侧的好友列表数据绑定
+           var friendlist=new Vue({
+               el:"#left_list_content",
+               data:{
+                   list:{}
+               }
+           })
+
             //获取用户的基本个人信息
                 $.ajax({
                     url:"http://127.0.0.1:8090/userinfo/findUserInfo",
@@ -66,7 +95,7 @@
                 dataType:"json",
                 type:"post",
                 data:{
-                    userid:account
+                    account:account
                 }
                 ,success:function (data) {
                     userinfo.friendnumber=data
@@ -74,6 +103,27 @@
                     alert("网络开小差了。。。。")
                 }
             })
+
+            //获取 好友列表
+            $.ajax({
+                url:"http://127.0.0.1:8090/friends/findFriendList",
+                dataType:"json",
+                type:"post",
+                data:{
+                   account:account,
+                    pageSize:10,
+                    pageNumber:0
+                },
+                success:function (data) {
+                    alert("获取好友列表")
+                    alert(data);
+                    friendlist.list=data.list;
+                },error:function () {
+                    alert("请联系兰国海解决问题")
+                }
+            })
+
+
             //点击 搜索
             $("#search_button").click(function () {
                 alert("搜索")
@@ -104,7 +154,7 @@
             $("#active").click(function () {
                 window.location.reload();
             })
-            //点击顶部的 退出登录
+            // 点击顶部的 退出登录
             $("#exit").click(function () {
                 window.location.href="http://127.0.0.1/8090/html/Login.html"
             })
@@ -146,18 +196,26 @@
 </div>
 <!--变换的底部-->
 <div id="bottom">
+<!--    左侧部分的 好友列表-->
         <div id="left">
             <div id="left_list">
                 <div id="left_list_title">好友列表</div>
                 <div id="left_list_content">
-                        <div class="friendmodel" >
-                            <img src="../images/兔子.jpg"><p>用户的昵称</p><div>删除好友</div>
+                        <div class="friendmodel" v-for="(friend,i) in list" >
+                            <img v-bind:src="friend.avatar"><p>{{friend.name}}</p><div>删除好友</div>
                         </div>
                 </div>
                 <div id="left_list_page"><p>首页</p><p>上一页</p><p>下一页</p><p>尾页</div>
             </div>
         </div>
-        <div id="center"></div>
+<!--    中间部分的 好友动态-->
+        <div id="center">
+            <iframe id="active_center" src="Active_Info.html" scrolling="auto">
+            </iframe>
+
+
+        </div>
+<!--    右侧部分的 搜索-->
         <div id="right">
             <div id="search">
                 <div id="search_top">
@@ -166,7 +224,7 @@
                 </div>
                 <div id="search_content">
                     <div class="result_model" v-for="(user,i) in list">
-                        <img v-bind:src="user.avatar"><p>{{user.name}}</p><div>添加好友</div>
+                        <img v-bind:src="user.avatar"><p>{{user.name}}</p><div v-on:click="addfriend(user)">添加好友</div>
                     </div>
                 </div>
                 <div id="right_list_page"><p>首页</p><p>上一页</p><p>下一页</p><p>尾页</p></div>

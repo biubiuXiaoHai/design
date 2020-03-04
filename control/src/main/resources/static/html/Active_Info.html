@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Active_Info</title>
+    <link href="../css/Active_Info.css" rel="stylesheet">
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/vue.min.js"></script>
+    <script>
+        $(function () {
+            //获取cookie
+            //取出名字和用户的账号
+            function getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+
+            var username = getCookie("cookie_username");
+            var account = getCookie("cookie_account");
+
+            var contentlist=new Vue({
+                el:"#body_content",
+                data:{
+                    applicationlist:{}
+                },
+                methods:{
+                    accept:function (apply) {
+                        //点击 接受
+                      $.ajax({
+                          url:"http://127.0.0.1:8090/friends/addFriendSuccess",
+                          dataType:"json",
+                          type:"post",
+                          data:{
+                              master_id:apply.master_id,
+                              friend_id:apply.friend_id,
+                          },success:function (data) {
+                              alert("同意了申请"+data),
+                                  window.parent.location.reload();
+                          },
+                          error:function () {
+                              alert("系统异常")
+                          }
+
+                      })
+
+                    },
+                    refuse:function (apply) {
+                        //点击 拒绝
+                        $.ajax({
+                            url:"http://127.0.0.1:8090/friends/addFriendFail",
+                            dataType:"json",
+                            type:"post",
+                            data:{
+                                master_id:apply.master_id,
+                                friend_id:apply.friend_id
+                            },success:function (data) {
+                                alert("已拒绝添加该好友")
+                                window.location.reload()
+                            },error:function () {
+                                alert("系统异常")
+                            }
+                        })
+                    }
+                }
+            })
+
+
+            //获取消息 ：新好友申请的消息
+            $.ajax({
+                url:"http://127.0.0.1:8090/friends/findFriendApplication",
+                dataType:"json",
+                type:"post",
+                data:{
+                    account:account
+                }
+                ,success:function (data) {
+                    contentlist.applicationlist=data;
+                },error:function () {
+                    alert("获取申请信息失败，请联系开发者")
+                }
+            })
+            })
+
+    </script>
+</head>
+<body>
+<div id="body_content">
+<!--有好友申请信息-->
+<div class="add_friend_info" v-for="(application,i) in applicationlist">
+    <div id="title">您有一条好友申请信息</div>
+    <div id="content">
+        <img v-bind:src="application.avatar">
+        <div id="info">
+            <p id="account">账号: {{application.friend_id}}</p>
+            <p id="name">昵称: {{application.name}}</p>
+            <p id="signature">个性签名: {{application.signature}}</p>
+        </div>
+        <div id="accept" v-on:click="accept(application)">接受</div>
+        <div id="refuse" v-on:click="refuse(application)">拒绝</div>
+    </div>
+    <div id="time">{{application.applicationtime}}</div>
+</div>
+</div>
+
+</body>
+</html>

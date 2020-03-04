@@ -25,7 +25,7 @@
     select count(*) from friends where master_id=#{master_id, jdbcType=INTEGER};
   </select>
   <select id="findFriendList" parameterType="java.lang.Integer" resultType="com.yunduo.entities.Users">
-    select * from users inner join friends on users.account=friends.master_id  where friends.master_id=${account,jdbcType=INTEGER}
+    select * from users inner join friends on users.account=friends.friend_id  where friends.master_id=#{account,jdbcType=INTEGER}
   </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

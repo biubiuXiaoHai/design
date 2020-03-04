@@ -32,7 +32,7 @@ public class UserInfoServiceImp  implements UserInfoService {
         Users user =usersMapper.selectByPhoneAll(model.getAccount().toString());
         if(user!=null && model.getAccount().toString().equals(user.getPhone())){
             if(user.getPassword().equals(model.getPassword())) {
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 Date date=new Date();
 //                System.out.println(formatter.format(date));
                 String time=formatter.format(date);

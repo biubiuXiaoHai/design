@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @ApiModel("添加好友成功请求")
 public class AddFriendSuccessReq {
-    private Integer id;
+//    private Integer id;
     @ApiModelProperty("主人的id")
     private Integer master_id;
     @ApiModelProperty("好友的id")

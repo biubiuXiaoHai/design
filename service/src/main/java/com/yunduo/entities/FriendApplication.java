@@ -11,9 +11,9 @@ public class FriendApplication {
 
     private String name;
 
-    private String applicationtime;
+    private String signature;
 
-    private Integer state;
+    private String applicationtime;
 
     public Integer getId() {
         return id;
@@ -55,19 +55,19 @@ public class FriendApplication {
         this.name = name == null ? null : name.trim();
     }
 
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature == null ? null : signature.trim();
+    }
+
     public String getApplicationtime() {
         return applicationtime;
     }
 
     public void setApplicationtime(String applicationtime) {
         this.applicationtime = applicationtime == null ? null : applicationtime.trim();
-    }
-
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
     }
 }

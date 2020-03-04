@@ -7,26 +7,26 @@
     <result column="friend_id" jdbcType="INTEGER" property="friend_id" />
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="signature" jdbcType="VARCHAR" property="signature" />
     <result column="applicationtime" jdbcType="VARCHAR" property="applicationtime" />
-    <result column="state" jdbcType="INTEGER" property="state" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, master_id, friend_id, avatar, name, applicationtime, state
+    id, master_id, friend_id, avatar, name, signature, applicationtime
   </sql>
-  <delete id="deleteByMasterIdAndFriendId" parameterType="com.yunduo.bean.AddFriendfailReq">
-    delete friendapplication
-    where master_id=#{master_id} and friend_id=#{friend_id};
 
+  <select id="findApplication" resultType="com.yunduo.entities.FriendApplication">
+    select * from friendapplication where master_id=#{account};
+  </select>
+
+  <delete id="deleteByMasterIdAndFriendId" >
+    delete from  friendapplication
+    where master_id=#{master_id} and friend_id=#{friend_id};
   </delete>
-  <update id="updApplyInfoState" parameterType="com.yunduo.entities.Friends">
-    update friendapplication
-    set state=2
-    where master_id=#{friend_id} and friend_id=#{master_id};
-  </update>
-  
   <select id="selectByMasterIdAndFriendId" resultType="com.yunduo.entities.FriendApplication">
     select * from friendapplication where master_id=#{master_id} and friend_id=#{friend_id};
   </select>
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -39,11 +39,11 @@
   </delete>
   <insert id="insert" parameterType="com.yunduo.entities.FriendApplication">
     insert into friendapplication (id, master_id, friend_id, 
-      avatar, name, applicationtime, 
-      state)
+      avatar, name, signature, 
+      applicationtime)
     values (#{id,jdbcType=INTEGER}, #{master_id,jdbcType=INTEGER}, #{friend_id,jdbcType=INTEGER}, 
-      #{avatar,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{applicationtime,jdbcType=VARCHAR}, 
-      #{state,jdbcType=INTEGER})
+      #{avatar,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, 
+      #{applicationtime,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.yunduo.entities.FriendApplication">
     insert into friendapplication
@@ -63,11 +63,11 @@
       <if test="name != null">
         name,
       </if>
+      <if test="signature != null">
+        signature,
+      </if>
       <if test="applicationtime != null">
         applicationtime,
-      </if>
-      <if test="state != null">
-        state,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -86,11 +86,11 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="signature != null">
+        #{signature,jdbcType=VARCHAR},
+      </if>
       <if test="applicationtime != null">
         #{applicationtime,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null">
-        #{state,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -109,11 +109,11 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="signature != null">
+        signature = #{signature,jdbcType=VARCHAR},
+      </if>
       <if test="applicationtime != null">
         applicationtime = #{applicationtime,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null">
-        state = #{state,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -124,8 +124,8 @@
       friend_id = #{friend_id,jdbcType=INTEGER},
       avatar = #{avatar,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
-      applicationtime = #{applicationtime,jdbcType=VARCHAR},
-      state = #{state,jdbcType=INTEGER}
+      signature = #{signature,jdbcType=VARCHAR},
+      applicationtime = #{applicationtime,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

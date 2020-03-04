@@ -3,6 +3,7 @@ package com.yunduo.controller;
 import com.github.pagehelper.PageInfo;
 import com.yunduo.bean.*;
 import com.yunduo.entities.Users;
+import com.yunduo.service.FriendApplicationService;
 import com.yunduo.service.FriendsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,12 +12,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @Api(value = "friendsController" ,description = "好友关系")
 @RequestMapping("friends")
 public class FriendsController {
     @Autowired
     FriendsService friendsService;
+    @Autowired
+    FriendApplicationService friendApplicationService;
 
     /**
      * 获取好友数量
@@ -46,6 +51,14 @@ public class FriendsController {
     }
 
     /**
+     * 好友申请请求
+     */
+    @PostMapping("findFriendApplication")
+    @ApiOperation("好友申请信息")
+    public List<FindFriendApplicationRsq> findFriendApplication(Integer account){
+        return friendApplicationService.findFriendApplication(account);
+    }
+    /**
      * 添加好友成功
      *
      * @param model
@@ -58,8 +71,8 @@ public class FriendsController {
     /**
      * 对方拒绝了添加为好友
      */
-    @PostMapping("addFriendfail")
-    public Integer addFriendfail(AddFriendfailReq model){
+    @PostMapping("addFriendFail")
+    public Integer addFriendfail(AddFriendFailReq model){
        return friendsService.addFriendFail(model);
     }
     /**

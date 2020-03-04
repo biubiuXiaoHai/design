@@ -1,0 +1,104 @@
+*{
+    margin: 0px;
+}
+body{
+    width: 530px;
+    height: 752px;
+    background-color: #adadad;
+
+}
+#body_content{
+    width: 100%;
+    height: 100%;
+}
+/*添加好友的申请信息模板*/
+.add_friend_info{
+    width: 90%;
+    height: 150px;
+    margin-left: 5%;
+    background-color: #f7ecb5;
+}
+#title{
+    width: 50%;
+    height: 30px;
+    background-color: #adadad;
+    float: left;
+    margin-left: 25%;
+    text-align: center;
+}
+#content{
+    width: 90%;
+    height: 90px;
+    margin-left: 5%;
+    background-color: #777777;
+    float: left;
+
+}
+#content img{
+    width: 75px;
+    height: 75px;
+    margin-left: 7px;
+    margin-top: 7px;
+    float: left;
+    background-color: #286090;
+}
+#info{
+    width:240px ;
+    height: 100%;
+    background-color: #286090;
+    float: left;
+}
+/*#info p{*/
+/*    margin: 0px*/
+/*}*/
+#account{
+    width: 150px;
+    height: 20px;
+    margin-left: 10px;
+    background-color: #555555;
+    float: left;
+}
+#name{
+    width: 150px;
+    height: 20px;
+    margin-left: 10px;
+    background-color: #f7ecb5;
+    float: left;
+}
+#signature{
+    margin-top: 5px;
+    margin-left: 5%;
+    width: 90%;
+    height: 45px;
+    margin-left: 10px;
+    background-color: #555555;
+    float: left;
+}
+#accept{
+    width:45px;
+    height: 23px;
+    float: right;
+    margin-top: 30px ;
+    margin-right: 5px;
+    background-color: #4cae4c;
+    text-align: center;
+}
+#refuse{
+    width: 45px;
+    height: 23px;
+    float: right;
+    margin-top: 30px ;
+    margin-right: 5px;
+    background-color: #c9302c;
+    text-align: center;
+}
+
+#time{
+    width:250px ;
+    height: 23px;
+    margin-top: 3px;
+    background-color: #286090;
+    text-align: center;
+    float: right;
+
+}

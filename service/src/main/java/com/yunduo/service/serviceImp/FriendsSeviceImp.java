@@ -67,8 +67,10 @@ public class FriendsSeviceImp  implements FriendsService {
         friendApplication.setFriend_id(model.getMaster_id());
         Users user=usersMapper.selectByPrimaryKey(model.getFriend_id());
         friendApplication.setAvatar(user.getAvatar());
+        friendApplication.setName(user.getName());
+        friendApplication.setSignature(user.getSignature());
         Date  date=new Date();
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年mm月dd日 hh时MM分ss秒");
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年MM月dd日 hh时mm分ss秒");
         String time =simpleDateFormat.format(date);
         friendApplication.setApplicationtime(time);
         friendApplicationMapper.insertSelective(friendApplication);
@@ -79,20 +81,28 @@ public class FriendsSeviceImp  implements FriendsService {
     public Integer addFriendSuccess(AddFriendSuccessReq model) {
         Friends friend=CloneUtil.cloneObj(model,Friends.class);
         Date date=new Date();
-        SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyy年mm月dd日 hh时MM分ss秒");
+        SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyy年MM月dd日 hh时mm分ss秒");
         String time=simpleDateFormat.format(date);
         friend.setAdd_time(time);
         //更新双方成为好友的时间
         friendsMapper.insertSelective(friend);
         friendsMapper.updBecomeFriendTime(friend);
-        //更新为已处理好友申请状态
-        friendApplicationMapper.updApplyInfoState(friend);
-        return null;
+        //删除申请记录
+        FriendApplication delete=new FriendApplication();
+        delete.setMaster_id(model.getMaster_id());
+        delete.setFriend_id(model.getFriend_id());
+        friendApplicationMapper.deleteByMasterIdAndFriendId(delete);
+        return 1;
     }
 
     @Override
-    public Integer addFriendFail(AddFriendfailReq model) {
-       return friendApplicationMapper.deleteByMasterIdAndFriendId(model);
+    public Integer addFriendFail(AddFriendFailReq model) {
+        //删除申请记录
+        FriendApplication delete=new FriendApplication();
+        delete.setMaster_id(model.getMaster_id());
+        delete.setFriend_id(model.getFriend_id());
+        friendApplicationMapper.deleteByMasterIdAndFriendId(delete);
+        return 1;
     }
 
     @Override

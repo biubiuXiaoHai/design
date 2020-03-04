@@ -9,6 +9,6 @@ public interface FriendsService {
     public PageInfo<Users> findFriendList(FindFriendListReq model);
     public Integer addFriend(AddFriendReq model);
     public Integer addFriendSuccess(AddFriendSuccessReq model);
-    public Integer addFriendFail(AddFriendfailReq model);
+    public Integer addFriendFail(AddFriendFailReq model);
     public Integer deleteFriend(DeleteFriendReq model);
 }
