@@ -1,16 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Home_Share</title>
-    <link href="../../css/Home_Share.css" rel="stylesheet">
+    <link href="../../css/Home_Part/Home_Share.css" rel="stylesheet">
+    <script src="../../js/jquery-3.4.1.min.js"></script>
+    <script src="../../js/vue.min.js"></script>
+    <script>
+        $(function () {
+            var sharemodel=new Vue({
+                el:"#center",
+                data:{
+                    sharelist:{}
+                },
+                methods:{
+                    //点击 “删除”
+                    deleteshare:function (id) {
+                        $.ajax({
+                            url:"http://127.0.0.1:8090/share/delShareInfo",
+                            dataType:"json",
+                            type:"post",
+                            data:{
+                                id:id
+                            },
+                            success:function (data) {
+                                if(data==1){
+                                    window.location.reload()
+                                }
+                            }
+                        })
+                    }
+                }
+            })
 
+            //获取cookie
+            //取出名字和用户的账号
+            function getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for(var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+            //获取 账号
+            var account=getCookie("cookie_account");
+
+            //获取所有的个人的已经发表的说说信息
+            $.ajax({
+                url:"http://127.0.0.1:8090/share/findMasterShare",
+                dataType:"json",
+                type:"post",
+                data:{
+                    master_id: account
+                }
+                ,success:function (data) {
+                    sharemodel.sharelist=data
+                }
+            })
+
+            //当点击了 “发表”
+            $("#publish").click(function () {
+                alert("发表说说")
+                $.ajax({
+                    url:"http://127.0.0.1:8090/share/reportShare",
+                    dateType:"json",
+                    type:"post",
+                    data:{
+                        master_id: account,
+                        words: $("#words").html()
+                    },
+                    success: function (data) {
+                        alert("发表成功")
+                        window.location.reload();
+
+                    },error:function () {
+                        alert("发表说说出现问题")
+                    }
+                })
+            })
+            //点击 “取消发表”
+            $("#cancer").click(function () {
+                window.location.reload();
+            })
+            //点击 “添加照片”
+            $("#add_photo").click(function () {
+                alert("添加照片")
+                $("#photo").attr("display","inline");
+            })
+
+        })
+    </script>
 </head>
 <body>
-<div class="left_part">
-    <p>你好，这是说说</p>
+    <div id="content">
+<!--        说说相关信息-->
+    <div id="center">
+<!--        <div id="photo" style="display: none"></div>-->
+        <div id="photo" style="display: none" >
+            <div id="photo_push">
+                <li ><img src="../../images/兔子.jpg"></li>
+                <li ><img src="../../images/兔子.jpg"></li>
+                <li ><img src="../../images/兔子.jpg"></li>
+                <li ><img src="../../images/兔子.jpg"></li>
+                <li ><img src="../../images/兔子.jpg"></li>
+                <li ><img src="../../images/兔子.jpg"></li>
+                <li ><img src="../../images/兔子.jpg"></li>
+                <li ><img src="../../images/兔子.jpg"></li>
+                <li ><img src="../../images/兔子.jpg"></li>
+            </div>
+            <div id="tip">
+                <input type="file" id="file_input" name="filePath" multiple="multiple"/>
+<!--                <input type="file" value="请选择照片">-->
+            </div>
 
-</div>
+        </div>
+<!--发表说说-->
+        <div id="shareinfo">
+            <div id="words" contenteditable="true">请输入文字信息</div>
+<!--            <div id="words">-->
+<!--                <input type="textarea" placeholder="请输入文字信息">-->
+<!--            </div>-->
+            <div id="chose">
+                <div id="add_photo">添加照片</div>
+                <div id="cancer">取消发表</div>
+                <div id="publish">发表</div>
+            </div>
+        </div>
+<!--展示已有的说说-->
+        <div class="share_model" v-for="(share,i) in sharelist">
+            <div id="user_info">
+                <div id="head_img">
+                    <img v-bind:src="share.master_img">
+                </div>
+                <div id="user_name">{{share.master_name}}</div>
+                <div id="share_time">{{share.share_time}}</div>
+            </div>
+            <div id="word_message">
+                <div id="message">
+                    {{share.words}}
+                </div>
+            </div>
+<!--            浏览次数等-->
+            <div id="browse_times">
+                <div id="browse">被浏览了 {{share.saw_time}} 次</div>
+                <div id="likes">点赞</div>
+                <div id="leave_message">留言</div>
+                <div id="delete" v-on:click="deleteshare(share.id)">删除</div>
+            </div>
+            <div id="talk_message"></div>
 
+        </div>
+
+    </div>
+<!--        最近访客信息-->
+    <div id="right"></div>
+    </div>
 </body>
 </html>

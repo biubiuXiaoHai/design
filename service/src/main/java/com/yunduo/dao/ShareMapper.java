@@ -1,6 +1,5 @@
 package com.yunduo.dao;
 
-import com.yunduo.bean.FindAllFriendShareRsp;
 import com.yunduo.entities.Share;
 
 import java.util.List;
@@ -8,8 +7,8 @@ import java.util.List;
 public interface ShareMapper {
     Share selectByMasteridAndTime(Integer master_id,String share_time);
 
-    List<Share>findAllFriendShare(Integer master_id);
-
+    List<Share> findMasterShare(Integer master_id);
+    List<Share> findFriendShare(Integer master_id);
 
     int deleteByPrimaryKey(Integer id);
 

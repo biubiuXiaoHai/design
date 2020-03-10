@@ -4,6 +4,8 @@
   <resultMap id="BaseResultMap" type="com.yunduo.entities.Share">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="master_id" jdbcType="INTEGER" property="master_id" />
+    <result column="master_name" jdbcType="VARCHAR" property="master_name" />
+    <result column="master_img" jdbcType="VARCHAR" property="master_img" />
     <result column="share_time" jdbcType="VARCHAR" property="share_time" />
     <result column="picture1" jdbcType="VARCHAR" property="picture1" />
     <result column="picture2" jdbcType="VARCHAR" property="picture2" />
@@ -18,14 +20,17 @@
     <result column="saw_time" jdbcType="INTEGER" property="saw_time" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, master_id, share_time, picture1, picture2, picture3, picture4, picture5, picture6, 
-    picture7, picture8, picture9, words, saw_time
+    id, master_id, master_name, master_img, share_time, picture1, picture2, picture3, 
+    picture4, picture5, picture6, picture7, picture8, picture9, words, saw_time
   </sql>
   <select id="selectByMasteridAndTime" resultType="com.yunduo.entities.Share">
     select * from share where master_id=#{master_id} and share_time=#{share_time};
   </select>
-  <select id="findAllFriendShare" parameterType="java.lang.Integer" resultType="com.yunduo.entities.Share">
-    select * from share where master_id=#{master_id};
+  <select id="findMasterShare" parameterType="java.lang.Integer" resultType="com.yunduo.entities.Share">
+    select * from share where master_id=#{master_id} order by id desc;
+  </select>
+  <select id="findFriendShare" resultType="com.yunduo.entities.Share">
+    select *  from friends inner join share on friends.friend_id=share.master_id where friends.master_id=#{master_id} order by share.id desc
   </select>
 
 
@@ -40,16 +45,18 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.yunduo.entities.Share">
-    insert into share (id, master_id, share_time, 
-      picture1, picture2, picture3, 
-      picture4, picture5, picture6, 
-      picture7, picture8, picture9, 
-      words, saw_time)
-    values (#{id,jdbcType=INTEGER}, #{master_id,jdbcType=INTEGER}, #{share_time,jdbcType=VARCHAR},
-      #{picture1,jdbcType=VARCHAR}, #{picture2,jdbcType=VARCHAR}, #{picture3,jdbcType=VARCHAR}, 
-      #{picture4,jdbcType=VARCHAR}, #{picture5,jdbcType=VARCHAR}, #{picture6,jdbcType=VARCHAR}, 
-      #{picture7,jdbcType=VARCHAR}, #{picture8,jdbcType=VARCHAR}, #{picture9,jdbcType=VARCHAR}, 
-      #{words,jdbcType=VARCHAR}, #{saw_time,jdbcType=INTEGER})
+    insert into share (id, master_id, master_name, 
+      master_img, share_time, picture1, 
+      picture2, picture3, picture4, 
+      picture5, picture6, picture7, 
+      picture8, picture9, words, 
+      saw_time)
+    values (#{id,jdbcType=INTEGER}, #{master_id,jdbcType=INTEGER}, #{master_name,jdbcType=VARCHAR}, 
+      #{master_img,jdbcType=VARCHAR}, #{share_time,jdbcType=VARCHAR}, #{picture1,jdbcType=VARCHAR}, 
+      #{picture2,jdbcType=VARCHAR}, #{picture3,jdbcType=VARCHAR}, #{picture4,jdbcType=VARCHAR}, 
+      #{picture5,jdbcType=VARCHAR}, #{picture6,jdbcType=VARCHAR}, #{picture7,jdbcType=VARCHAR}, 
+      #{picture8,jdbcType=VARCHAR}, #{picture9,jdbcType=VARCHAR}, #{words,jdbcType=VARCHAR}, 
+      #{saw_time,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.yunduo.entities.Share">
     insert into share
@@ -59,6 +66,12 @@
       </if>
       <if test="master_id != null">
         master_id,
+      </if>
+      <if test="master_name != null">
+        master_name,
+      </if>
+      <if test="master_img != null">
+        master_img,
       </if>
       <if test="share_time != null">
         share_time,
@@ -104,6 +117,12 @@
       <if test="master_id != null">
         #{master_id,jdbcType=INTEGER},
       </if>
+      <if test="master_name != null">
+        #{master_name,jdbcType=VARCHAR},
+      </if>
+      <if test="master_img != null">
+        #{master_img,jdbcType=VARCHAR},
+      </if>
       <if test="share_time != null">
         #{share_time,jdbcType=VARCHAR},
       </if>
@@ -148,6 +167,12 @@
       <if test="master_id != null">
         master_id = #{master_id,jdbcType=INTEGER},
       </if>
+      <if test="master_name != null">
+        master_name = #{master_name,jdbcType=VARCHAR},
+      </if>
+      <if test="master_img != null">
+        master_img = #{master_img,jdbcType=VARCHAR},
+      </if>
       <if test="share_time != null">
         share_time = #{share_time,jdbcType=VARCHAR},
       </if>
@@ -190,6 +215,8 @@
   <update id="updateByPrimaryKey" parameterType="com.yunduo.entities.Share">
     update share
     set master_id = #{master_id,jdbcType=INTEGER},
+      master_name = #{master_name,jdbcType=VARCHAR},
+      master_img = #{master_img,jdbcType=VARCHAR},
       share_time = #{share_time,jdbcType=VARCHAR},
       picture1 = #{picture1,jdbcType=VARCHAR},
       picture2 = #{picture2,jdbcType=VARCHAR},

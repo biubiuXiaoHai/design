@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Friend_Home</title>
+    <link href="../css/Home.css" rel="stylesheet">
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/vue.min.js"></script>
+    <script>
+        $(function () {
+            //获取cookie
+            //取出名字和用户的账号
+            function getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for(var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+            var username=getCookie("cookie_friendname");
+            var account=getCookie("cookie_friendaccount");
+
+            var userinfo=new Vue({
+                el:"#person",
+                data:{
+                    user: username,
+                    account:account,
+                    imgurl: {}
+                }
+            })
+
+            //进入个人首页时首先加载个人信息
+            $.ajax({
+                url:"http://127.0.0.1:8090/userinfo/findUserInfo",
+                type:"post",
+                dataType:"json",
+                data:{
+                    userid:account
+                },
+                success:function (data) {
+                    userinfo.imgurl=data.avatar;
+                },error:function () {
+                    alert("获取个人信息失败！")
+                }
+            })
+
+            //点击头部 “返回个人首页”
+            $("input[name='home']").click(function () {
+                window.location.href="http://127.0.0.1:8090/html/Home.html"
+            })
+            //点击 "返回好友动态"
+            $("input[name='active']").click(function () {
+                window.location.href="http://127.0.0.1:8090/html/Active.html"
+            })
+            //点击 “退出登录”
+            $("input[name='exit']").click(function(){
+                alert("点击退出登录")
+                window.location.href="http://127.0.0.1:8090/html/Login.html"
+            })
+
+            //    点击个人首页
+            $("#home_person").click(function () {
+                $("#contain").attr("src","Home_Part/Home_Person.html")
+            })
+            //    点击说说
+            $("#home_share").click(function () {
+                $("#contain").attr("src","Home_Part/Home_Share.html")
+            })
+            //    点击留言板
+            $("#home_message").click(function () {
+                $("#contain").attr("src","Home_Part/Home_Message.html")
+            })
+            //    点击相册
+            $("#home_photo").click(function () {
+                $("#contain").attr("src","Home_Part/Home_Photo.html")
+            })
+        })
+    </script>
+</head>
+<body>
+<!--    固定的头部-->
+<div id="header">
+    <div id="menu">
+        <div id="logo"><p>&云朵空间</p></div>
+        <li>
+            <input name="home" type="button" value="返回个人首页">
+        </li>
+        <li>
+            <input name="active" type="button" value="返回好友动态">
+        </li>
+        <li  style="float: right"> <input name="exit" type="button" value="退出登录"></li>
+    </div>
+    <div id="person">
+        <div id="person_space">
+            <b id="user_title"><b class="user_name"> {{user}}</b> &nbsp&nbsp的云朵空间</b>
+        </div>
+        <div id="head"><img v-bind:src="imgurl"></div>
+        <div id="detail">
+            <b class="user_name" id="detail1">
+                &nbsp;&nbsp;{{user}}
+            </b>
+            <div id="detail2"><b >{{account}}</b></div>
+            <div id="detail3"><input type="button" value="开通云朵会员"></input></div>
+            <div id="detail4">
+                <li><a id="home_person">个人主页</a></li>
+                <li><a id="home_share">说说</a></li>
+                <li><a id="home_message">留言</a></li>
+                <li><a id="home_photo">相册</a></li>
+            </div>
+        </div>
+    </div>
+</div>
+<!--变换的底部-->
+<div id="bottom">
+    <iframe id="contain"src="Home_Part/Friend_Home.html" scrolling="no"></iframe>
+</div>
+</body>
+</html>

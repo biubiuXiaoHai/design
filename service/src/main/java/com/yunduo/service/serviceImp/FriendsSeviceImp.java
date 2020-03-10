@@ -57,7 +57,7 @@ public class FriendsSeviceImp  implements FriendsService {
     @Override
     public Integer addFriend(AddFriendReq model) {
         //如果自己的好友列表已经有该好友
-        if(friendsMapper.findByMasterIdAndFriendId(model)==1){
+        if(friendsMapper.findByMasterIdAndFriendId(model)!=0){
             //则在自己的好友列表中不重复添加
         }else {
             //单方面将对方加为好友

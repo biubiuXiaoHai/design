@@ -1,12 +1,17 @@
 package com.yunduo.bean;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 @Data
-public class FindAllFriendShareRsp {
+@ApiModel("获取相关的说说信息")
+public class FindMasterShareRsq {
     private Integer id;
 
+    private String master_img;
+
     private Integer master_id;
+    private String master_name;
 
     private String share_time;
 
