@@ -12,8 +12,67 @@
     <script src="../js/jquery-3.4.1.min.js"></script>
     <script>
         $(function () {
+            //判断 昵称 是否符合规范
+            $("input[name='name']").on('input',function () {
+                if($(this).val().length>=2&&$(this).val().length<=10){
+                    // alert("昵称符合规范")
+                    $("#warm_name").css("display","none");
+                }else{
+                    // alert("不和规范")
+                    $("#warm_name").css("display","inline")
+                }
+                register_change();
+            })
+            //判断 密码 是否符合规范
+            $("input[name='password']").on('input',function () {
+                if($(this).val().length>=6&&$(this).val().length<=18){
+                    $("#warm_password").css("display","none");
+                }else{
+                    $("#warm_password").css("display","inline")
+                }
+                register_change();
+            })
+            //判断 手机号的长度 是否符合规范
+            $("input[name='phone']").on('input',function () {
+                if($(this).val().length==11){
+                    $("#warm_phone").css("display","none");
+                }else{
+                    $("#warm_phone").css("display","inline")
+                    $("#warm_phone div").html("请输入有效的11位数手机号")
+                }
+                register_change();
+            })
+            //判断是否勾选 同意协议
+            $("#ageree").click(function () {
+                if($(this).val()==0){
+                    $(this).attr("value",1);
+                }else{
+                    $(this).attr("value",0);
+                }
+                register_change();
+            })
+
+           //判断显示 是否符合注册要求的规范
+           function register_change() {
+              if($("#warm_name").css("display")==="none"&&$("#warm_password").css("display")==='none'&& $("#warm_phone").css("display")==="none"
+                && $("input[name='name']").val().length!=0&& $("input[name='password']").val().length!=0
+                && $("input[name='phone']").val().length!=0&& $("#ageree").val()==1){
+                $("#nowregister").css("background-color","#286090")
+                return true;
+              }else{
+                $("#nowregister").css("background-color","#5bc0de")
+                return false;
+              }
+
+        }
+
+            //点击 “立即注册”
             $("#nowregister").click(function () {
-                alert("立即注册")
+                if( register_change()===false){
+                    alert("注册条件没满足")
+                    return ''
+                }
+                // alert("立即注册")
                 $.ajax({
                     url:"http://127.0.0.1:8090/userinfo/register",
                     dataType:"json",
@@ -38,6 +97,7 @@
                 })
             })
         })
+
     </script>
 
 </head>
@@ -57,17 +117,17 @@
          <div id="Register">
              <ul>
              <li class="box_big"><input name="name" type="text" value placeholder="请输入您的 昵称 "></li>
-             <li class="box_small"><div>该昵称字符长度过长</div></li>
+             <li class="box_small" id="warm_name" style="display: none"><div>该昵称长度不规范：2~10中文或字母之间</div></li>
              <li class="box_big"><input  name="password" type="password" value placeholder="请输入您的 密码 "></li>
-             <li class="box_small"><div>该密码不符合规范</div></li>
+             <li class="box_small" id="warm_password" style="display: none"><div>该密码不符合规范：6到18之间</div></li>
              <li class="box_big"><input name="phone" type="text" value placeholder="请输入手机号码 "></li>
-             <li class="box_small"><div>该手机号已经被注册</div></li>
+             <li class="box_small" id="warm_phone" style="display: none"><div>该手机号已经被注册</div></li>
              </ul>
              <div id="nowregister">
                  <a>立即注册</a>
              </div>
              <div id="agreement">
-                 <input type="checkbox" checked="checked" ><p>我已阅读<a>《隐私政策》</a>和<a>《云朵用户协议》</a></p>
+                 <input type="checkbox" id="ageree" value="0"><p>我已阅读<a>《隐私政策》</a>和<a>《云朵用户协议》</a></p>
              </div>
          </div>
      </div>

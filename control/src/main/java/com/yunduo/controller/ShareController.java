@@ -63,6 +63,9 @@ public class ShareController {
     public List<Share>findFriendShare(Integer master_id){
        return shareService.findFriendShare(master_id);
     }
+    /**
+    * 预览头像的功能
+    * */
 
 
 }

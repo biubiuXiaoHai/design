@@ -15,8 +15,8 @@ public class UpdUserInfoReq {
     @ApiModelProperty("账号")
     private Integer account;
 //    头像图片
-    @ApiModelProperty("账号")
-    private MultipartFile  file=null;
+    @ApiModelProperty("修改的头像")
+    private MultipartFile  file;
     @ApiModelProperty("昵称")
     private String name;
     @ApiModelProperty("密码")

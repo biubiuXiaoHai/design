@@ -5,6 +5,7 @@
     <title>Home_Share</title>
     <link href="../../css/Home_Part/Home_Share.css" rel="stylesheet">
     <script src="../../js/jquery-3.4.1.min.js"></script>
+    <script src="../../js/jquery.form.js"></script>
     <script src="../../js/vue.min.js"></script>
     <script>
         $(function () {
@@ -32,6 +33,20 @@
                     }
                 }
             })
+            // var photos=new Vue({
+            //     el:"#photo_push",
+            //     data:{
+            //         photoimg1:"../../images/兔子.jpg",
+            //         photoimg2:"../../images/兔子.jpg",
+            //         photoimg3:"../../images/兔子.jpg",
+            //         photoimg4:"../../images/兔子.jpg",
+            //         photoimg5:"../../images/兔子.jpg",
+            //         photoimg6:"../../images/兔子.jpg",
+            //         photoimg7:"../../images/兔子.jpg",
+            //         photoimg8:"../../images/兔子.jpg",
+            //         photoimg9:"../../images/兔子.jpg"
+            //     }
+            // })
 
             //获取cookie
             //取出名字和用户的账号
@@ -62,21 +77,91 @@
                     master_id: account
                 }
                 ,success:function (data) {
-                    sharemodel.sharelist=data
+                    sharemodel.sharelist=data;
                 }
             })
+            // function lookone(file){
+            //
+            // }
+            //当点击预览  photo1
+            $("#look1").click(function () {
+                var formdata1=new FormData();
+                formdata1.append("file",$("#photo1")[0].files[0])
+                $.ajax({
+                    url:"http://127.0.0.1:8090/userinfo/updImgInfo",
+                    dataType: "json",
+                    type: "post",
+                    data: formdata1,
+                    contentType: false,
+                    processData: false,
+                    success:function (data) {
+                        alert("预览成功:"+data)
+                    },error:function (data) {
+                        console.log(data)
+                        alert(data)
+                        alert("传输失败")
+                    }
+                })
+            })
+            //当点击预览 photo2
+            // $("#look2").click(function () {
+            //     var formdata2=new FormData();
+            //     formdata2.append("file",$("#photo2")[0].files[0])
+            //     $.ajax({
+            //         url:"http://127.0.0.1:8090/userinfo/updImgInfo",
+            //         dataType: "json",
+            //         type: "post",
+            //         data: formdata2,
+            //         contentType: false,
+            //         processData: false,
+            //         success:function (data) {
+            //             alert("预览成功:"+data)
+            //         },error:function (data) {
+            //             console.log(data)
+            //             alert(data)
+            //             alert("传输失败")
+            //         }
+            //     })
+            // })
 
+
+
+            var formdata=new FormData();
             //当点击了 “发表”
             $("#publish").click(function () {
-                alert("发表说说")
+                alert("发表说说");
+                formdata.append("master_id",account);
+                if($("#photo1").val()!=='')
+                formdata.append("picture1",$("#photo1")[0].files[0]);
+                if($("#photo2").val()!=='')
+                formdata.append("picture2",$("#photo2")[0].files[0]);
+                if($("#photo3").val()!=='')
+                formdata.append("picture3",$("#photo3")[0].files[0]);
+                if($("#photo4").val()!=='')
+                formdata.append("picture4",$("#photo4")[0].files[0]);
+                if($("#photo5").val()!=='')
+                formdata.append("picture5",$("#photo5")[0].files[0]);
+                if($("#photo6").val()!=='')
+                formdata.append("picture6",$("#photo6")[0].files[0]);
+                if($("#photo7").val()!=='')
+                formdata.append("picture7",$("#photo7")[0].files[0]);
+                if($("#photo8").val()!=='')
+                formdata.append("picture8",$("#photo8")[0].files[0]);
+                if($("#photo9").val()!=='')
+                formdata.append("picture9",$("#photo9")[0].files[0]);
+                // if($("#words").val()!=='')
+                formdata.append("words",$("#words").text())
                 $.ajax({
                     url:"http://127.0.0.1:8090/share/reportShare",
                     dateType:"json",
                     type:"post",
-                    data:{
-                        master_id: account,
-                        words: $("#words").html()
-                    },
+                    data:formdata,
+                    contentType:false,
+                    processData:false,
+                    // data:{
+                    //     master_id: account,
+                    //     words: $("#words").html()
+                    // },
                     success: function (data) {
                         alert("发表成功")
                         window.location.reload();
@@ -86,14 +171,17 @@
                     }
                 })
             })
+
             //点击 “取消发表”
             $("#cancer").click(function () {
                 window.location.reload();
             })
+
             //点击 “添加照片”
             $("#add_photo").click(function () {
                 alert("添加照片")
-                $("#photo").attr("display","inline");
+                $("#photo").css("display","inline");
+                // $("#phone").css("margin-left","100px")
             })
 
         })
@@ -104,22 +192,35 @@
 <!--        说说相关信息-->
     <div id="center">
 <!--        <div id="photo" style="display: none"></div>-->
+
+<!--        添加照片：最多九张-->
         <div id="photo" style="display: none" >
             <div id="photo_push">
-                <li ><img src="../../images/兔子.jpg"></li>
-                <li ><img src="../../images/兔子.jpg"></li>
-                <li ><img src="../../images/兔子.jpg"></li>
-                <li ><img src="../../images/兔子.jpg"></li>
-                <li ><img src="../../images/兔子.jpg"></li>
-                <li ><img src="../../images/兔子.jpg"></li>
-                <li ><img src="../../images/兔子.jpg"></li>
-                <li ><img src="../../images/兔子.jpg"></li>
-                <li ><img src="../../images/兔子.jpg"></li>
+                <li ><div class="img"><img src="../../images/兔子.jpg"></div><div class="control"><input id="photo1" class="photo" type="file" value="点击添加照片"><div id="look1" class="look">预览</div><div id="delete1" class="delete">删除</div></div></li>
+                <li ><div class="img"><img src="../../images/兔子.jpg"></div><div class="control"><input id="photo2" class="photo" type="file" value="点击添加照片"><div id="look2" class="look">预览</div><div id="delete2" class="delete">删除</div></div></li>
+                <li ><div class="img"><img src="../../images/兔子.jpg"></div><div class="control"><input id="photo3" class="photo" type="file" value="点击添加照片"><div id="look3" class="look">预览</div><div id="delete3" class="delete">删除</div></div></li>
+                <li ><div class="img"><img src="../../images/兔子.jpg"></div><div class="control"><input id="photo4" class="photo" type="file" value="点击添加照片"><div id="look4" class="look">预览</div><div id="delete4" class="delete">删除</div></div></li>
+                <li ><div class="img"><img src="../../images/兔子.jpg"></div><div class="control"><input id="photo5" class="photo" type="file" value="点击添加照片"><div id="look5" class="look">预览</div><div id="delete5" class="delete">删除</div></div></li>
+                <li ><div class="img"><img src="../../images/兔子.jpg"></div><div class="control"><input id="photo6" class="photo" type="file" value="点击添加照片"><div id="look6" class="look">预览</div><div id="delete6" class="delete">删除</div></div></li>
+                <li ><div class="img"><img src="../../images/兔子.jpg"></div><div class="control"><input id="photo7" class="photo" type="file" value="点击添加照片"><div id="look7" class="look">预览</div><div id="delete7" class="delete">删除</div></div></li>
+                <li ><div class="img"><img src="../../images/兔子.jpg"></div><div class="control"><input id="photo8" class="photo" type="file" value="点击添加照片"><div id="look8" class="look">预览</div><div id="delete8" class="delete">删除</div></div></li>
+                <li ><div class="img"><img src="../../images/兔子.jpg"></div><div class="control"><input id="photo9" class="photo" type="file" value="点击添加照片"><div id="look9" class="look">预览</div><div id="delete9" class="delete">删除</div></div></li>
+
+
+<!--                <li ><img src="../../images/兔子.jpg"></li>-->
+<!--                <li ><img src="../../images/兔子.jpg"></li>-->
+<!--                <li ><img src="../../images/兔子.jpg"></li>-->
+<!--                <li ><img src="../../images/兔子.jpg"></li>-->
+<!--                <li ><img src="../../images/兔子.jpg"></li>-->
+<!--                <li ><img src="../../images/兔子.jpg"></li>-->
+<!--                <li ><img src="../../images/兔子.jpg"></li>-->
+<!--                <li ><img src="../../images/兔子.jpg"></li>-->
+<!--                <li ><img src="../../images/兔子.jpg"></li>-->
             </div>
-            <div id="tip">
-                <input type="file" id="file_input" name="filePath" multiple="multiple"/>
-<!--                <input type="file" value="请选择照片">-->
-            </div>
+<!--            <div id="tip">-->
+<!--                <input type="file" id="file_input" name="filePath" multiple="multiple"/>-->
+<!--&lt;!&ndash;                <input type="file" value="请选择照片">&ndash;&gt;-->
+<!--            </div>-->
 
         </div>
 <!--发表说说-->
@@ -148,6 +249,17 @@
                     {{share.words}}
                 </div>
             </div>
+            <div id="photos">
+                <div class="photo_model" v-if="share.picture1 !==null"><img v-bind:src="share.picture1"></div>
+                <div class="photo_model" v-if="share.picture2 !==null"><img v-bind:src="share.picture2"></div>
+                <div class="photo_model" v-if="share.picture3 !==null"><img v-bind:src="share.picture3"></div>
+                <div class="photo_model" v-if="share.picture4 !==null"><img v-bind:src="share.picture4"></div>
+                <div class="photo_model" v-if="share.picture5 !==null"><img v-bind:src="share.picture5"></div>
+                <div class="photo_model" v-if="share.picture6 !==null"><img v-bind:src="share.picture6"></div>
+                <div class="photo_model" v-if="share.picture7 !==null"><img v-bind:src="share.picture7"></div>
+                <div class="photo_model" v-if="share.picture8 !==null"><img v-bind:src="share.picture8"></div>
+                <div class="photo_model" v-if="share.picture9 !==null"><img v-bind:src="share.picture9"></div>
+            </div>
 <!--            浏览次数等-->
             <div id="browse_times">
                 <div id="browse">被浏览了 {{share.saw_time}} 次</div>
@@ -155,6 +267,7 @@
                 <div id="leave_message">留言</div>
                 <div id="delete" v-on:click="deleteshare(share.id)">删除</div>
             </div>
+            <div id="praise"> </div>
             <div id="talk_message"></div>
 
         </div>

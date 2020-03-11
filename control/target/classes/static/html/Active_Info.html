@@ -46,7 +46,7 @@
                               master_id:apply.master_id,
                               friend_id:apply.friend_id,
                           },success:function (data) {
-                              alert("同意了申请"+data),
+                              alert("同意了申请该好友： "+data+" 的申请"),
                                   window.parent.location.reload();
                           },
                           error:function () {
@@ -66,7 +66,7 @@
                                 master_id:apply.master_id,
                                 friend_id:apply.friend_id
                             },success:function (data) {
-                                alert("已拒绝添加该好友")
+                                // alert("已拒绝添加该好友")
                                 window.location.reload()
                             },error:function () {
                                 alert("系统异常")
@@ -109,7 +109,7 @@
                 }
                 ,success:function (data) {
                     contentlist.sharelist=data
-                    alert("获取好友说说成功")
+                    // alert("获取好友说说成功")
                 },error:function () {
                     alert("获取好友说说失败")
                 }

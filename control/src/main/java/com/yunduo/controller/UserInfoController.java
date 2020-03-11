@@ -68,10 +68,10 @@ public class UserInfoController {
      * @param file
      * @return
      */
-    @PostMapping("updateInfo")
+    @PostMapping("updImgInfo")
     @ApiOperation("仅仅只是转换头像的实时显示而已，不改数据库")
-    public String updateInfo(@RequestParam("file") MultipartFile file){
-        System.out.println("ok it work");
+    public String updImgInfo(@RequestParam("file") MultipartFile file){
+//        System.out.println("ok it work");
         //获取原来的文件名
         String fileName=file.getOriginalFilename();
         String fileLast=fileName.substring(fileName.lastIndexOf("."));

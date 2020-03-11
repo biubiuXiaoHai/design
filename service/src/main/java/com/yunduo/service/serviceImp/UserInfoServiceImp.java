@@ -41,16 +41,18 @@ public class UserInfoServiceImp  implements UserInfoService {
                     user.setLast_date(time);
                     usersMapper.updateByPrimaryKeySelective(user);
                 }
+                //登录成功
                 loginRsq.setResult(1);
                 loginRsq.setAccount(user.getAccount());
                 loginRsq.setName(user.getName());
                 return loginRsq;
             }
+            //密码错误
             loginRsq.setResult(3);
             return loginRsq;
         }
         //取云朵账号来判断
-        user= usersMapper.selectByPrimaryKey(model.getAccount());
+        user= usersMapper.selectByPrimaryKey(Integer.valueOf(model.getAccount()));
         if(user!=null&&model.getAccount().equals(user.getAccount())){
             if(user.getPassword().equals(model.getPassword())) {
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -67,9 +69,11 @@ public class UserInfoServiceImp  implements UserInfoService {
                 loginRsq.setName(user.getName());
                 return loginRsq;
             }
+            //登录失败,密码错误
             loginRsq.setResult(3);
             return loginRsq;
         }
+        //result=2账号不存在
         loginRsq.setResult(2);
         return loginRsq;
     }
@@ -100,6 +104,11 @@ public class UserInfoServiceImp  implements UserInfoService {
 
     @Override
     public Integer updUserInfo(UpdUserInfoReq model) {
+        if(model.getFile()==null){
+            Users user=CloneUtil.cloneObj(model,Users.class);
+            usersMapper.updateByPrimaryKeySelective(user);
+            return 1;
+        }
         String filename=model.getFile().getOriginalFilename();
         String filelast=filename.substring(filename.lastIndexOf("."));
         filename= UUID.randomUUID()+filelast;

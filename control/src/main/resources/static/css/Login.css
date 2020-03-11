@@ -111,6 +111,7 @@ body{
     color: red;
 }
 #login_button{
+    float: left;
     width: 300px;
     height: 45px;
     margin-top: 12px;
@@ -187,6 +188,13 @@ body{
 li a:hover{
     color: #31b0d5;
 }
+#nowRegister:hover{
+    color: red;
+}
 p  a:hover{
     color: red;
+}
+
+#warm_info{
+    float: left;
 }

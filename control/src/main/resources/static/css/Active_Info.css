@@ -155,6 +155,7 @@ body{
 
 /*说说的文字内容信息*/
 #word_message{
+    overflow: auto;
     width: 450px;
     height: 100px;
     background-color: #adadad;
