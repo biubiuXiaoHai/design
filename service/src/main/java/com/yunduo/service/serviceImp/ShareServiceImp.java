@@ -129,7 +129,7 @@ public class ShareServiceImp implements ShareService {
         String str=file.getOriginalFilename();
         String strlast=str.substring(str.lastIndexOf("."));
         String strname= UUID.randomUUID()+strlast;
-        String filepath="D:/temp-rainy/";
+        String filepath="E:/temp-rainy/";
         File dest =new File(filepath+strname);
         try{
             file.transferTo(dest);

@@ -30,7 +30,7 @@ public class TestController {
         }
         String fileName = file.getOriginalFilename();  // 文件名
         String suffixName = fileName.substring(fileName.lastIndexOf("."));  // 后缀名
-        String filePath = "D://temp-rainy//"; // 上传后的路径
+        String filePath = "E://temp-rainy//"; // 上传后的路径
         fileName = UUID.randomUUID() + suffixName; // 新文件名
         File dest = new File(filePath + fileName);
         if (!dest.getParentFile().exists()) {
@@ -43,7 +43,7 @@ public class TestController {
         }
         String filename = "/temp-rainy/" + fileName;
         model.addAttribute("filename", filename);
-        return "D:\\temp-rainy\\6e1e14a7-8cba-47bb-bdd1-5c1600120a26.jpg";
+        return "E:\\temp-rainy\\6e1e14a7-8cba-47bb-bdd1-5c1600120a26.jpg";
     }
 
     @PostMapping("updUsersInfo")

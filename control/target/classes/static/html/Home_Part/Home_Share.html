@@ -129,7 +129,7 @@
             var formdata=new FormData();
             //当点击了 “发表”
             $("#publish").click(function () {
-                alert("发表说说");
+                // alert("发表说说");
                 formdata.append("master_id",account);
                 if($("#photo1").val()!=='')
                 formdata.append("picture1",$("#photo1")[0].files[0]);
@@ -163,7 +163,7 @@
                     //     words: $("#words").html()
                     // },
                     success: function (data) {
-                        alert("发表成功")
+                        // alert("发表成功")
                         window.location.reload();
 
                     },error:function () {
@@ -179,7 +179,7 @@
 
             //点击 “添加照片”
             $("#add_photo").click(function () {
-                alert("添加照片")
+                // alert("添加照片")
                 $("#photo").css("display","inline");
                 // $("#phone").css("margin-left","100px")
             })

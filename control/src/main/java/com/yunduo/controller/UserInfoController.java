@@ -79,7 +79,7 @@ public class UserInfoController {
         fileName= UUID.randomUUID()+fileLast;
         System.out.println("新文件夹名字："+fileName);
 
-        String filePath="D:/temp-rainy/";
+        String filePath="E:/temp-rainy/";
         File dest=new File(filePath+fileName);
         if(!dest.getParentFile().exists()){
             dest.getParentFile().mkdirs();

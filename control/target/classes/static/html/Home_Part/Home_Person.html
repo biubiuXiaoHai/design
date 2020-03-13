@@ -92,7 +92,7 @@
                     $("#sameresult").css("display","inline")
                 }
             })
-            //点击 “预览头像”
+            //点击 “预览效果”
             $("#form1").ajaxForm(function (data) {
                 // alert("进入提交");
                 // alert(data);
@@ -106,7 +106,7 @@
             })
             //点击 “保存修改” 按钮
             $("#save_update").click(function () {
-                alert(account);
+                // alert(account);
                 var pwd=$("#password");
                 if($("#new_head").val()=='') {
                     // alert("头像为空");
@@ -178,7 +178,7 @@
         </div>
         <!--      修改头像替换模块2-->
         <div id="change_logo2" style="display: none">
-         <form action="/userinfo/updateInfo" method="post" enctype="multipart/form-data" id="form1">
+         <form action="/userinfo/updImgInfo" method="post" enctype="multipart/form-data" id="form1">
               <input id="new_head" name="file" type="file">
                 <input id="cancel_change" type="button" value="取消">
                 <input id="sure_change" type="submit" value="预览效果">

@@ -53,7 +53,7 @@ public class UserInfoServiceImp  implements UserInfoService {
         }
         //取云朵账号来判断
         user= usersMapper.selectByPrimaryKey(Integer.valueOf(model.getAccount()));
-        if(user!=null&&model.getAccount().equals(user.getAccount())){
+        if(user!=null&&(Integer.valueOf(model.getAccount()).equals(user.getAccount()))){
             if(user.getPassword().equals(model.getPassword())) {
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 Date date=new Date();
@@ -112,8 +112,11 @@ public class UserInfoServiceImp  implements UserInfoService {
         String filename=model.getFile().getOriginalFilename();
         String filelast=filename.substring(filename.lastIndexOf("."));
         filename= UUID.randomUUID()+filelast;
-        String filepath="D:/temp-rainy/";
+        String filepath="E:/temp-rainy/";
         File dest =new File(filepath+filename);
+        if(!dest.getParentFile().exists()){
+            dest.getParentFile().mkdirs();
+        }
         try{
             model.getFile().transferTo(dest);
         } catch (IOException e) {
