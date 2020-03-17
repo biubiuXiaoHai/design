@@ -21,6 +21,13 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.1.0</version>
         </dependency>
+
+        <!--引入第三方短信系统-->
+        <dependency>
+            <groupId>com.zhenzikj</groupId>
+            <artifactId>zhenzisms</artifactId>
+            <version>1.0.4</version>
+        </dependency>
     </dependencies>
 
     <build>

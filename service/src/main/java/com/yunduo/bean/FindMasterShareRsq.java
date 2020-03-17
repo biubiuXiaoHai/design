@@ -1,7 +1,10 @@
 package com.yunduo.bean;
 
+import com.yunduo.entities.Praisepower;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @ApiModel("获取相关的说说信息")
@@ -36,5 +39,7 @@ public class FindMasterShareRsq {
     private String words;
 
     private Integer saw_time;
+
+    private List<String> person_name;
 
 }

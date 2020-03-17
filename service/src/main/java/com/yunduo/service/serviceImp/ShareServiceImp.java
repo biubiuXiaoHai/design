@@ -71,6 +71,8 @@ public class ShareServiceImp implements ShareService {
         Date date=new Date();
         String share_time=simpleDateFormat.format(date);
         share.setShare_time(share_time);
+        //设置浏览次数为0
+        share.setSaw_time(0);
         shareMapper.insertSelective(share);
 //        System.out.println("发表说说的功能完成，开始返回展示的数据");
 //
@@ -106,14 +108,28 @@ public class ShareServiceImp implements ShareService {
      */
     @Override
     public List<FindMasterShareRsq> findMasterShare(Integer master_id) {
-        List<Share> share =shareMapper.findMasterShare(master_id);
-        List<FindMasterShareRsq> list= CloneUtil.cloneList(share,FindMasterShareRsq.class);
+        List<Share> infolist =shareMapper.findMasterShare(master_id);
+        //浏览次数加1
+        for(int i=0;i<infolist.size();i++){
+            Share share=infolist.get(i);
+            share.setSaw_time(share.getSaw_time()+1);
+            shareMapper.updateByPrimaryKeySelective(share);
+        }
+        infolist =shareMapper.findMasterShare(master_id);
+        List<FindMasterShareRsq> list= CloneUtil.cloneList(infolist,FindMasterShareRsq.class);
         return list;
     }
 
     @Override
     public List<Share> findFriendShare(Integer master_id) {
-    return   shareMapper.findFriendShare(master_id);
+        //获取时则浏览次数加1
+        List<Share> infolist=shareMapper.findFriendShare(master_id);
+        for(int i=0;i<infolist.size();i++){
+            Share share=infolist.get(i);
+            share.setSaw_time(share.getSaw_time()+1);
+            shareMapper.updateByPrimaryKeySelective(share);
+        }
+    return infolist=shareMapper.findFriendShare(master_id);
 
     }
 
