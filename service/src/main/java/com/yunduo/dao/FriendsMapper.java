@@ -13,6 +13,7 @@ public interface FriendsMapper {
     Integer updBecomeFriendTime(Friends model);
     Integer findFriendNumber(Integer master_id);
     List<Users> findFriendList(Integer account );
+    Integer selectByMasterIdAndFriendId(Integer master_id,Integer friend_id);
 
     int deleteByPrimaryKey(Integer id);
 

@@ -199,6 +199,15 @@ body{
     float: right;
     text-align: center;
 }
+#praise_content{
+    width: 400px;
+    height: auto;
+    float: left;
+}
+#praise_content p{
+    float: left;
+    margin-left: 3px;
+}
 /*底部的谈论区*/
 #talk_message{
     width: 450px;

@@ -1,5 +1,7 @@
 package com.yunduo.service.serviceImp;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.yunduo.bean.*;
 import com.yunduo.dao.UsersMapper;
 import com.yunduo.entities.Users;
@@ -28,9 +30,14 @@ public class UserInfoServiceImp implements UserInfoService {
     @Override
     public LoginRsp Login(LoginReq model) {
         LoginRsp loginRsq = new LoginRsp();
+        //输入格式的判断
+        if(model.getAccount().length()!=6&&model.getAccount().length()!=11){
+            loginRsq.setResult(2);
+            return loginRsq;
+        }
         //先取手机号来判断
-        Users user = usersMapper.selectByPhoneAll(model.getAccount().toString());
-        if (user != null && model.getAccount().toString().equals(user.getPhone())) {
+        Users user = usersMapper.selectByPhoneAll(model.getAccount());
+        if (user != null && model.getAccount().equals(user.getPhone())) {
             if (user.getPassword().equals(model.getPassword())) {
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = new Date();
@@ -122,6 +129,7 @@ public class UserInfoServiceImp implements UserInfoService {
         }
     }
 
+    //更新用户的信息
     @Override
     public Integer updUserInfo(UpdUserInfoReq model) {
         if (model.getFile() == null) {
@@ -180,7 +188,11 @@ public class UserInfoServiceImp implements UserInfoService {
      * @return
      */
     @Override
-    public List<Users> findUserFriend(String info) {
-        return usersMapper.findUserFriend(info);
+    public PageInfo<Users> findUserFriend(FindUserFriendReq info)
+    {
+        PageHelper.startPage(info.getPageNumber(),info.getPageSize());
+        List<Users> list=usersMapper.findUserFriend(info.getInfo());
+        PageInfo<Users> pageInfo=new PageInfo<Users>(list);
+        return pageInfo;
     }
 }

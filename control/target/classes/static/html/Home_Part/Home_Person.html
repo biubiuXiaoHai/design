@@ -27,6 +27,16 @@
             // var username=getCookie("cookie_username");
             var account=getCookie("cookie_account");
 
+            //最左侧的数量统计
+            var overview=new Vue({
+                el:"#overview",
+                data:{
+                    share_sum:0,
+                    message_sum:0,
+                    photo_sum:0
+                }
+            })
+
             //绑定个人信息
             var userin= new Vue({
                 el:"#info",
@@ -40,6 +50,18 @@
                     phone:""
                 }
             })
+
+            //获取左侧统计信息
+            // $(function () {
+            //     $.ajax({
+            //         url: "http://127.0.0.1:8090/userinfo/findUserInfo",
+            //         dataType: "json",
+            //         type: "post",
+            //         data: {
+            //             userid: account,
+            //         }
+            //     })
+            // })
 
             //获取个人的信息
             $(function () {
@@ -59,7 +81,7 @@
                         userin.signature=data.signature;
                         userin.phone=data.phone;
                     },error: function (data) {
-                        alert("获取个人信息失败")
+                        // alert("获取个人信息失败")
                     }
                 })
             })
@@ -81,7 +103,6 @@
                 // alert("it click it")
                 $("#pass_button").css("display","none");
                 $(".change_pass").css("display","inline");
-
             })
             //当 两次密码不同时 会出提示
             $("#password_change2").on("input",function () {
@@ -107,31 +128,24 @@
             //点击 “保存修改” 按钮
             $("#save_update").click(function () {
                 // alert(account);
-                var pwd=$("#password");
                 if($("#new_head").val()=='') {
                     // alert("头像为空");
                 }else{
                     // alert("头像不为空")
                     formdata.append("file",$("#new_head")[0].files[0])
                 }
-                if(pwd.val()==''){
+                if($("#passwordnumber").val()==''){
                     //密码为空则不修改
                 }else{
                     formdata.append("password", $("#passwordnumber").val())
                 }
 
                 formdata.append("account",account),
-
-                    //有bug需要选择判断需要传的数据才传
-                // var files=$("#new_head").[0].files[0];
-                //     formdata.append("file",$("#new_head")[0].files[0])
-
                 formdata.append("name",$("#name").val()),
                 formdata.append("sex",$("#sex_type").val()),
                 formdata.append("birthday",$("#birthdaydate").val()),
                 formdata.append("fondness",$("#fondness").val()),
                 formdata.append("signature",$("#signature").val()),
-                // formdata.append("password", $("#passwordnumber").val())
                 formdata.append("phone",$("#phonenumber").val()),
 
                 $.ajax({
@@ -146,7 +160,7 @@
                             window.parent.location.reload();
                           // alert("成功了")
                         },error:function (data) {
-                            alert("失败了")
+                            // alert("失败了")
                         }
                     })
             })
@@ -158,14 +172,16 @@
 <!--左侧好友列表-->
 <div id="letf_part">
     <div id="overview">
-        <li><div>说说： </div><p>****</p></li>
+        <li><div>说说： </div><p>{{share_sum}}</p></li>
         <li><div>留言： </div><p>****</p></li>
         <li><div>相册： </div><p>****</p></li>
     </div>
 
 </div>
 <!--      中间的好友动态部分-->
-<div id="center_part"></div>
+<div id="center_part">
+
+</div>
 <!--右侧的个人信息展示部分-->
 <div id="right_part">
     <div id="info">
@@ -199,7 +215,7 @@
 
         <li class="change_pass" style="display: none"><div class="model"><div id="password_change1">密码：</div><div class="write"><input type="password" name="password_change1" id="passwordnumber"></div></div></li>
         <li class="change_pass" style="display: none"><div class="model"><div id="password_change2">确认新密码：</div><div class="write"><input type="password" name="password_change2"></div></div></li>
-        <li class="change_pass" style="display: none" id="sameresult"><p id="warm_password">两次输入的密码不相同!</p></li>
+        <li  style="display: none" id="sameresult"><p id="warm_password">两次输入的密码不相同!</p></li>
         <li><div class="model"><div id="phone">电话号码：</div><div class="write"><input type="text" id="phonenumber" v-model="phone"></div></div></li>
 
         <div id="info_bottom">

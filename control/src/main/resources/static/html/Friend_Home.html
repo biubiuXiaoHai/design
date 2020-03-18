@@ -48,7 +48,7 @@
                 success:function (data) {
                     userinfo.imgurl=data.avatar;
                 },error:function () {
-                    alert("获取个人信息失败！")
+                    // alert("获取个人信息失败！")
                 }
             })
 
@@ -62,25 +62,25 @@
             })
             //点击 “退出登录”
             $("input[name='exit']").click(function(){
-                alert("点击退出登录")
+                // alert("点击退出登录")
                 window.location.href="http://127.0.0.1:8090/html/Login.html"
             })
 
             //    点击个人首页
             $("#home_person").click(function () {
-                $("#contain").attr("src","Home_Part/Home_Person.html")
+                $("#contain").attr("src","Home_Part/Friend_Person.html")
             })
             //    点击说说
             $("#home_share").click(function () {
-                $("#contain").attr("src","Home_Part/Home_Share.html")
+                $("#contain").attr("src","Home_Part/Friend_Share.html")
             })
             //    点击留言板
             $("#home_message").click(function () {
-                $("#contain").attr("src","Home_Part/Home_Message.html")
+                $("#contain").attr("src","Home_Part/Friend_Message.html")
             })
             //    点击相册
             $("#home_photo").click(function () {
-                $("#contain").attr("src","Home_Part/Home_Photo.html")
+                $("#contain").attr("src","Home_Part/Friend_Photo.html")
             })
         })
     </script>
@@ -120,7 +120,7 @@
 </div>
 <!--变换的底部-->
 <div id="bottom">
-    <iframe id="contain"src="Home_Part/Friend_Home.html" scrolling="no"></iframe>
+    <iframe id="contain"src="Home_Part/Friend_Home.html" scrolling="auto"></iframe>
 </div>
 </body>
 </html>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PraisePowerController {
     @Autowired
     PraisePowerService praisePowerService;
+    //添加一个点赞  ：是否已点，点过则取消0，未点则加上1
     @PostMapping("addPraiseInfo")
     public Integer addPraiseInfo(AddPraiseInfoReq model){
         return praisePowerService.addPraiseInfo(model);

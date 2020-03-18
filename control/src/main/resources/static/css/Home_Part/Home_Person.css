@@ -40,6 +40,7 @@ body{
     font-size: 30px;
 }
 #center_part{
+    overflow-scrolling: auto;
     float: left;
     width: 50%;
     height: 100%;
@@ -237,4 +238,7 @@ input[name="phone"]{
     width: 180px;
     height: 22px;
     color: red;
+}
+#sameresult{
+    margin-left: 10px;
 }

@@ -59,7 +59,7 @@
                                     // alert("添加好友成功")
                                 },
                                 error:function () {
-                                    alert("添加好友失败")
+                                    // alert("添加好友失败")
                                 }
                             })
                             window.location.reload();
@@ -110,7 +110,7 @@
                     ,success:function (data) {
                         userinfo.imgurl=data.avatar;
                     },error:function () {
-                        alert("网络开小差了。。。。")
+                        // alert("网络开小差了。。。。")
                     }
                 })
             //获取用户好友数量
@@ -124,7 +124,7 @@
                 ,success:function (data) {
                     userinfo.friendnumber=data
                 },error:function () {
-                    alert("网络开小差了。。。。")
+                    // alert("网络开小差了。。。。")
                 }
             })
 
@@ -141,11 +141,13 @@
                 success:function (data) {
                     friendlist.list=data.list;
                 },error:function () {
-                    alert("请联系兰国海解决问题")
+                    // alert("请联系兰国海解决问题")
                 }
             })
 
 
+            var pageNumber=1;
+            var pageSize=12;
             //点击 搜索
             $("#search_button").click(function () {
                 // alert("搜索")
@@ -154,12 +156,14 @@
                     dataType:"json",
                     type:"post",
                     data:{
+                        pageNum:pageNumber,
+                        pageSize:pageSize,
                         info:$("#search_input").val(),
                     },
                     success:function (data) {
-                        searchlist.list=data;
+                        searchlist.list=data.list;
                     },error:function () {
-                        alert("请联系兰国海解决问题")
+                        // alert("请联系兰国海解决问题")
                     }
 
                 })

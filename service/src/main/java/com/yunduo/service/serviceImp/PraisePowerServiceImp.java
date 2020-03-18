@@ -24,7 +24,7 @@ public class PraisePowerServiceImp  implements PraisePowerService {
         }else{
             //取消点赞
             praisepowerMapper.deleteByPrimaryKey(result.getId());
-            return 2;
+            return 0;
         }
     }
 }

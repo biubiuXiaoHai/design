@@ -1,0 +1,152 @@
+#message{
+    width: 870px;
+    height: 2000px;
+    background-color: #777777;
+}
+/*第一部分：主人寄语*/
+#master_message{
+    width: 800px;
+    height: 200px;
+    margin-left: 35px;
+    float: left;
+    background-color: #f7ecb5;
+}
+#title{
+    width: 740px;
+    height: 35px;
+    background-color: #269abc;
+    float: left;
+    margin-left: 30px;
+}
+#tip{
+    width: 180px;
+    height: 35px;
+    background-color: #5bc0de;
+    font-size: 30px;
+    float: left;
+}
+#not_change{
+    width:100px ;
+    height: 28px;
+    background-color: #4cae4c;
+    text-align: center;
+    float: right;
+    margin-right: 10px;
+    margin-top: 3px;
+}
+#yes_change{
+    width:100px ;
+    height: 28px;
+    background-color: #555555;
+    text-align: center;
+    float: right;
+    margin-right: 10px;
+    margin-top: 3px;
+}
+#master_content{
+    width: 750px;
+    float: left;
+    height: 130px;
+    margin-top: 5px;
+    margin-left: 25px;
+    background-color: #4cae4c;
+}
+#last_time{
+    width: 800px;
+    height: 30px;
+    background-color: #555555;
+    float: left;
+}
+#last_time p{
+    margin-top: 0px;
+    float: right;
+    margin-right: 20px;
+}
+
+/*留言内容部分*/
+#messageinfo{
+    width: 800px;
+    height: 2000px;
+    overflow: auto;
+    margin-left: 35px;
+    background-color: white;
+    float: left;
+    margin-top: 5px;
+}
+#messagetitle{
+    width: 800px;
+    height: 35px;
+    background-color: #4cae4c;
+    float: left;
+}
+#messagetitle div{
+    width: 200px;
+    height: 35px;
+    float: left;
+    background-color: #5bc0de;
+    text-align: center;
+    font-size: 30px;
+}
+#messagemodel{
+    margin-top: 5px;
+    width: 760px ;
+    height: 180px ;
+    margin-left: 20px;
+    background-color: #f7ecb5;
+    float: left;
+}
+#userinfo{
+    width: 100%;
+    height: 60px;
+    background-color: #777777;
+    float: left;
+}
+#userhead{
+    width: 55px;
+    height: 55px;
+    margin-top: 3px;
+    float: left;
+}
+#username{
+    width: 100px;
+    height: 35px;
+    float: left;
+    margin-left: 20px;
+    margin-top: 13px;
+    background-color: #269abc;
+}
+#answer{
+    float: right;
+    margin-right: 20px;
+    width: 80px;
+    height: 30px;
+    margin-top: 15px;
+    background-color: #f7ecb5;
+    text-align: center;
+}
+#delete{
+    float: right;
+    margin-right: 20px;
+    width: 80px;
+    height: 30px;
+    margin-top: 15px;
+    background-color: #ec971f;
+    text-align: center;
+}
+#words{
+    width: 100%;
+    height: 95px ;
+    background-color: white;
+    float: left;
+    text-align: center;
+}
+#words_time{
+    width: 100%;
+    height: 25px;
+    background-color: #269abc;
+    float: left;
+}
+#words_time p{
+    margin: 0;
+    float: right;
+}

@@ -74,29 +74,6 @@ public class ShareServiceImp implements ShareService {
         //设置浏览次数为0
         share.setSaw_time(0);
         shareMapper.insertSelective(share);
-//        System.out.println("发表说说的功能完成，开始返回展示的数据");
-//
-//        ShareInfoRsp shareInfoRsp=new ShareInfoRsp();
-//        Users user=usersMapper.selectByPrimaryKey(model.getMaster_id());
-//        Share share1=shareMapper.selectByMasteridAndTime(share.getMaster_id(),share.getShare_time());
-//        shareInfoRsp.setId(share1.getId());
-//        shareInfoRsp.setShare_time(share1.getShare_time());
-//        shareInfoRsp.setPicture1(share1.getPicture1());
-//        shareInfoRsp.setPicture2(share1.getPicture2());
-//        shareInfoRsp.setPicture3(share1.getPicture3());
-//        shareInfoRsp.setPicture4(share1.getPicture4());
-//        shareInfoRsp.setPicture5(share1.getPicture5());
-//        shareInfoRsp.setPicture6(share1.getPicture6());
-//        shareInfoRsp.setPicture7(share1.getPicture7());
-//        shareInfoRsp.setPicture8(share1.getPicture8());
-//        shareInfoRsp.setPicture9(share1.getPicture9());
-//        shareInfoRsp.setWords(share1.getWords());
-//        shareInfoRsp.setSaw_time(share1.getSaw_time());
-//        //用户信息
-//        shareInfoRsp.setAccount(share1.getMaster_id());
-//        shareInfoRsp.setAvatar(user.getAvatar());
-//        shareInfoRsp.setName(user.getName());
-//        return shareInfoRsp;
         return 1;
         //响应1 为成功
     }

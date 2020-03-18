@@ -63,7 +63,17 @@
         <!--               enableSelectByExample="false" enableUpdateByExample="false">-->
         <!--            <property name="useActualColumnNames" value="true" />-->
         <!--        </table>-->
-        <table tableName="praisepower" domainObjectName="Praisepower"
+<!--        <table tableName="praisepower" domainObjectName="Praisepower"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false">-->
+<!--            <property name="useActualColumnNames" value="true"/>-->
+
+<!--        <table tableName="message" domainObjectName="Message"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false">-->
+<!--            <property name="useActualColumnNames" value="true"/>-->
+<!--        </table>-->
+        <table tableName="hostmessage" domainObjectName="HostMessage"
                enableCountByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" enableUpdateByExample="false">
             <property name="useActualColumnNames" value="true"/>

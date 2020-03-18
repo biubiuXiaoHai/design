@@ -72,7 +72,31 @@
                                 alert("系统异常")
                             }
                         })
-                    }
+                    },
+                praise:function (share) {
+                    // alert("点赞： " + share.id);
+                    $.ajax({
+                        url: "http://127.0.0.1:8090/praisePower/addPraiseInfo",
+                        dataType: "json",
+                        type: "post",
+                        data: {
+                            share_id: share.id,
+                            person_id: account,
+                            person_name: username
+                        },
+                        success: function (data) {
+                            if (data == 0) {
+                                alert("点赞失败")
+                            } else {
+                                alert("点赞成功")
+                                window.location.reload();
+                            }
+                        }, error: function () {
+                            alert("抱歉，点赞失败")
+                        }
+
+                    })
+                }
                 }
             })
 
@@ -154,10 +178,10 @@
         <!--            浏览次数等-->
         <div id="browse_times">
             <div id="browse">被浏览了 {{share.saw_time}} 次</div>
-            <div id="likes">点赞</div>
+            <div id="likes" v-on:click="praise(share)">点赞</div>
             <div id="leave_message">留言</div>
-
         </div>
+        <div id="praise_content"><p v-for="(praise_one,i) in share.praise">{{praise_one.person_name}},</p><p>觉得很赞</p></div>
         <div id="talk_message"></div>
 
     </div>

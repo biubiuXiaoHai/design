@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Home_Message</title>
-    <link href="../../css/Home_Part/Home_Message.css" rel="stylesheet">
+    <title>Friend_Message</title>
+    <link href="../../css/Home_Part/Friend_Message.css" rel="stylesheet">
     <script src="../../js/jquery-3.4.1.min.js"></script>
     <script src="../../js/vue.min.js"></script>
     <script>
@@ -28,32 +28,20 @@
             var username=getCookie("cookie_username");
             var account=getCookie("cookie_account");
 
+            var friendname=getCookie("cookie_friendname");
+            var friendaccount=getCookie("cookie_friendaccount");
+
             var hostmessage=new Vue({
-               el:"#master_message",
-               data:{
-                   content:{}
-               }
+                el:"#master_message",
+                data:{
+                    content:{}
+                }
             });
             var messagelist=new Vue({
                 el:"#messageinfo",
                 data:{
                     msglist:{},
                     cust:account
-                },
-                methods:{
-                    delet_message:function (id) {
-                        $.ajax({
-                            url:"http://127.0.0.1:8090/message/delMessage",
-                            dataType:"json",
-                            type:"post",
-                            data:{
-                                id:id
-                            },success:function (data) {
-                                // alert("删除成功")
-                                window.location.reload();
-                            }
-                        })
-                    }
                 }
             });
             //获取 主人寄语
@@ -62,7 +50,7 @@
                 dataType:"json",
                 type:"post",
                 data:{
-                    master_id:account
+                    master_id:friendaccount
                 },success:function (data) {
                     // alert("寄语获取成功")
                     hostmessage.content=data;
@@ -70,40 +58,44 @@
                     // alert("寄语获取异常")
                 }
             })
-            // 获取 留言信息
+            //获取 留言信息
             $.ajax({
-                url:"http://127.0.0.1:8090/message/findMessage",
-                dataType:"json",
-                type:"post",
-                data:{
-                    master_id:account
-                },success:function (data) {
-                    messagelist.msglist=data;
-                },error:function () {
-                }
-            })
-        //    点击 “取消修改”
-            $("#not_change").click(function () {
-                window.location.reload();
-            })
-        //    点击 “保存修改”
-            $("#yes_change").click(function () {
-                $.ajax({
-                    url:"http://127.0.0.1:8090/message/updHostMessage",
+                    url:"http://127.0.0.1:8090/message/findMessage",
                     dataType:"json",
                     type:"post",
                     data:{
-                        master_id:account,
-                        message:$("#master_content").text()
+                        master_id:friendaccount
                     },success:function (data) {
-                        // alert("修改成功")
-                        hostmessage.content=data;
+                        // alert("留言信息获取成功")
+                        messagelist.msglist=data;
                     },error:function () {
-                        // alert("修改失败")
+                        // alert("留言信息获取异常")
+                    }
+                })
+            //点击 “清空编辑”
+            $("#give_cancer").click(function () {
+                $("#give_content").html("");
+            })
+            //点击 “确定留言”
+            $("#give_sure").click(function () {
+                $.ajax({
+                    url:"http://127.0.0.1:8090/message/addMessage",
+                    dataType:"json",
+                    type:"post",
+                    data:{
+                        master_id:friendaccount,
+                        friend_id:account,
+                        message:$("#give_content").text()
+                    },success:function (data) {
+                        // alert("留言成功")
+                        window.location.reload();
+                    },error:function () {
+                        // alert("留言动作异常")
                     }
                 })
 
             })
+            //点击删除
 
         })
     </script>
@@ -113,18 +105,22 @@
     <div id="master_message">
         <div id="title">
             <div id="tip">主人的寄语：</div>
-            <div id="yes_change">保存修改</div>
-            <div id="not_change">取消修改</div>
         </div>
-        <div id="master_content" contenteditable="true">{{content.message}}</div>
+        <div id="master_content" >{{content.message}}</div>
         <div id="last_time"><p>{{content.last_time}}</p></div>
+    </div>
+    <div id="givemessage">
+        <div id="give_title"><div>我也来留个言</div></div>
+        <div id="give_content" contenteditable="true">输入留言信息：</div>
+        <div id="give_result"> <div id="give_sure">确定留言</div><div id="give_cancer">清空编辑</div></div>
+
     </div>
     <div id="messageinfo">
         <div id="messagetitle"><div>访客留言信息:</div></div>
-<!--        留言信息模板-->
+        <!--        留言信息模板-->
         <div id="messagemodel" v-for="(msg,i) in msglist">
             <div id="userinfo">
-                <img id="userhead" v-bind:src="msg.friend_avatar"><div id="username">{{msg.friend_name}}</div><div id="answer">回复</div><div id="delete" v-on:click="delet_message(msg.id)">删除</div>
+                <img id="userhead" v-bind:src="msg.friend_avatar"  ><div id="username">{{msg.friend_name}}</div><div id="answer">回复</div><div id="delete" v-if="msg.friend_id ==cust">删除</div>
             </div>
             <div id="words">{{msg.message}}</div>
             <div id="words_time"><p>{{msg.last_time}}</p></div>

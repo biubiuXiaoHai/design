@@ -18,16 +18,22 @@
     <result column="picture9" jdbcType="VARCHAR" property="picture9" />
     <result column="words" jdbcType="VARCHAR" property="words" />
     <result column="saw_time" jdbcType="INTEGER" property="saw_time" />
+    <collection property="praise" ofType="com.yunduo.entities.Praisepower" column="praiseid">
+        <result column="id" javaType="Integer" jdbcType="INTEGER" property="id"></result>
+      <result column="share_id" javaType="Integer" jdbcType="INTEGER" property="share_id"></result>
+      <result column="person_id" javaType="Integer" jdbcType="INTEGER" property="person_id"></result>
+      <result column="person_name" javaType="String" jdbcType="INTEGER" property="person_name"></result>
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
     id, master_id, master_name, master_img, share_time, picture1, picture2, picture3, 
     picture4, picture5, picture6, picture7, picture8, picture9, words, saw_time
   </sql>
   <select id="selectByMasteridAndTime" resultType="com.yunduo.entities.Share">
-    select * from share where master_id=#{master_id} and share_time=#{share_time};
+    select * from share left join praisepower on share.id=praisepower.share_id where share.master_id=#{master_id} and share.share_time=#{share_time};
   </select>
   <select id="findMasterShare" parameterType="java.lang.Integer" resultType="com.yunduo.entities.Share">
-    select * from share where master_id=#{master_id} order by id desc;
+    select * from share left join praisepower on share.id=praisepower.share_id where share.master_id=#{master_id} order by share.id desc;
   </select>
   <select id="findFriendShare" resultType="com.yunduo.entities.Share">
     select *  from friends inner join share on friends.friend_id=share.master_id where friends.master_id=#{master_id} order by share.id desc

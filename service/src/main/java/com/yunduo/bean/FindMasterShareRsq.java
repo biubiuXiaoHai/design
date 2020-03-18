@@ -40,6 +40,6 @@ public class FindMasterShareRsq {
 
     private Integer saw_time;
 
-    private List<String> person_name;
+    private List<Praisepower> praise;
 
 }

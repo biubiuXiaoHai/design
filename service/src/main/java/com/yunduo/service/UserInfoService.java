@@ -1,5 +1,6 @@
 package com.yunduo.service;
 
+import com.github.pagehelper.PageInfo;
 import com.yunduo.bean.*;
 import com.yunduo.entities.Users;
 
@@ -11,5 +12,5 @@ public interface UserInfoService {
     public Integer updUserInfo(UpdUserInfoReq model);
     public FindUserInfoRsp findUserInfo(Integer userid);
     public StatisticsInfoRsp statisticsInfo(Integer account);
-    public List<Users> findUserFriend(String info);
+    public PageInfo<Users> findUserFriend(FindUserFriendReq info);
 }

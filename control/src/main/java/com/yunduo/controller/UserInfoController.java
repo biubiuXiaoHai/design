@@ -1,5 +1,6 @@
 package com.yunduo.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.yunduo.bean.*;
 import com.yunduo.entities.Users;
 import com.yunduo.service.UserInfoService;
@@ -117,7 +118,7 @@ public class UserInfoController {
      */
     @PostMapping("findUserFriend")
     @ApiOperation("搜索好友(通过账号，手机号，昵称等搜素)")
-    public List<Users> findUserFriend(String  info){
+    public PageInfo<Users> findUserFriend(FindUserFriendReq  info){
         return userInfoService.findUserFriend(info);
     }
 }

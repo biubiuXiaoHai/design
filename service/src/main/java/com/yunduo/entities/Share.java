@@ -1,5 +1,7 @@
 package com.yunduo.entities;
 
+import java.util.List;
+
 public class Share {
     private Integer id;
 
@@ -32,6 +34,15 @@ public class Share {
     private String words;
 
     private Integer saw_time;
+
+    //添加点赞的 信息
+    List<Praisepower> praise;
+    public List<Praisepower> getPraise() {
+        return praise;
+    }
+    public void setPraise(List<Praisepower> praise) {
+        this.praise = praise;
+    }
 
     public Integer getId() {
         return id;

@@ -66,6 +66,10 @@ public class FriendsSeviceImp  implements FriendsService {
             friends.setFriend_id(model.getFriend_id());
             friendsMapper.insertSelective(friends);
         }
+        if(model.getMaster_id().equals(model.getFriend_id())){
+            //如果添加的是自己，则不要创建申请信息了。
+            return 1;
+        }
         //给对方创建一条好友请求信息
         FriendApplication friendApplication=new FriendApplication();
         friendApplication.setMaster_id(model.getFriend_id());
@@ -90,8 +94,8 @@ public class FriendsSeviceImp  implements FriendsService {
         String time=simpleDateFormat.format(date);
         friend.setAdd_time(time);
         //更新双方成为好友的时间
-        friendsMapper.insertSelective(friend);
-        friendsMapper.updBecomeFriendTime(friend);
+            friendsMapper.insertSelective(friend);
+            friendsMapper.updBecomeFriendTime(friend);
         //删除申请记录
         FriendApplication delete=new FriendApplication();
         delete.setMaster_id(model.getMaster_id());

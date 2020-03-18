@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Friend_Share</title>
+    <link href="../../css/Home_Part/Friend_Share.css" rel="stylesheet">
+    <script src="../../js/jquery-3.4.1.min.js"></script>
+    <script src="../../js/jquery.form.js"></script>
+    <script src="../../js/vue.min.js"></script>
+    <script>
+        $(function () {
+            var sharemodel=new Vue({
+                el:"#center",
+                data:{
+                    sharelist:{}
+                }
+            })
+
+            //获取cookie
+            //取出名字和用户的账号
+            function getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for(var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+            //获取 账号
+            var account=getCookie("cookie_friendaccount");
+
+            //获取所有的个人的已经发表的说说信息
+            $.ajax({
+                url:"http://127.0.0.1:8090/share/findMasterShare",
+                dataType:"json",
+                type:"post",
+                data:{
+                    master_id: account
+                }
+                ,success:function (data) {
+                    sharemodel.sharelist=data;
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<div id="content">
+    <!--        说说相关信息-->
+    <div id="center">
+        <!--展示已有的说说-->
+        <div class="share_model" v-for="(share,i) in sharelist">
+            <div id="user_info">
+                <div id="head_img">
+                    <img v-bind:src="share.master_img">
+                </div>
+                <div id="user_name">{{share.master_name}}</div>
+                <div id="share_time">{{share.share_time}}</div>
+            </div>
+            <div id="word_message">
+                <div id="message">
+                    {{share.words}}
+                </div>
+            </div>
+            <div id="photos">
+                <div class="photo_model" v-if="share.picture1 !==null"><img v-bind:src="share.picture1"></div>
+                <div class="photo_model" v-if="share.picture2 !==null"><img v-bind:src="share.picture2"></div>
+                <div class="photo_model" v-if="share.picture3 !==null"><img v-bind:src="share.picture3"></div>
+                <div class="photo_model" v-if="share.picture4 !==null"><img v-bind:src="share.picture4"></div>
+                <div class="photo_model" v-if="share.picture5 !==null"><img v-bind:src="share.picture5"></div>
+                <div class="photo_model" v-if="share.picture6 !==null"><img v-bind:src="share.picture6"></div>
+                <div class="photo_model" v-if="share.picture7 !==null"><img v-bind:src="share.picture7"></div>
+                <div class="photo_model" v-if="share.picture8 !==null"><img v-bind:src="share.picture8"></div>
+                <div class="photo_model" v-if="share.picture9 !==null"><img v-bind:src="share.picture9"></div>
+            </div>
+            <!--            浏览次数等-->
+            <div id="browse_times">
+                <div id="browse">被浏览了 {{share.saw_time}} 次</div>
+                <div id="likes">点赞</div>
+                <div id="leave_message">留言</div>
+                <div id="delete" v-on:click="deleteshare(share.id)">删除</div>
+            </div>
+            <div id="praise"> </div>
+            <div id="talk_message"></div>
+
+        </div>
+
+    </div>
+    <!--        最近访客信息-->
+    <div id="right"></div>
+</div>
+</body>
+</html>

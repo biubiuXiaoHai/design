@@ -1,0 +1,298 @@
+/*公共能用 部分的样式-------*/
+* {
+    margin: 0px 0px 0px 0px;
+}
+body{
+    width:1092px ;
+    height: 2000px;
+}
+/*------------公共能用 部分的样式*/
+#content{
+    margin-left: 10%;
+    width: 80%;
+    height: 1000px;
+    background-color: whitesmoke;
+}
+#center{
+    overflow: auto;
+    width: 75%;
+    height: 800px;
+    float: left;
+    background-color: #f7ecb5;
+
+}
+#photo{
+    margin-left: 100px;
+    width:450px ;
+    height: 510px;
+    background-color: #777777;
+}
+#photo_push{
+    margin-left: 100px;
+    width: 450px;
+    height: 510px;
+    background-color: #5bc0de;
+}
+#photo_push li{
+    list-style: none;
+    float: left;
+    width: 150px;
+    height: 170px;
+    background-color: #adadad;
+}
+.img{
+    margin-left: 2px;
+    margin-top: 2px;
+    width: 146px;
+    height: 146px;
+    background-color: #ff1351;
+    float: left;
+}
+.img img{
+    width: 146px;
+    height: 146px;
+    background-color: #ff1351;
+    float: left;
+}
+.control{
+    width: 146px;
+    height: 22px;
+    float: left;
+    background-color: #286090;
+}
+.photo{
+    width: 62px;
+    height: 22px;
+}
+.look{
+    width: 36px;
+    height: 22px;
+    float: right;
+    color: #777777;
+}
+.look :hover{
+    color: #222222;
+}
+.delete{
+    width: 36px;
+    height: 22px;
+    float: right;
+    color: #777777;
+}
+.delete :hover{
+    color: red;
+}
+/*#photo_push li img{*/
+/*    margin-top: 5px;*/
+/*    margin-left: 7px;*/
+/*    width: 140px;*/
+/*    height: 130px;*/
+/*    float: left;*/
+/*}*/
+
+/*#tip{*/
+/*    margin-left: 100px;*/
+/*    width: 450px;*/
+/*    height: 40px;*/
+/*    background-color: #269abc;*/
+/*}*/
+
+#shareinfo{
+    margin-left: 100px;
+    width:450px ;
+    /*height: auto;*/
+    height: 160px;
+    background-color: #adadad;
+}
+#words{
+    overflow:auto;
+    margin-top: 10px;
+    width: 430px;
+    /*height: 150px;*/
+    height: 84px;
+    margin-left: 10px;
+    background-color: white;
+    float: left;
+
+}
+/*#words input{*/
+/*    overflow: auto;*/
+/*    width: 430px;*/
+/*    !*height: auto;*!*/
+/*    height: 300px;*/
+/*    background-color: white;*/
+/*    float: left;*/
+/*}*/
+#chose{
+    width: 430px;
+    height: 50px;
+    margin-left: 10px;
+    background-color: #66512c;
+    float: left;
+}
+#add_photo{
+    margin-top: 10px;
+    width: 67px;
+    height: 25px;
+    margin-left: 184px;
+    background-color: whitesmoke;
+    float: left;
+    text-align: center;
+    border-radius: 3px;
+}
+#cancer{
+    margin-top: 10px;
+    width: 67px;
+    height: 25px;
+    margin-left: 20px;
+    background-color: cadetblue;
+    float: left;
+    text-align: center;
+    border-radius: 3px;
+}
+#publish{
+    margin-top: 10px;
+    width: 67px;
+    height: 25px;
+    margin-left: 20px;
+    background-color: #269abc;
+    float: left;
+    text-align: center;
+    border-radius: 3px;
+}
+
+#right{
+    width: 25%;
+    height: 50%;
+    float: left;
+    background-color: #777777;
+}
+
+/*展示说说的模板*/
+.share_model{
+    /*margin-top: 20px;*/
+    width: 450px;
+    /*height: 250px;*/
+    height: auto;
+    margin-left: 100px;
+}
+/*用户的信息*/
+#user_info{
+    margin-top: 30px;
+    width: 450px;
+    height: 70px;
+    background-color: #269abc;
+    float: left;
+}
+#head_img{
+    width: 60px;
+    height: 60px;
+    margin-top: 5px;
+    margin-left: 5px;
+    background-color: #66512c;
+    float: left;
+    border-color: #777777;
+}
+#head_img img{
+    width: 58px;
+    height: 58px;
+    margin-top: 1px;
+    margin-left: 1px;
+
+}
+#user_name{
+    width: 370px;
+    height: 25px;
+    margin-top: 5px;
+    margin-left: 5px;
+    background-color: yellow;
+    float: left;
+}
+#share_time{
+    width: 370px;
+    height: 25px;
+    margin-top: 10px;
+    margin-left: 5px;
+    background-color: #f7ecb5;
+    float: left;
+}
+
+/*说说的文字内容信息*/
+#word_message{
+    width: 450px;
+    /*height: 100px;*/
+    height: auto;
+    background-color: #adadad;
+    float: left;
+}
+#message{
+    width: 400px;
+    height: auto;
+    /*height: max-content;*/
+    background-color: white;
+    float: left;
+    margin-top: 5px;
+    margin-left: 25px;
+}
+/*说说的照片*/
+#photos{
+    width: 428px;
+    /*height: 462px;*/
+    height: auto;
+    float: left;
+    margin-left: 10px;
+    background-color: #66512c;
+}
+.photo_model{
+    width: 140px ;
+    height: 150px;
+    margin-left: 2px ;
+    margin-top: 2px;
+    float: left;
+}
+.photo_model img{
+    width: 140px ;
+    height: 150px;
+}
+/*浏览次数*/
+#browse_times{
+    width: 450px;
+    height: 25px;
+    background-color: #5bc0de;
+    float: left;
+}
+#browse{
+    width: 150px;
+    height: 25px;
+    margin-left: 25px;
+    background-color: #269abc;
+    float: left;
+}
+#delete{
+    width: 60px;
+    height: 25px;
+    background-color: #adadad ;
+    float: right;
+    text-align: center;
+}
+#likes{
+    width: 60px;
+    height: 25px;
+    background-color: #adadad;
+    float: right;
+    text-align: center;
+}
+#leave_message{
+    width: 60px;
+    height: 25px;
+    background-color: #66512c;
+    float: right;
+    text-align: center;
+}
+/*底部的谈论区*/
+#talk_message{
+    width: 450px;
+    height: auto;
+    background-color: cornflowerblue;
+}
+

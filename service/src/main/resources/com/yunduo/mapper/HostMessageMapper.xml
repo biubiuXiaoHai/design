@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunduo.dao.HostMessageMapper">
+  <resultMap id="BaseResultMap" type="com.yunduo.entities.HostMessage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="master_id" jdbcType="INTEGER" property="master_id" />
+    <result column="message" jdbcType="VARCHAR" property="message" />
+    <result column="last_time" jdbcType="VARCHAR" property="last_time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, master_id, message, last_time
+  </sql>
+  <select id="selectByMasterId" parameterType="java.lang.Integer" resultType="com.yunduo.entities.HostMessage">
+    select * from hostmessage where master_id=#{master_id};
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hostmessage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hostmessage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yunduo.entities.HostMessage">
+    insert into hostmessage (id, master_id, message, 
+      last_time)
+    values (#{id,jdbcType=INTEGER}, #{master_id,jdbcType=INTEGER}, #{message,jdbcType=VARCHAR}, 
+      #{last_time,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yunduo.entities.HostMessage">
+    insert into hostmessage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="master_id != null">
+        master_id,
+      </if>
+      <if test="message != null">
+        message,
+      </if>
+      <if test="last_time != null">
+        last_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="master_id != null">
+        #{master_id,jdbcType=INTEGER},
+      </if>
+      <if test="message != null">
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="last_time != null">
+        #{last_time,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yunduo.entities.HostMessage">
+    update hostmessage
+    <set>
+      <if test="master_id != null">
+        master_id = #{master_id,jdbcType=INTEGER},
+      </if>
+      <if test="message != null">
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="last_time != null">
+        last_time = #{last_time,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yunduo.entities.HostMessage">
+    update hostmessage
+    set master_id = #{master_id,jdbcType=INTEGER},
+      message = #{message,jdbcType=VARCHAR},
+      last_time = #{last_time,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

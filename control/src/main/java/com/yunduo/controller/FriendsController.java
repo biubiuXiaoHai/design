@@ -59,7 +59,7 @@ public class FriendsController {
         return friendApplicationService.findFriendApplication(account);
     }
     /**
-     * 添加好友成功
+     * 接受添加好友
      *
      * @param model
      * @return
