@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunduo.dao.PictureMapper">
+  <resultMap id="BaseResultMap" type="com.yunduo.entities.Picture">
+    <id column="picture_id" jdbcType="INTEGER" property="picture_id" />
+    <result column="master_id" jdbcType="INTEGER" property="master_id" />
+    <result column="ablum_id" jdbcType="INTEGER" property="ablum_id" />
+    <result column="push_time" jdbcType="VARCHAR" property="push_time" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    picture_id, master_id, ablum_id, push_time, url
+  </sql>
+  <select id="selectByMasterId" parameterType="java.lang.Integer" resultType="com.yunduo.entities.Picture">
+    select * from picture where master_id=#{master_id} order by picture_id desc;
+  </select>
+  <delete id="deleteByAblumId" parameterType="java.lang.Integer">
+    delete  from picture where ablum_id=#{ablum_id};
+  </delete>
+  <select id="findAblumNumber" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+    select count(*) from picture where ablum_id=#{ablum_id};
+  </select>
+  <select id="selectByAblumId" parameterType="java.lang.Integer" resultType="com.yunduo.entities.Picture">
+    select * from picture where ablum_id=#{ablum_id};
+  </select>
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from picture
+    where picture_id = #{picture_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from picture
+    where picture_id = #{picture_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yunduo.entities.Picture">
+    insert into picture (picture_id, master_id, ablum_id, 
+      push_time, url)
+    values (#{picture_id,jdbcType=INTEGER}, #{master_id,jdbcType=INTEGER}, #{ablum_id,jdbcType=INTEGER}, 
+      #{push_time,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yunduo.entities.Picture">
+    insert into picture
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="picture_id != null">
+        picture_id,
+      </if>
+      <if test="master_id != null">
+        master_id,
+      </if>
+      <if test="ablum_id != null">
+        ablum_id,
+      </if>
+      <if test="push_time != null">
+        push_time,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="picture_id != null">
+        #{picture_id,jdbcType=INTEGER},
+      </if>
+      <if test="master_id != null">
+        #{master_id,jdbcType=INTEGER},
+      </if>
+      <if test="ablum_id != null">
+        #{ablum_id,jdbcType=INTEGER},
+      </if>
+      <if test="push_time != null">
+        #{push_time,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yunduo.entities.Picture">
+    update picture
+    <set>
+      <if test="master_id != null">
+        master_id = #{master_id,jdbcType=INTEGER},
+      </if>
+      <if test="ablum_id != null">
+        ablum_id = #{ablum_id,jdbcType=INTEGER},
+      </if>
+      <if test="push_time != null">
+        push_time = #{push_time,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where picture_id = #{picture_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yunduo.entities.Picture">
+    update picture
+    set master_id = #{master_id,jdbcType=INTEGER},
+      ablum_id = #{ablum_id,jdbcType=INTEGER},
+      push_time = #{push_time,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR}
+    where picture_id = #{picture_id,jdbcType=INTEGER}
+  </update>
+</mapper>

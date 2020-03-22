@@ -73,7 +73,17 @@
 <!--               enableSelectByExample="false" enableUpdateByExample="false">-->
 <!--            <property name="useActualColumnNames" value="true"/>-->
 <!--        </table>-->
-        <table tableName="hostmessage" domainObjectName="HostMessage"
+<!--        <table tableName="hostmessage" domainObjectName="HostMessage"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false">-->
+<!--            <property name="useActualColumnNames" value="true"/>-->
+<!--        </table>-->
+        <table tableName="ablum" domainObjectName="Ablum"
+               enableCountByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" enableUpdateByExample="false">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+        <table tableName="picture" domainObjectName="Picture"
                enableCountByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" enableUpdateByExample="false">
             <property name="useActualColumnNames" value="true"/>

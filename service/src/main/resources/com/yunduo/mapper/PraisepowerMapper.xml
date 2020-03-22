@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yunduo.dao.PraisepowerMapper">
-  <resultMap id="BaseResultMap" type="com.yunduo.entities.Praisepower">
+  <resultMap id="BaseResultMap" type="com.yunduo.entities.PraisePower">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="share_id" jdbcType="INTEGER" property="share_id" />
     <result column="person_id" jdbcType="INTEGER" property="person_id" />
@@ -10,7 +10,7 @@
   <sql id="Base_Column_List">
     id, share_id, person_id, person_name
   </sql>
-  <select id="selectByShareIdAndPersonId" resultType="com.yunduo.entities.Praisepower">
+  <select id="selectByShareIdAndPersonId" resultType="com.yunduo.entities.PraisePower">
     select * from praisepower where share_id=#{share_id} and person_id=#{person_id};
   </select>
 
@@ -24,13 +24,13 @@
     delete from praisepower
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.yunduo.entities.Praisepower">
+  <insert id="insert" parameterType="com.yunduo.entities.PraisePower">
     insert into praisepower (id, share_id, person_id, 
       person_name)
     values (#{id,jdbcType=INTEGER}, #{share_id,jdbcType=INTEGER}, #{person_id,jdbcType=INTEGER}, 
       #{person_name,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.yunduo.entities.Praisepower">
+  <insert id="insertSelective" parameterType="com.yunduo.entities.PraisePower">
     insert into praisepower
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -61,7 +61,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.yunduo.entities.Praisepower">
+  <update id="updateByPrimaryKeySelective" parameterType="com.yunduo.entities.PraisePower">
     update praisepower
     <set>
       <if test="share_id != null">
@@ -76,7 +76,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.yunduo.entities.Praisepower">
+  <update id="updateByPrimaryKey" parameterType="com.yunduo.entities.PraisePower">
     update praisepower
     set share_id = #{share_id,jdbcType=INTEGER},
       person_id = #{person_id,jdbcType=INTEGER},

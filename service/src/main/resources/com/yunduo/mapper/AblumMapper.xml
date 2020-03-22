@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunduo.dao.AblumMapper">
+  <resultMap id="BaseResultMap" type="com.yunduo.entities.Ablum">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="master_id" jdbcType="INTEGER" property="master_id" />
+    <result column="ablum_title" jdbcType="VARCHAR" property="ablum_title" />
+    <result column="ablum_head" jdbcType="VARCHAR" property="ablum_head" />
+    <result column="ablum_description" jdbcType="VARCHAR" property="ablum_description" />
+    <result column="picture_number" jdbcType="INTEGER" property="picture_number" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, master_id, ablum_title, ablum_head, ablum_description, picture_number
+  </sql>
+  <select id="selectByMasterId" parameterType="java.lang.Integer" resultType="com.yunduo.entities.Ablum">
+    select * from ablum where master_id=#{master_id} order by id desc;
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ablum
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ablum
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yunduo.entities.Ablum">
+    insert into ablum (id, master_id, ablum_title, 
+      ablum_head, ablum_description, picture_number
+      )
+    values (#{id,jdbcType=INTEGER}, #{master_id,jdbcType=INTEGER}, #{ablum_title,jdbcType=VARCHAR}, 
+      #{ablum_head,jdbcType=VARCHAR}, #{ablum_description,jdbcType=VARCHAR}, #{picture_number,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yunduo.entities.Ablum">
+    insert into ablum
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="master_id != null">
+        master_id,
+      </if>
+      <if test="ablum_title != null">
+        ablum_title,
+      </if>
+      <if test="ablum_head != null">
+        ablum_head,
+      </if>
+      <if test="ablum_description != null">
+        ablum_description,
+      </if>
+      <if test="picture_number != null">
+        picture_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="master_id != null">
+        #{master_id,jdbcType=INTEGER},
+      </if>
+      <if test="ablum_title != null">
+        #{ablum_title,jdbcType=VARCHAR},
+      </if>
+      <if test="ablum_head != null">
+        #{ablum_head,jdbcType=VARCHAR},
+      </if>
+      <if test="ablum_description != null">
+        #{ablum_description,jdbcType=VARCHAR},
+      </if>
+      <if test="picture_number != null">
+        #{picture_number,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yunduo.entities.Ablum">
+    update ablum
+    <set>
+      <if test="master_id != null">
+        master_id = #{master_id,jdbcType=INTEGER},
+      </if>
+      <if test="ablum_title != null">
+        ablum_title = #{ablum_title,jdbcType=VARCHAR},
+      </if>
+      <if test="ablum_head != null">
+        ablum_head = #{ablum_head,jdbcType=VARCHAR},
+      </if>
+      <if test="ablum_description != null">
+        ablum_description = #{ablum_description,jdbcType=VARCHAR},
+      </if>
+      <if test="picture_number != null">
+        picture_number = #{picture_number,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yunduo.entities.Ablum">
+    update ablum
+    set master_id = #{master_id,jdbcType=INTEGER},
+      ablum_title = #{ablum_title,jdbcType=VARCHAR},
+      ablum_head = #{ablum_head,jdbcType=VARCHAR},
+      ablum_description = #{ablum_description,jdbcType=VARCHAR},
+      picture_number = #{picture_number,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

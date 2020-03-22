@@ -1,6 +1,6 @@
 package com.yunduo.bean;
 
-import com.yunduo.entities.Praisepower;
+import com.yunduo.entities.PraisePower;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -40,6 +40,6 @@ public class FindMasterShareRsq {
 
     private Integer saw_time;
 
-    private List<Praisepower> praise;
+    private List<PraisePower> praise;
 
 }

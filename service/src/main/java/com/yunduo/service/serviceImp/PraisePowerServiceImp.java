@@ -2,7 +2,7 @@ package com.yunduo.service.serviceImp;
 
 import com.yunduo.bean.AddPraiseInfoReq;
 import com.yunduo.dao.PraisepowerMapper;
-import com.yunduo.entities.Praisepower;
+import com.yunduo.entities.PraisePower;
 import com.yunduo.service.PraisePowerService;
 import com.yunduo.utils.CloneUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,8 @@ public class PraisePowerServiceImp  implements PraisePowerService {
     PraisepowerMapper praisepowerMapper;
     @Override
     public Integer addPraiseInfo(AddPraiseInfoReq model) {
-        Praisepower praisepower= CloneUtil.cloneObj(model,Praisepower.class);
-        Praisepower result=praisepowerMapper.selectByShareIdAndPersonId(praisepower);
+        PraisePower praisepower= CloneUtil.cloneObj(model, PraisePower.class);
+        PraisePower result=praisepowerMapper.selectByShareIdAndPersonId(praisepower);
         if(result==null){
             praisepowerMapper.insertSelective(praisepower);
             //点赞成功

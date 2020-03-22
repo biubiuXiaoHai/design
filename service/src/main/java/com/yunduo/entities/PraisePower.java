@@ -1,6 +1,6 @@
 package com.yunduo.entities;
 
-public class Praisepower {
+public class PraisePower {
     private Integer id;
 
     private Integer share_id;

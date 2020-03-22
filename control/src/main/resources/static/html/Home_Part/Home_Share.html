@@ -32,22 +32,7 @@
                         })
                     }
                 }
-            })
-            // var photos=new Vue({
-            //     el:"#photo_push",
-            //     data:{
-            //         photoimg1:"../../images/兔子.jpg",
-            //         photoimg2:"../../images/兔子.jpg",
-            //         photoimg3:"../../images/兔子.jpg",
-            //         photoimg4:"../../images/兔子.jpg",
-            //         photoimg5:"../../images/兔子.jpg",
-            //         photoimg6:"../../images/兔子.jpg",
-            //         photoimg7:"../../images/兔子.jpg",
-            //         photoimg8:"../../images/兔子.jpg",
-            //         photoimg9:"../../images/兔子.jpg"
-            //     }
-            // })
-
+            });
             //获取cookie
             //取出名字和用户的账号
             function getCookie(cname) {
@@ -79,52 +64,252 @@
                 ,success:function (data) {
                     sharemodel.sharelist=data;
                 }
-            })
-            // function lookone(file){
-            //
-            // }
-            //当点击预览  photo1
-            $("#look1").click(function () {
-                var formdata1=new FormData();
-                formdata1.append("file",$("#photo1")[0].files[0])
+            });
+
+            var form1=new FormData();
+            var form2=new FormData();
+            var form3=new FormData();
+            var form4=new FormData();
+            var form5=new FormData();
+            var form6=new FormData();
+            var form7=new FormData();
+            var form8=new FormData();
+            var form9=new FormData();
+            //当选取 photo1 结束时触发
+            $("#photo1").bind("input propertychange",function () {
+                form1.delete("file");
+                form1.append("file",$("#photo1")[0].files[0]);
                 $.ajax({
-                    url:"http://127.0.0.1:8090/userinfo/updImgInfo",
+                    url:"http://127.0.0.1:8090/share/lookImg",
                     dataType: "json",
                     type: "post",
-                    data: formdata1,
+                    data: form1,
                     contentType: false,
                     processData: false,
                     success:function (data) {
                         alert("预览成功:"+data)
-                    },error:function (data) {
-                        console.log(data)
-                        alert(data)
-                        alert("传输失败")
+                    }
+                    ,error:function (data) {
+                        // console.log(data);
+                        // alert(data.responseText);
+                        $("#imgurl1").attr("src",data.responseText);
+                        // photos.img1=data.responseText;
                     }
                 })
             })
-            //当点击预览 photo2
-            // $("#look2").click(function () {
-            //     var formdata2=new FormData();
-            //     formdata2.append("file",$("#photo2")[0].files[0])
-            //     $.ajax({
-            //         url:"http://127.0.0.1:8090/userinfo/updImgInfo",
-            //         dataType: "json",
-            //         type: "post",
-            //         data: formdata2,
-            //         contentType: false,
-            //         processData: false,
-            //         success:function (data) {
-            //             alert("预览成功:"+data)
-            //         },error:function (data) {
-            //             console.log(data)
-            //             alert(data)
-            //             alert("传输失败")
-            //         }
-            //     })
-            // })
+            //当选取 photo2 结束时触发
+            $("#photo2").bind("input propertychange",function (){
+                // alert("点击预览效果");
+                form2.append("file",$("#photo2")[0].files[0])
+                $.ajax({
+                    url:"http://127.0.0.1:8090/share/lookImg",
+                    dataType: "json",
+                    type: "post",
+                    data: form2,
+                    contentType: false,
+                    processData: false,
+                    success:function (data) {
+                        alert("预览成功:"+data)
+                    }
+                    ,error:function (data) {
+                        // console.log(data);
+                        // alert(data.responseText);
+                        $("#imgurl2").attr("src",data.responseText);
+                    }
+                })
+            });
+            //当选取 photo3 结束时触发
+            $("#photo3").bind("input propertychange",function (){
+                // alert("点击预览效果");
+                form3.append("file",$("#photo3")[0].files[0])
+                $.ajax({
+                    url:"http://127.0.0.1:8090/share/lookImg",
+                    dataType: "json",
+                    type: "post",
+                    data: form3,
+                    contentType: false,
+                    processData: false,
+                    success:function (data) {
+                        alert("预览成功:"+data)
+                    }
+                    ,error:function (data) {
+                        // console.log(data);
+                        // alert(data.responseText);
+                        $("#imgurl3").attr("src",data.responseText);
+                    }
+                })
+            });
+            //当选取 photo4 结束时触发
+            $("#photo4").bind("input propertychange",function (){
+                // alert("点击预览效果");
+                form4.append("file",$("#photo4")[0].files[0])
+                $.ajax({
+                    url:"http://127.0.0.1:8090/share/lookImg",
+                    dataType: "json",
+                    type: "post",
+                    data: form4,
+                    contentType: false,
+                    processData: false,
+                    success:function (data) {
+                        alert("预览成功:"+data)
+                    }
+                    ,error:function (data) {
+                        // console.log(data);
+                        // alert(data.responseText);
+                        $("#imgurl4").attr("src",data.responseText);
+                    }
+                })
+            });
+            //当选取 photo5 结束时触发
+            $("#photo5").bind("input propertychange",function (){
+                // alert("点击预览效果");
+                form5.append("file",$("#photo5")[0].files[0])
+                $.ajax({
+                    url:"http://127.0.0.1:8090/share/lookImg",
+                    dataType: "json",
+                    type: "post",
+                    data: form5,
+                    contentType: false,
+                    processData: false,
+                    success:function (data) {
+                        alert("预览成功:"+data)
+                    }
+                    ,error:function (data) {
+                        // console.log(data);
+                        // alert(data.responseText);
+                        $("#imgurl5").attr("src",data.responseText);
+                    }
+                })
+            });
+            //当选取 photo6 结束时触发
+            $("#photo6").bind("input propertychange",function (){
+                // alert("点击预览效果");
+                form6.append("file",$("#photo6")[0].files[0])
+                $.ajax({
+                    url:"http://127.0.0.1:8090/share/lookImg",
+                    dataType: "json",
+                    type: "post",
+                    data: form6,
+                    contentType: false,
+                    processData: false,
+                    success:function (data) {
+                        alert("预览成功:"+data)
+                    }
+                    ,error:function (data) {
+                        // console.log(data);
+                        // alert(data.responseText);
+                        $("#imgurl6").attr("src",data.responseText);
+                    }
+                })
+            });
+            //当选取 photo7 结束时触发
+            $("#photo7").bind("input propertychange",function (){
+                // alert("点击预览效果");
+                form7.append("file",$("#photo7")[0].files[0])
+                $.ajax({
+                    url:"http://127.0.0.1:8090/share/lookImg",
+                    dataType: "json",
+                    type: "post",
+                    data: form7,
+                    contentType: false,
+                    processData: false,
+                    success:function (data) {
+                        alert("预览成功:"+data)
+                    }
+                    ,error:function (data) {
+                        // console.log(data);
+                        // alert(data.responseText);
+                        $("#imgurl7").attr("src",data.responseText);
+                    }
+                })
+            });
+            //当选取 photo8 结束时触发
+            $("#photo8").bind("input propertychange",function (){
+                // alert("点击预览效果");
+                form8.append("file",$("#photo8")[0].files[0])
+                $.ajax({
+                    url:"http://127.0.0.1:8090/share/lookImg",
+                    dataType: "json",
+                    type: "post",
+                    data: form8,
+                    contentType: false,
+                    processData: false,
+                    success:function (data) {
+                        alert("预览成功:"+data)
+                    }
+                    ,error:function (data) {
+                        // console.log(data);
+                        // alert(data.responseText);
+                        $("#imgurl8").attr("src",data.responseText);
+                    }
+                })
+            });
+            //当选取 photo9 结束时触发
+            $("#photo9").bind("input propertychange",function (){
+                form9.append("file",$("#photo9")[0].files[0])
+                $.ajax({
+                    url:"http://127.0.0.1:8090/share/lookImg",
+                    dataType: "json",
+                    type: "post",
+                    data: form9,
+                    contentType: false,
+                    processData: false,
+                    success:function (data) {
+                        alert("预览成功:"+data)
+                    }
+                    ,error:function (data) {
+                        // console.log(data);
+                        // alert(data.responseText);
+                        $("#imgurl9").attr("src",data.responseText);
+                    }
+                })
+            });
 
-
+            //当点击删除 photo1
+            $("#delete1").click(function () {
+                form1.delete("file");
+                $("#imgurl1").attr("src","../../images/share_example.jpg");
+            });
+            //当点击删除 photo2
+            $("#delete2").click(function () {
+                form2.delete("file");
+                $("#imgurl2").attr("src","../../images/share_example.jpg");
+            });
+            //当点击删除 photo3
+            $("#delete3").click(function () {
+                form3.delete("file");
+                $("#imgurl3").attr("src","../../images/share_example.jpg");
+            });
+            //当点击删除 photo4
+            $("#delete4").click(function () {
+                form4.delete("file");
+                $("#imgurl4").attr("src","../../images/share_example.jpg");
+            });
+            //当点击删除 photo5
+            $("#delete5").click(function () {
+                form5.delete("file");
+                $("#imgurl5").attr("src","../../images/share_example.jpg");
+            });
+            //当点击删除 photo6
+            $("#delete6").click(function () {
+                form6.delete("file");
+                $("#imgurl6").attr("src","../../images/share_example.jpg");
+            });
+            //当点击删除 photo7
+            $("#delete7").click(function () {
+                form7.delete("file");
+                $("#imgurl7").attr("src","../../images/share_example.jpg");
+            });
+            //当点击删除 photo8
+            $("#delete8").click(function () {
+                form8.delete("file");
+                $("#imgurl8").attr("src","../../images/share_example.jpg");
+            });
+            //当点击删除 photo9
+            $("#delete9").click(function () {
+                form9.delete("file");
+                $("#imgurl9").attr("src","../../images/share_example.jpg");
+            });
 
             var formdata=new FormData();
             //当点击了 “发表”
@@ -158,24 +343,18 @@
                     data:formdata,
                     contentType:false,
                     processData:false,
-                    // data:{
-                    //     master_id: account,
-                    //     words: $("#words").html()
-                    // },
                     success: function (data) {
-                        // alert("发表成功")
                         window.location.reload();
-
                     },error:function () {
                         alert("发表说说出现问题")
                     }
                 })
-            })
+            });
 
             //点击 “取消发表”
             $("#cancer").click(function () {
                 window.location.reload();
-            })
+            });
 
             //点击 “添加照片”
             $("#add_photo").click(function () {
@@ -194,15 +373,15 @@
 <!--        添加照片：最多九张-->
         <div id="photo" style="display: none" >
             <div id="photo_push">
-                <li ><div class="img"><img src="../../images/兔子.jpg"></div><div class="control"><input id="photo1" class="photo" type="file" value="点击添加照片"><div id="look1" class="look">预览</div><div id="delete1" class="delete">删除</div></div></li>
-                <li ><div class="img"><img src="../../images/兔子.jpg"></div><div class="control"><input id="photo2" class="photo" type="file" value="点击添加照片"><div id="look2" class="look">预览</div><div id="delete2" class="delete">删除</div></div></li>
-                <li ><div class="img"><img src="../../images/兔子.jpg"></div><div class="control"><input id="photo3" class="photo" type="file" value="点击添加照片"><div id="look3" class="look">预览</div><div id="delete3" class="delete">删除</div></div></li>
-                <li ><div class="img"><img src="../../images/兔子.jpg"></div><div class="control"><input id="photo4" class="photo" type="file" value="点击添加照片"><div id="look4" class="look">预览</div><div id="delete4" class="delete">删除</div></div></li>
-                <li ><div class="img"><img src="../../images/兔子.jpg"></div><div class="control"><input id="photo5" class="photo" type="file" value="点击添加照片"><div id="look5" class="look">预览</div><div id="delete5" class="delete">删除</div></div></li>
-                <li ><div class="img"><img src="../../images/兔子.jpg"></div><div class="control"><input id="photo6" class="photo" type="file" value="点击添加照片"><div id="look6" class="look">预览</div><div id="delete6" class="delete">删除</div></div></li>
-                <li ><div class="img"><img src="../../images/兔子.jpg"></div><div class="control"><input id="photo7" class="photo" type="file" value="点击添加照片"><div id="look7" class="look">预览</div><div id="delete7" class="delete">删除</div></div></li>
-                <li ><div class="img"><img src="../../images/兔子.jpg"></div><div class="control"><input id="photo8" class="photo" type="file" value="点击添加照片"><div id="look8" class="look">预览</div><div id="delete8" class="delete">删除</div></div></li>
-                <li ><div class="img"><img src="../../images/兔子.jpg"></div><div class="control"><input id="photo9" class="photo" type="file" value="点击添加照片"><div id="look9" class="look">预览</div><div id="delete9" class="delete">删除</div></div></li>
+                <li ><div class="img"><img  id="imgurl1" src="../../images/share_example.jpg"></div><div class="control"><input id="photo1" class="photo" type="file"> <div id="delete1" class="delete">删除</div></div></li>
+                <li ><div class="img"><img  id="imgurl2" src="../../images/share_example.jpg"></div><div class="control"><input id="photo2" class="photo" type="file" ><div id="delete2" class="delete">删除</div></div></li>
+                <li ><div class="img"><img  id="imgurl3" src="../../images/share_example.jpg"></div><div class="control"><input id="photo3" class="photo" type="file" ><div id="delete3" class="delete">删除</div></div></li>
+                <li ><div class="img"><img  id="imgurl4" src="../../images/share_example.jpg"></div><div class="control"><input id="photo4" class="photo" type="file" ><div id="delete4" class="delete">删除</div></div></li>
+                <li ><div class="img"><img  id="imgurl5" src="../../images/share_example.jpg"></div><div class="control"><input id="photo5" class="photo" type="file" ><div id="delete5" class="delete">删除</div></div></li>
+                <li ><div class="img"><img  id="imgurl6" src="../../images/share_example.jpg"></div><div class="control"><input id="photo6" class="photo" type="file" ><div id="delete6" class="delete">删除</div></div></li>
+                <li ><div class="img"><img  id="imgurl7" src="../../images/share_example.jpg"></div><div class="control"><input id="photo7" class="photo" type="file" ><div id="delete7" class="delete">删除</div></div></li>
+                <li ><div class="img"><img  id="imgurl8" src="../../images/share_example.jpg"></div><div class="control"><input id="photo8" class="photo" type="file" ><div id="delete8" class="delete">删除</div></div></li>
+                <li ><div class="img"><img  id="imgurl9" src="../../images/share_example.jpg"></div><div class="control"><input id="photo9" class="photo" type="file" ><div id="delete9" class="delete">删除</div></div></li>
             </div>
         </div>
 <!--发表说说-->

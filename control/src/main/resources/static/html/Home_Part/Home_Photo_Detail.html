@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Home_Photo_Deteil</title>
+    <link href="../../css/Home_Part/Home_Photo_Detail.css" rel="stylesheet">
+    <script src="../../js/jquery-3.4.1.min.js"></script>
+    <script src="../../js/vue.min.js"></script>
+    <script src="../../js/jquery.form.js"></script>
+    <script>
+        $(function () {
+            //获取cookie
+            //取出名字和用户的账号
+            function getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for(var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+            // var username=getCookie("cookie_username");
+            var ablumid = getCookie("ablumid");
+            var account = getCookie("cookie_account");
+            //绑定头部的相册首页信息
+            var head = new Vue({
+                el: "#head_part",
+                data: {
+                    ablum_head: "",
+                    ablum_title: "",
+                    ablum_description: ""
+                }
+            });
+            //绑定照片
+            var content=new Vue({
+                el:"#detail_part",
+                data:{
+                    list:{}
+                },methods:{
+                    //点击 “设为封面”
+                    sethead:function (picture_id) {
+                        $.ajax({
+                            url: "http://127.0.0.1:8090/ablum/updAblumPage",
+                            dataType: "json",
+                            type: "post",
+                            data: {
+                                ablum_id: ablumid,
+                                picture_id:picture_id
+                            }, success: function (data) {
+                                window.location.reload();
+                            }, error: function () {
+                                // alert("系统异常")
+                            }
+                        });
+                    },
+                    //点击 “删除”
+                    deletepic:function (photo_id) {
+                        $.ajax({
+                            url: "http://127.0.0.1:8090/picture/delPicture",
+                            dataType: "json",
+                            type: "post",
+                            data: {
+                                picture_id:photo_id
+                            }, success: function (data) {
+                                window.location.reload();
+                            }, error: function () {
+                                // alert("系统异常")
+                            }
+                        })
+
+                    }
+                }
+            })
+            //获取相册首页的信息
+            $.ajax({
+                url: "http://127.0.0.1:8090/ablum/findAblumByAblumId",
+                dataType: "json",
+                type: "post",
+                data: {
+                    id: ablumid
+                }, success: function (data) {
+                    head.ablum_head = data.ablum_head;
+                    head.ablum_title = data.ablum_title;
+                    head.ablum_description = data.ablum_description;
+                }, error: function () {
+                    // alert("系统异常")
+                }
+            });
+            //获取相册中的照片信息
+            $.ajax({
+                url:"http://127.0.0.1:8090/picture/findPictureByAblumId",
+                dataType: "json",
+                type: "post",
+                data: {
+                    ablum_id: ablumid
+                }, success: function (data) {
+                    content.list=data;
+                }, error: function () {
+                    // alert("系统异常")
+                }
+            })
+            //当点击 “保存提交”
+            $("#save").click(function () {
+                $.ajax({
+                    url:"http://127.0.0.01:8090/ablum/updAblum",
+                    dataType:"json",
+                    type:"post",
+                    data:{
+                        id:ablumid,
+                        ablum_title:$("#title_name").text(),
+                        ablum_description:$("#description").text()
+                    },success:function (data) {
+                        window.location.reload();
+                    },error:function () {
+                        // alert("网络问题的出错")
+                    }
+                })
+                
+            })
+            //当点击 “删除该相册”
+            $("#deleteall").click(function () {
+                $.ajax({
+                    url:"http://127.0.0.01:8090/ablum/delAblum",
+                    dataType:"json",
+                    type:"post",
+                    data:{
+                        id:ablumid,
+                    },success:function (data) {
+                        window.location.href="http://127.0.0.1:8090/html/Home_Part/Home_Photo.html";
+                    },error:function () {
+                        // alert("网络问题的出错")
+                    }
+                })
+
+
+            })
+            var form=new FormData();
+            //当 “上传照片” 被点击
+            $("#push").click(function () {
+                if($("#picture").val() ===''){
+                    return "";
+                }
+                form.append("master_id",account);
+                form.append("ablum_id",ablumid);
+                form.append("file",$("#picture")[0].files[0]);
+                $.ajax({
+                    url:"http://127.0.0.1:8090/picture/addPicture",
+                    dataType:"json",
+                    type:"post",
+                    data:form,
+                    contentType:false,
+                    processData:false,
+                    success:function (data) {
+                        // alert("上传成功")
+                        window.location.reload();
+                    },
+                    error:function () {
+                        // alert("上传失败")
+                    }
+                })
+            })
+        })
+
+    </script>
+</head>
+<body>
+<div id="content">
+    <div id="head_part">
+        <div id="head_img"><img v-bind:src="ablum_head"></div>
+<!--        <div id="head_img"><img src="../../images/rabbit.jpg"></div>-->
+        <div id="head_title">
+            <div id="title_up">
+                <div id="title_name" contenteditable="true">{{ablum_title}}</div>
+                <div id="save">保存提交</div>
+                <div id="deleteall">删除该相册</div>
+                <div id="push">上传照片</div>
+                <div id="chose"><input type="file" id="picture"></div>
+            </div>
+            <div id="title_down">
+                <div id="description" contenteditable="true">{{ablum_description}}</div>
+            </div>
+        </div>
+    </div>
+    <div id="detail_part">
+        <div id="picture_model" v-for="(picture,i) in list">
+            <img v-bind:src="picture.url">
+            <div id="tip">
+                <div id="push_time">{{picture.push_time}}</div>
+                <div id="sethead" v-on:click="sethead(picture.picture_id)">设为封面</div>
+                <div id="delete" v-on:click="deletepic(picture.picture_id)">删除</div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

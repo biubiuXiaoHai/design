@@ -59,6 +59,11 @@ public class UserInfoServiceImp implements UserInfoService {
             return loginRsq;
         }
         //取云朵账号来判断
+        if(model.getAccount().length()!=6){
+            //result=2账号不存在
+            loginRsq.setResult(2);
+            return loginRsq;
+        }
         user = usersMapper.selectByPrimaryKey(Integer.valueOf(model.getAccount()));
         if (user != null && (Integer.valueOf(model.getAccount()).equals(user.getAccount()))) {
             if (user.getPassword().equals(model.getPassword())) {
@@ -96,7 +101,7 @@ public class UserInfoServiceImp implements UserInfoService {
         int result = usersMapper.selectByPhone(model.getPhone());
         if (result == 0) {
             Users user = CloneUtil.cloneObj(model, Users.class);
-            user.setAvatar("/images/兔子.jpg");
+            user.setAvatar("/images/rabbit.jpg");
             usersMapper.insertSelective(user);
             user = usersMapper.selectByPhoneAll(user.getPhone());
             registerRsp.setResult(1);

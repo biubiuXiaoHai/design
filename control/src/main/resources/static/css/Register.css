@@ -17,7 +17,7 @@ body{
     width: 433px;
     height: 100%;
     float: left;
-    background-image: url("../images/注册背景1.jpg");
+    background-image: url("../images/backgrounp_left.jpg");
     /*background-color: red;*/
 }
 .logo{
@@ -141,5 +141,5 @@ p a:hover{
     /*height: 768px;*/
     height:100% ;
     float: right;
-    background-image: url("../images/注册背景2.jpg");
+    background-image: url("../images/backgrounp_right.jpg");
 }

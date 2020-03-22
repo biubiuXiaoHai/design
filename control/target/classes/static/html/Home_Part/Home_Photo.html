@@ -1,11 +1,161 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Home_Photo</title>
+    <link href="../../css/Home_Part/Home_Photo.css" rel="stylesheet">
+    <script src="../../js/jquery-3.4.1.min.js"></script>
+    <script src="../../js/vue.min.js"></script>
+    <script>
+        $(function () {
+            //获取cookie
+            //取出名字和用户的账号
+            function getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for(var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+            // var username=getCookie("cookie_username");
+            var account=getCookie("cookie_account");
+            //绑相册的目录
+            var photos=new Vue({
+                el:"#photo_content",
+                data:{
+                    list:{}
+                },methods:{
+                    go:function(id){
+                        document.cookie="ablumid = "+id;
+                        window.location.href="http://127.0.0.1:8090/html/Home_Part/Home_Photo_Detail.html"
+                    }
+                }
+            });
+            var allpicture=new Vue({
+                el:"#picture_content",
+                data:{
+                    list:{}
+                }
+            })
+            //获取相册信息
+            $.ajax({
+                url:"http://127.0.0.1:8090/ablum/findAblumByMasterId",
+                dataType:"json",
+                type:"post",
+                data:{
+                    master_id:account
+                },
+                success:function(data) {
+                    photos.list=data;
+                },error:function () {
+                    // alert("未知错误")
+                }
+            })
+
+            //点击 “相册”
+            $("#photos").click(function () {
+                $("#photo_content").css("display","inline");
+                $("#picture_content").css("display","none");
+                $("#add_photo").css("display","none");
+            })
+            //点击 ”照片“
+            $("#pictures").click(function () {
+                $("#photo_content").css("display","none");
+                $("#picture_content").css("display","inline");
+                $("#add_photo").css("display","none");
+                $.ajax({
+                    url:"http://127.0.0.1:8090/picture/findAllPicture",
+                    dataType:"json",
+                    type:"post",
+                    data:{
+                        master_id:account,
+                    },
+                    success:function(data) {
+                        allpicture.list=data;
+                    },error:function () {
+                        // alert("未知错误")
+                    }
+                })
+            })
+            //点击 “新建相册”
+            $("#new_photos").click(function () {
+                // alert("点击添加相册");
+                $("#photo_content").css("display","none");
+                $("#picture_content").css("display","none");
+                $("#add_photo").css("display","block");
+
+            });
+            //点击 ”取消创建“
+            $("#cancer").click(function () {
+                window.location.reload();
+            })
+            //点击 “确定创建”
+            $("#sure").click(function () {
+                // alert("确定创建")
+                $.ajax({
+                    url:"http://127.0.0.1:8090/ablum/addAblum",
+                    dataType:"json",
+                    type:"post",
+                    data:{
+                        master_id:account,
+                        ablum_title:$("#top_name").text(),
+                        ablum_description:$("#des_content").text(),
+                    },
+                success:function(data) {
+                    // alert("创建成功了");
+                    window.location.reload();
+                },error:function () {
+                        // alert("未知错误")
+                    }
+                })
+            })
+        })
+    </script>
+
 </head>
 <body>
-照片
+<div id="content">
+    <div id="button">
+        <div id="photos">相册</div>
+        <div id="pictures">照片</div>
+        <div id="new_photos">新建相册</div>
+    </div>
+<!--    版本1 相册目录-->
+    <div id="photo_content" style="display: inline">
+        <div id="photo_model" v-for="(photo,i) in list">
+            <div id="img" v-on:click="go(photo.id)"><img v-bind:src="photo.ablum_head"></div>
+            <div id="phto_name">{{photo.ablum_title}} ({{photo.picture_number}})</div>
+        </div>
+    </div>
+<!--    版本2：照片全部-->
+     <div id="picture_content" style="display: none">
+         <div id="picture_model" v-for="(pic,i) in list">
+             <div id="picture_img"><img v-bind:src="pic.url"></div>
+             <div id="picture_time">{{pic.push_time}}</div>
+         </div>
+     </div>
+<!--    版本3：新建相册-->
+     <div id="add_photo"style="display: none">
+         <div id="build_info" >
+             <div id="build_title"><div>创建相册</div></div>
+             <div id="build_content">
+                 <div id="top"><div id="top_title">相册名称： </div><div id="top_name" contenteditable="true">请输入相册名称</div></div>
+                 <div id="descript"><div id="des_title">相册描述： </div><div id="des_content" contenteditable="true">请输入相册的描述</div></div>
+                 <di id="chose"> <div id="sure">确定创建</div><div id="cancer">取消创建</div></di>
+             </div>
+         </div>
+
+     </div>
+
+</div>
 
 </body>
 </html>

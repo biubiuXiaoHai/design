@@ -1,19 +1,19 @@
 package com.yunduo.dao;
 
-import com.yunduo.entities.Praisepower;
+import com.yunduo.entities.PraisePower;
 
 public interface PraisepowerMapper {
-    Praisepower selectByShareIdAndPersonId(Praisepower model);
+    PraisePower selectByShareIdAndPersonId(PraisePower model);
 
     int deleteByPrimaryKey(Integer id);
 
-    int insert(Praisepower record);
+    int insert(PraisePower record);
 
-    int insertSelective(Praisepower record);
+    int insertSelective(PraisePower record);
 
-    Praisepower selectByPrimaryKey(Integer id);
+    PraisePower selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(Praisepower record);
+    int updateByPrimaryKeySelective(PraisePower record);
 
-    int updateByPrimaryKey(Praisepower record);
+    int updateByPrimaryKey(PraisePower record);
 }
