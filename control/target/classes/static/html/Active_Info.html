@@ -74,28 +74,30 @@
                         })
                     },
                 praise:function (share) {
+                        alert("别点了，没做到");
+                        window.location.reload();
                     // alert("点赞： " + share.id);
-                    $.ajax({
-                        url: "http://127.0.0.1:8090/praisePower/addPraiseInfo",
-                        dataType: "json",
-                        type: "post",
-                        data: {
-                            share_id: share.id,
-                            person_id: account,
-                            person_name: username
-                        },
-                        success: function (data) {
-                            if (data == 0) {
-                                alert("点赞失败")
-                            } else {
-                                alert("点赞成功")
-                                window.location.reload();
-                            }
-                        }, error: function () {
-                            alert("抱歉，点赞失败")
-                        }
-
-                    })
+                    // $.ajax({
+                    //     url: "http://127.0.0.1:8090/praisePower/addPraiseInfo",
+                    //     dataType: "json",
+                    //     type: "post",
+                    //     data: {
+                    //         share_id: share.id,
+                    //         person_id: account,
+                    //         person_name: username
+                    //     },
+                    //     success: function (data) {
+                    //         if (data == 0) {
+                    //             alert("点赞失败")
+                    //         } else {
+                    //             alert("点赞成功")
+                    //             window.location.reload();
+                    //         }
+                    //     }, error: function () {
+                    //         alert("抱歉，点赞失败")
+                    //     }
+                    //
+                    // })
                 }
                 }
             })
@@ -149,7 +151,7 @@
 <div class="add_friend_info" v-for="(application,i) in applicationlist">
     <div id="title">您有一条好友申请信息</div>
     <div id="content">
-        <img v-bind:src="application.avatar">
+        <div id="applyimg"><img v-bind:src="application.avatar"></div>
         <div id="info">
             <p id="account">账号: {{application.friend_id}}</p>
             <p id="name">昵称: {{application.name}}</p>
@@ -163,11 +165,12 @@
 
 <!--展示已有的说说-->
     <div class="share_model" v-for="(share,i) in sharelist">
+        <div id="model">
         <div id="user_info">
             <div id="head_img">
                 <img v-bind:src="share.master_img">
             </div>
-            <div id="user_name">{{share.master_name}}</div>
+            <div id="share_user_name">{{share.master_name}}</div>
             <div id="share_time">{{share.share_time}}</div>
         </div>
         <div id="word_message">
@@ -192,11 +195,11 @@
             <div id="likes" v-on:click="praise(share)">点赞</div>
             <div id="leave_message">留言</div>
         </div>
-        <div id="praise_content"><p v-for="(praise_one,i) in share.praise">{{praise_one.person_name}},</p><p>觉得很赞</p></div>
-        <div id="talk_message"></div>
-
+<!--        <div id="praise_content"><p v-for="(praise_one,i) in share.praise">{{praise_one.person_name}},</p><p>觉得很赞</p></div>-->
+<!--        <div id="talk_message"></div>-->
     </div>
-</div>
+     </div>
+     </div>
 
 </body>
 </html>

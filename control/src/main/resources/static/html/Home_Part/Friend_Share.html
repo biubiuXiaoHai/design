@@ -55,46 +55,49 @@
 <div id="content">
     <!--        说说相关信息-->
     <div id="center">
+
         <!--展示已有的说说-->
         <div class="share_model" v-for="(share,i) in sharelist">
-            <div id="user_info">
-                <div id="head_img">
-                    <img v-bind:src="share.master_img">
+            <div id="model">
+                <div id="user_info">
+                    <div id="head_img">
+                        <img v-bind:src="share.master_img">
+                    </div>
+                    <div id="user_name">{{share.master_name}}</div>
+                    <div id="share_time">{{share.share_time}}</div>
                 </div>
-                <div id="user_name">{{share.master_name}}</div>
-                <div id="share_time">{{share.share_time}}</div>
-            </div>
-            <div id="word_message">
-                <div id="message">
-                    {{share.words}}
+                <div id="word_message">
+                    <div id="message">
+                        {{share.words}}
+                    </div>
                 </div>
-            </div>
-            <div id="photos">
-                <div class="photo_model" v-if="share.picture1 !==null"><img v-bind:src="share.picture1"></div>
-                <div class="photo_model" v-if="share.picture2 !==null"><img v-bind:src="share.picture2"></div>
-                <div class="photo_model" v-if="share.picture3 !==null"><img v-bind:src="share.picture3"></div>
-                <div class="photo_model" v-if="share.picture4 !==null"><img v-bind:src="share.picture4"></div>
-                <div class="photo_model" v-if="share.picture5 !==null"><img v-bind:src="share.picture5"></div>
-                <div class="photo_model" v-if="share.picture6 !==null"><img v-bind:src="share.picture6"></div>
-                <div class="photo_model" v-if="share.picture7 !==null"><img v-bind:src="share.picture7"></div>
-                <div class="photo_model" v-if="share.picture8 !==null"><img v-bind:src="share.picture8"></div>
-                <div class="photo_model" v-if="share.picture9 !==null"><img v-bind:src="share.picture9"></div>
-            </div>
-            <!--            浏览次数等-->
-            <div id="browse_times">
-                <div id="browse">被浏览了 {{share.saw_time}} 次</div>
-                <div id="likes">点赞</div>
-                <div id="leave_message">留言</div>
-                <div id="delete" v-on:click="deleteshare(share.id)">删除</div>
-            </div>
-            <div id="praise"> </div>
-            <div id="talk_message"></div>
+                <div id="photos">
+                    <div class="photo_model" v-if="share.picture1 !==null"><img v-bind:src="share.picture1"></div>
+                    <div class="photo_model" v-if="share.picture2 !==null"><img v-bind:src="share.picture2"></div>
+                    <div class="photo_model" v-if="share.picture3 !==null"><img v-bind:src="share.picture3"></div>
+                    <div class="photo_model" v-if="share.picture4 !==null"><img v-bind:src="share.picture4"></div>
+                    <div class="photo_model" v-if="share.picture5 !==null"><img v-bind:src="share.picture5"></div>
+                    <div class="photo_model" v-if="share.picture6 !==null"><img v-bind:src="share.picture6"></div>
+                    <div class="photo_model" v-if="share.picture7 !==null"><img v-bind:src="share.picture7"></div>
+                    <div class="photo_model" v-if="share.picture8 !==null"><img v-bind:src="share.picture8"></div>
+                    <div class="photo_model" v-if="share.picture9 !==null"><img v-bind:src="share.picture9"></div>
+                </div>
+                <!--            浏览次数等-->
+                <div id="browse_times">
+                    <div id="browse">被浏览了 {{share.saw_time}} 次</div>
+                    <div id="likes">点赞</div>
+                    <div id="leave_message">留言</div>
+                    <div id="delete" v-on:click="deleteshare(share.id)">删除</div>
+                </div>
+                <!--            <div id="praise"> </div>-->
+                <!--            <div id="talk_message"></div>-->
 
+            </div>
         </div>
-
     </div>
     <!--        最近访客信息-->
-    <div id="right"></div>
+    <!--        不做了-->
+    <!--    <div id="right"></div>-->
 </div>
 </body>
 </html>

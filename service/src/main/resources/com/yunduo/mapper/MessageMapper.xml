@@ -13,6 +13,12 @@
   <sql id="Base_Column_List">
     id, master_id, friend_id, friend_avatar, friend_name, message, last_time
   </sql>
+  <select id="selectByFriendId" parameterType="java.lang.Integer" resultType="com.yunduo.entities.Message">
+    select * from message where friend_id=#{friend_id};
+  </select>
+  <select id="selectSumByMasterId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(*) from message where master_id=#{master_id};
+  </select>
   <select id="selectByMasterId" parameterType="java.lang.Integer" resultType="com.yunduo.entities.Message">
     select * from message where master_id=#{master_id} order by id desc;
   </select>

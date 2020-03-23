@@ -6,6 +6,7 @@ import io.swagger.models.auth.In;
 import java.util.List;
 
 public interface PictureMapper {
+    Integer selectSumByMasterId(Integer master_id);
     List<Picture> selectByMasterId(Integer master_id);
     Integer deleteByAblumId(Integer ablum_id);
     Integer findAblumNumber(Integer ablum_id);

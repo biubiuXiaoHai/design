@@ -11,6 +11,9 @@
   <sql id="Base_Column_List">
     picture_id, master_id, ablum_id, push_time, url
   </sql>
+  <select id="selectSumByMasterId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(*) from picture where master_id=#{master_id};
+  </select>
   <select id="selectByMasterId" parameterType="java.lang.Integer" resultType="com.yunduo.entities.Picture">
     select * from picture where master_id=#{master_id} order by picture_id desc;
   </select>

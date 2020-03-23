@@ -11,6 +11,6 @@ public interface UserInfoService {
     public RegisterRsp register(RegisterReq model);
     public Integer updUserInfo(UpdUserInfoReq model);
     public FindUserInfoRsp findUserInfo(Integer userid);
-    public StatisticsInfoRsp statisticsInfo(Integer account);
     public PageInfo<Users> findUserFriend(FindUserFriendReq info);
+    public OverView findOverView(Integer account);
 }

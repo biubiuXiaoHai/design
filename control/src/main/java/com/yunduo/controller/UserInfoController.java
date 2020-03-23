@@ -15,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
 
 @Api(value = "UserInfoController" ,description = "用户信息")
@@ -98,18 +97,6 @@ public class UserInfoController {
     /**
      * 左侧统计总览信息（说说/留言/相册数量）
      */
-    @PostMapping("statisticsInfo")
-    @ApiOperation("左侧统计总览信息（说说/留言/相册数量）")
-    public StatisticsInfoRsp statisticsInfo(Integer account){
-        return userInfoService.statisticsInfo(account);
-    }
-
-    /**好友动态页的
-     *
-     * 好友列表
-     * 入：主id
-     * 出：好友头像和昵称，id
-     */
 
     /**好友动态页的
      *
@@ -120,6 +107,13 @@ public class UserInfoController {
     public PageInfo<Users> findUserFriend(FindUserFriendReq  info){
         return userInfoService.findUserFriend(info);
     }
+
+    @PostMapping("findOverView")
+    @ApiOperation("获取总览信息")
+    public OverView findOverView(Integer account){
+        return  userInfoService.findOverView(account);
+    }
+
 }
 
 

@@ -5,6 +5,7 @@ import com.yunduo.entities.Share;
 import java.util.List;
 
 public interface ShareMapper {
+    Integer selectSumByMasterId(Integer master_id);
     Share selectByMasteridAndTime(Integer master_id,String share_time);
 
     List<Share> findMasterShare(Integer master_id);

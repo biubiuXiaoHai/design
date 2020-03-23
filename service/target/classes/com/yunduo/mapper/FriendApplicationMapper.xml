@@ -13,7 +13,9 @@
   <sql id="Base_Column_List">
     id, master_id, friend_id, avatar, name, signature, applicationtime
   </sql>
-
+  <select id="selectByFriendId" parameterType="java.lang.Integer" resultType="com.yunduo.entities.FriendApplication">
+    select * from friendapplication where friend_id=#{friend_id};
+  </select>
   <select id="findApplication" resultType="com.yunduo.entities.FriendApplication">
     select * from friendapplication where master_id=#{account};
   </select>

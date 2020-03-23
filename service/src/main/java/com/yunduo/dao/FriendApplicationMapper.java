@@ -7,6 +7,7 @@ import com.yunduo.entities.FriendApplication;
 import java.util.List;
 
 public interface FriendApplicationMapper {
+    List<FriendApplication> selectByFriendId(Integer friend_id);
     List<FriendApplication> findApplication(Integer account);
     Integer deleteByMasterIdAndFriendId(FriendApplication model);
 

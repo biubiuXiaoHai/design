@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Home_Person</title>
@@ -37,31 +37,116 @@
                 }
             })
 
-            //绑定个人信息
+            //绑定右侧个人信息
             var userin= new Vue({
-                el:"#info",
+                el:"#userinfo",
                 data:{
                     imgurl:"",
                     name:"",
                     sex:"",
-                    birthday:{},
+                    // birthday:{},
                     fondness:"",
                     signature:"",
                     phone:""
                 }
+            });
+            //********************
+            //中间的内容动态展示
+            //********************
+            var contentlist=new Vue({
+                el:"#center_part",
+                data:{
+                    applicationlist:{},
+                    sharelist:{}
+                },
+                methods:{
+                    //好友申请的： 点击 接受
+                    accept:function (apply) {
+                        $.ajax({
+                            url:"http://127.0.0.1:8090/friends/addFriendSuccess",
+                            dataType:"json",
+                            type:"post",
+                            data:{
+                                master_id:apply.master_id,
+                                friend_id:apply.friend_id,
+                            },success:function (data) {
+                                alert("同意了申请该好友： "+data+" 的申请"),
+                                    window.parent.location.reload();
+                            },
+                            error:function () {
+                                alert("系统异常")
+                            }
+
+                        })
+
+                    },
+                    //好友申请的： 点击 拒绝
+                    refuse:function (apply) {
+                        $.ajax({
+                            url:"http://127.0.0.1:8090/friends/addFriendFail",
+                            dataType:"json",
+                            type:"post",
+                            data:{
+                                master_id:apply.master_id,
+                                friend_id:apply.friend_id
+                            },success:function (data) {
+                                // alert("已拒绝添加该好友")
+                                window.location.reload()
+                            },error:function () {
+                                alert("系统异常")
+                            }
+                        })
+                    },
+                }
             })
+            //获取消息 ：新好友申请的消息
+            $.ajax({
+                url:"http://127.0.0.1:8090/friends/findFriendApplication",
+                dataType:"json",
+                type:"post",
+                data:{
+                    account:account
+                }
+                ,success:function (data) {
+                    // alert("获取好友申请成功："+data);
+                    // console.log(data);
+                    contentlist.applicationlist=data;
+                },error:function () {
+                    // alert("获取申请信息失败，请联系开发者")
+                }
+            });
+            //获取消息 ：所有的个人的已经发表的说说信息
+            $.ajax({
+                url:"http://127.0.0.1:8090/share/findMasterShare",
+                dataType:"json",
+                type:"post",
+                data:{
+                    master_id: account
+                }
+                ,success:function (data) {
+                    contentlist.sharelist=data;
+                }
+            });
+
+
 
             //获取左侧统计信息
-            // $(function () {
-            //     $.ajax({
-            //         url: "http://127.0.0.1:8090/userinfo/findUserInfo",
-            //         dataType: "json",
-            //         type: "post",
-            //         data: {
-            //             userid: account,
-            //         }
-            //     })
-            // })
+            $(function () {
+                $.ajax({
+                    url: "http://127.0.0.1:8090/userinfo/findOverView",
+                    dataType: "json",
+                    type: "post",
+                    data: {
+                       account: account,
+                    },success:function (data) {
+                        overview.share_sum=data.share_sum;
+                        overview.message_sum=data.message_sum;
+                        overview.photo_sum=data.photo_sum;
+                },error:function () {
+                        // alert("系统异常")
+                    }
+                })
+            })
 
             //获取个人的信息
             $(function () {
@@ -127,6 +212,20 @@
             })
             //点击 “保存修改” 按钮
             $("#save_update").click(function () {
+                //处理密码的
+                if($("#passwordnumber").val()==''){
+                    //密码为空则不修改
+                }else{
+                    if($("#password_change2").val()!==$("#password_change1").val()){
+                        //两次密码不相同或者为空
+                        $("#sameresult").css("display","inline");
+                        alert("两次密码不相同，无法修改！")
+                        return "";
+                    }else{
+                        formdata.append("password", $("#passwordnumber").val())
+                    }
+                }
+
                 // alert(account);
                 if($("#new_head").val()=='') {
                     // alert("头像为空");
@@ -134,18 +233,13 @@
                     // alert("头像不为空")
                     formdata.append("file",$("#new_head")[0].files[0])
                 }
-                if($("#passwordnumber").val()==''){
-                    //密码为空则不修改
-                }else{
-                    formdata.append("password", $("#passwordnumber").val())
-                }
 
                 formdata.append("account",account),
-                formdata.append("name",$("#name").val()),
+                formdata.append("name",$("#username").val()),
                 formdata.append("sex",$("#sex_type").val()),
-                formdata.append("birthday",$("#birthdaydate").val()),
+                // formdata.append("birthday",$("#birthdaydate").val()),
                 formdata.append("fondness",$("#fondness").val()),
-                formdata.append("signature",$("#signature").val()),
+                formdata.append("signature",$("#usersignature").val()),
                 formdata.append("phone",$("#phonenumber").val()),
 
                 $.ajax({
@@ -173,18 +267,70 @@
 <div id="letf_part">
     <div id="overview">
         <li><div>说说： </div><p>{{share_sum}}</p></li>
-        <li><div>留言： </div><p>****</p></li>
-        <li><div>相册： </div><p>****</p></li>
+        <li><div>留言： </div><p>{{message_sum}}</p></li>
+        <li><div>相册： </div><p>{{photo_sum}}</p></li>
     </div>
 
 </div>
 <!--      中间的好友动态部分-->
 <div id="center_part">
+    <!--有好友申请信息-->
+    <div class="add_friend_info" v-for="(application,i) in applicationlist">
+        <div id="title">您有一条好友申请信息</div>
+        <div id="content">
+            <div id="applyimg"> <img v-bind:src="application.avatar"></div>
+            <div id="info">
+                <p id="account">账号: {{application.friend_id}}</p>
+                <p id="name">昵称: {{application.name}}</p>
+                <p id="signature">个性签名: {{application.signature}}</p>
+            </div>
+            <div id="accept" v-on:click="accept(application)">接受</div>
+            <div id="refuse" v-on:click="refuse(application)">拒绝</div>
+        </div>
+        <div id="time">{{application.applicationtime}}</div>
+    </div>
+    <!--展示已有的说说-->
+    <div class="share_model" v-for="(share,i) in sharelist">
+        <div id="model">
+            <div id="user_info">
+                <div id="head_img">
+                    <img v-bind:src="share.master_img">
+                </div>
+                <div id="share_user_name">{{share.master_name}}</div>
+                <div id="share_time">{{share.share_time}}</div>
+            </div>
+            <div id="word_message">
+                <div id="message">
+                    {{share.words}}
+                </div>
+            </div>
+            <div id="photos">
+                <div class="photo_model" v-if="share.picture1 !==null"><img v-bind:src="share.picture1"></div>
+                <div class="photo_model" v-if="share.picture2 !==null"><img v-bind:src="share.picture2"></div>
+                <div class="photo_model" v-if="share.picture3 !==null"><img v-bind:src="share.picture3"></div>
+                <div class="photo_model" v-if="share.picture4 !==null"><img v-bind:src="share.picture4"></div>
+                <div class="photo_model" v-if="share.picture5 !==null"><img v-bind:src="share.picture5"></div>
+                <div class="photo_model" v-if="share.picture6 !==null"><img v-bind:src="share.picture6"></div>
+                <div class="photo_model" v-if="share.picture7 !==null"><img v-bind:src="share.picture7"></div>
+                <div class="photo_model" v-if="share.picture8 !==null"><img v-bind:src="share.picture8"></div>
+                <div class="photo_model" v-if="share.picture9 !==null"><img v-bind:src="share.picture9"></div>
+            </div>
+            <!--            浏览次数等-->
+            <div id="browse_times">
+                <div id="browse">被浏览了 {{share.saw_time}} 次</div>
+                <div id="likes">点赞</div>
+                <div id="leave_message">留言</div>
+                <div id="delete" v-on:click="deleteshare(share.id)">删除</div>
+            </div>
+            <!--            <div id="praise"> </div>-->
+            <!--            <div id="talk_message"></div>-->
 
+        </div>
+    </div>
 </div>
 <!--右侧的个人信息展示部分-->
 <div id="right_part">
-    <div id="info">
+    <div id="userinfo">
 <!--        <form id="form1">-->
        <div id="user_logo"><img id="user_logo_img" v-bind:src="imgurl"/></div>
 <!--        <div id="user_logo"><img id="user_logo_img" src="D:\temp-rainy\df595008-5cae-448a-a2cb-c42719f623f7.jpg"/></div>-->
@@ -200,28 +346,29 @@
                 <input id="sure_change" type="submit" value="预览效果">
          </form>
         </div>
-        <div id="user_name" >
-            <p>昵称：</p><input type="text" id="name" v-model="name" >
-        </div>
-
+        <div id="content_info">
+            <div id="user_name" >
+                <p>昵称：</p><input type="text" id="username" v-model="name" >
+            </div>
         <li><div class="model"><div id="sex" >性别：</div><div class="write"><input type="text" id="sex_type" v-model="sex" ></div></div></li>
-        <li><div class="model"><div id="birthday">出生年月日：</div><div class="write"><input type="date" id="birthdaydate" v-model="birthday" ></div></div></li>
+<!--        <li><div class="model"><div id="birthday">出生年月日：</div><div class="write"><input type="date" id="birthdaydate" v-model="birthday" ></div></div></li>-->
 <!--  先不做星座的，从简单的做
      <li><div class="model"><div id="constellation">星座：</div><div class="write"><input type="text" name="constellation" ></div></div></li>-->
         <li><div class="model"><div id="like">爱好：</div><div class="write"><input type="text" id="fondness" v-model="fondness"></div></div></li>
-        <li><div class="model"><div id="sign">个性签名：</div><div class="write"><input type="text" id="signature"  v-model="signature"></div></div></li>
+        <li><div class="model"><div id="sign">个性签名：</div><div class="write"><input type="text" id="usersignature"  v-model="signature"></div></div></li>
 
         <li id="pass_button"><div class="model"><div class="write" id="change_password"><input  name="change_password" type="button" value="修改密码"></input></div></div></li>
 
         <li class="change_pass" style="display: none"><div class="model"><div id="password_change1">密码：</div><div class="write"><input type="password" name="password_change1" id="passwordnumber"></div></div></li>
         <li class="change_pass" style="display: none"><div class="model"><div id="password_change2">确认新密码：</div><div class="write"><input type="password" name="password_change2"></div></div></li>
-        <li  style="display: none" id="sameresult"><p id="warm_password">两次输入的密码不相同!</p></li>
+        <li  style="display: none" id="sameresult"><p id="">两次输入的密码不相同!</p></li>
         <li><div class="model"><div id="phone">电话号码：</div><div class="write"><input type="text" id="phonenumber" v-model="phone"></div></div></li>
 
         <div id="info_bottom">
         <input id="delete_update" type="button" value="取消修改">
         <input id="save_update" type="button" value="保存修改">
     </div>
+        </div>
     </div>
 </div>
 </body>

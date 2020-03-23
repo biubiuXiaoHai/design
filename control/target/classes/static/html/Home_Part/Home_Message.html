@@ -124,7 +124,7 @@
 <!--        留言信息模板-->
         <div id="messagemodel" v-for="(msg,i) in msglist">
             <div id="userinfo">
-                <img id="userhead" v-bind:src="msg.friend_avatar"><div id="username">{{msg.friend_name}}</div><div id="answer">回复</div><div id="delete" v-on:click="delet_message(msg.id)">删除</div>
+                <div id="head_boder"><img id="userhead" v-bind:src="msg.friend_avatar"></div><div id="username">{{msg.friend_name}}</div><div id="answer">回复</div><div id="delete" v-on:click="delet_message(msg.id)">删除</div>
             </div>
             <div id="words">{{msg.message}}</div>
             <div id="words_time"><p>{{msg.last_time}}</p></div>

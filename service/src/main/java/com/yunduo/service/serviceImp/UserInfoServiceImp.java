@@ -3,7 +3,10 @@ package com.yunduo.service.serviceImp;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yunduo.bean.*;
-import com.yunduo.dao.UsersMapper;
+import com.yunduo.dao.*;
+import com.yunduo.entities.FriendApplication;
+import com.yunduo.entities.Message;
+import com.yunduo.entities.Share;
 import com.yunduo.entities.Users;
 import com.yunduo.service.UserInfoService;
 import com.yunduo.utils.CloneUtil;
@@ -20,6 +23,14 @@ import java.util.*;
 public class UserInfoServiceImp implements UserInfoService {
     @Autowired
     UsersMapper usersMapper;
+    @Autowired
+    ShareMapper shareMapper;
+    @Autowired
+    MessageMapper messageMapper;
+    @Autowired
+    PictureMapper pictureMapper;
+    @Autowired
+    FriendApplicationMapper friendApplicationMapper;
 
     /**
      * 登录页
@@ -116,7 +127,6 @@ public class UserInfoServiceImp implements UserInfoService {
             Map<String,String > params=new HashMap<String,String>();
 //           文字信息中不能出现“手机号”要换“号码”来表达。
             String info="您好，您的云朵空间已经注册成功，可以使用号码： "+user.getPhone()+"，或云朵账号："+user.getAccount()+"来进行登陆，密码为："+user.getPassword()+",祝您生活愉快，云朵空间，伴您成长每一天~ ";
-//          String info="hello 这是测试发送短信";
             params.put("message",info);
             params.put("number",user.getPhone());
             try{
@@ -156,12 +166,29 @@ public class UserInfoServiceImp implements UserInfoService {
             System.out.println("传输过程异常！");
             e.printStackTrace();
         }
-//        model.setAvatar(filepath+filename);
         Users user = CloneUtil.cloneObj(model, Users.class);
         user.setAvatar("/temp-rainy/" + filename);
         usersMapper.updateByPrimaryKeySelective(user);
-//        System.out.println("更新成功了！");
-        return 1;
+        System.out.println("更新成功了！");
+        //开始同步更新 说说的头像
+       List<Share> sharelist= shareMapper.findMasterShare(user.getAccount());
+       for(int i=0;i<sharelist.size();i++){
+           sharelist.get(i).setMaster_img(user.getAvatar());
+           shareMapper.updateByPrimaryKeySelective(sharelist.get(i));
+       }
+       //同步更新留言的头像
+       List<Message> messgelist=messageMapper.selectByFriendId(user.getAccount());
+       for(int i=0;i<messgelist.size();i++){
+           messgelist.get(i).setFriend_avatar(user.getAvatar());
+           messageMapper.updateByPrimaryKeySelective(messgelist.get(i));
+       }
+       //同步更新好友申请信息的头像
+        List<FriendApplication> applicationlist=friendApplicationMapper.selectByFriendId(user.getAccount());
+       for(int i=0;i<applicationlist.size();i++){
+           applicationlist.get(i).setAvatar(user.getAvatar());
+           friendApplicationMapper.updateByPrimaryKeySelective(applicationlist.get(i));
+       }
+       return 1;
     }
 
     /**
@@ -173,18 +200,10 @@ public class UserInfoServiceImp implements UserInfoService {
     @Override
     public FindUserInfoRsp findUserInfo(Integer userid) {
         Users users = usersMapper.selectByPrimaryKey(userid);
-//        if(users.getAvatar().equals(null)){
-////            users.setAvatar("../../images/兔子.jpg");
-////        }
         FindUserInfoRsp userInfoRsq = CloneUtil.cloneObj(users, FindUserInfoRsp.class);
         return userInfoRsq;
     }
 
-    @Override
-    public StatisticsInfoRsp statisticsInfo(Integer account) {
-//        等后期再开发
-        return null;
-    }
 
     /**
      * 查找好友用户
@@ -199,5 +218,14 @@ public class UserInfoServiceImp implements UserInfoService {
         List<Users> list=usersMapper.findUserFriend(info.getInfo());
         PageInfo<Users> pageInfo=new PageInfo<Users>(list);
         return pageInfo;
+    }
+
+    @Override
+    public OverView findOverView(Integer account) {
+        OverView overView=new OverView();
+        overView.setShare_sum(shareMapper.selectSumByMasterId(account));
+        overView.setMessage_sum(messageMapper.selectSumByMasterId(account));
+        overView.setPhoto_sum(pictureMapper.selectSumByMasterId(account));
+        return overView;
     }
 }

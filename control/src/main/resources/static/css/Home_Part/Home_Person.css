@@ -11,7 +11,7 @@ body{
     float: left;
     width: 25%;
     height: 100%;
-    background-color: #4cae4c;
+    background-color: #adadad;
 }
 #overview{
     margin-top: 10%;
@@ -19,90 +19,99 @@ body{
     width: 80%;
     height: 160px;
     background-color: #9d9d9d;
+    border-radius: 10px;
+    /*border: 2px;*/
+
 }
 #overview li{
     margin-top: 10px;
     margin-left: 20px;
-    background-color: white;
+    /*background-color: white;*/
     width: 80%;
     list-style: none;
     float: left;
 }
 #overview li div{
     text-align: center;
-    background-color: white;
+    /*background-color: white;*/
     float: left;
     font-size: 30px;
 }
 #overview li p{
-    background-color: #122b40;
+    /*background-color: #122b40;*/
     float: left;
     font-size: 30px;
 }
 #center_part{
-    overflow-scrolling: auto;
     float: left;
     width: 50%;
     height: 100%;
-    background-color: #9d9d9d;
+    overflow: auto;
+    background-color: #f9f9f9;
 }
 #right_part{
     float: left;
     width: 25%;
     height: 100%;
-    background-color: #4cae4c;
+    background-color: #adadad;
 }
-#info{
+#userinfo{
     margin-top: 10%;
     width: 100%;
     height: 400px;
-    background-color: #9d9d9d;
-
 }
 #user_logo{
     width: 120px;
     height: 120px;
     background-color: white;
+    margin-left: 5px;
     float: left;
 }
-#info img{
+#userinfo img{
     margin-top: 5px;
     margin-left: 5px;
     width: 110px;
     height: 110px;
     border-radius: 10px;
 }
-#info li{
+#userinfo li{
+    margin-top: 10px;
+    float: left;
     list-style: none;
 }
 #change_logo1{
     float: left;
-    width: 150px;
+    width: 145px;
     height: 80px;
-    background-color: yellow;
+    /*background-color: yellow;*/
 }
+
 #change_logo1_click{
     border-radius: 5px;
     margin-left: 20px;
     margin-top: 30px ;
+    float: left;
 }
 #change_logo2{
     float: left;
-    width: 150px;
+    width: 145px;
     height: 80px;
-    background-color: yellow;
+    /*background-color: yellow;*/
 }
 #new_head{
+    width: 120px;
+    height: 30px;
     border-radius: 3px;
     float: left;
-    margin-left: 7px;
+    margin-left: 5px;
     margin-top: 10px;
 }
 #cancel_change{
     border-radius: 5px;
     margin-top: 10px;
     float: left;
-    width: 70px;
+    margin-left: 5px;
+    width: 60px;
 }
 #sure_change{
     border-radius: 5px;
@@ -113,63 +122,49 @@ body{
 }
 
 #user_name{
-    width: 150px;
+    width: 180px;
     height: 20px;
     float: left;
-    background-color: red;
+    /*background-color: red;*/
 }
 #user_name p{
-    margin-left: 5px;
+    /*margin-left: 5px;*/
     float: left;
 }
 #user_name input{
-    width: 80px;
+    float: left;
+    width: 120px;
 }
 .model{
-    width: 100%;
+    width: 270px;
     height: 30px;
     float: left;
-    background-color: #4cae4c;
+    /*background-color: #4cae4c;*/
 }
 #sex{
     float: left;
-    background-color: red;
+    /*background-color: red;*/
 }
-input[name="sex_type"]{
+#sex_type{
     float: left;
-    width: 10px;
+    width: 40px;
     border-radius: 3px;
     /*size: auto;*/
 }
-#birthday{
-    float: left;
-    background-color: red;
-}
-input[name="birthday"]{
-    /*width: 80px;*/
-    border-radius: 3px;
-}
-#constellation{
-    float: left;
-    background-color: red;
-}
-/*input[name="constellation"]{*/
-/*    width: 80px;*/
-/*    border-radius: 3px;*/
-/*}*/
+
 #like{
     float: left;
-    background-color: red;
+    /*background-color: red;*/
 }
-input[name="fondness"]{
+#fondness{
     width: 180px;
     border-radius: 3px;
 }
 #sign{
     float: left;
-    background-color: red;
+    /*background-color: red;*/
 }
-#signature{
+#usersignature{
     float: left;
     width: auto;
 }
@@ -177,13 +172,10 @@ input[name="fondness"]{
     border-radius: 5px;
     margin-left: 80px;
 }
-.change_pass{
-    /*display: none;*/
-    margin-left: 10px;
-}
+
 #password_change1{
     float: left;
-    background-color: red;
+    /*background-color: red;*/
 }
 input[name="password_change1"]{
     border-radius: 3px;
@@ -191,7 +183,7 @@ input[name="password_change1"]{
 }
 #password_change2{
     float: left;
-    background-color: red;
+    /*background-color: red;*/
 }
 input[name="password_change2"]{
     border-radius: 3px;
@@ -199,7 +191,7 @@ input[name="password_change2"]{
 }
 #phone{
     float: left;
-    background-color: red;
+    /*background-color: red;*/
 }
 input[name="phone"]{
     border-radius: 3px;
@@ -208,13 +200,14 @@ input[name="phone"]{
 
 .write{
     float: left;
-    background-color: #269abc;
+    /*background-color: #269abc;*/
 }
 #info_bottom{
     float: left;
     width: 100%;
     height: 30px;
-    background-color: #1b6d85;
+    margin-top: 10px;
+    /*background-color: #1b6d85;*/
 }
 
 #delete_update{
@@ -242,3 +235,246 @@ input[name="phone"]{
 #sameresult{
     margin-left: 10px;
 }
+
+
+/*功能模块的中间部分*/
+/*添加好友的申请信息模板 起始*/
+.add_friend_info{
+    width: 90%;
+    height: 150px;
+    margin-left: 5%;
+    background-color: #f7ecb5;
+}
+#title{
+    width: 50%;
+    height: 30px;
+    float: left;
+    margin-left: 25%;
+    text-align: center;
+    font-weight: bold;
+}
+#content{
+    width: 90%;
+    height: 90px;
+    margin-left: 5%;
+    background-color: #777777;
+    float: left;
+    border-radius: 8px;
+
+}
+#applyimg{
+    width: 79px;
+    height: 79px;
+    float: left;
+    margin-left: 7px;
+    margin-top: 7px;
+    border: 1px solid wheat;
+}
+#applyimg img{
+    width: 75px;
+    height: 75px;
+    margin-left: 2px;
+    margin-top: 2px;
+    float: left;
+    background-color: #286090;
+}
+#info{
+    width:220px ;
+    height: 100%;
+    float: left;
+}
+#account{
+    width: 150px;
+    height: 20px;
+    margin-left: 10px;
+    float: left;
+    font-weight: bold;
+}
+#name{
+    width: 150px;
+    height: 20px;
+    margin-left: 10px;
+    float: left;
+    font-weight: bold;
+}
+#signature{
+    margin-top: 5px;
+    width: 90%;
+    height: 45px;
+    margin-left: 10px;
+    float: left;
+    /*background-color: #adadad;*/
+}
+#accept{
+    width:45px;
+    height: 23px;
+    float: right;
+    margin-top: 30px ;
+    margin-right: 5px;
+    background-color: #ec971f;
+    text-align: center;
+    border: 1px solid greenyellow;
+    border-radius: 3px;
+}
+#refuse{
+    width: 45px;
+    height: 23px;
+    float: right;
+    margin-top: 30px ;
+    margin-right: 5px;
+    background-color: #c9302c;
+    text-align: center;
+    border: 1px solid greenyellow;
+    border-radius: 3px;
+}
+#time{
+    width:250px ;
+    height: 23px;
+    margin-top: 3px;
+    text-align: center;
+    float: right;
+    font-size: 14px;
+
+}
+#content_info{
+    width: 90%;
+    height: auto;
+    float: left;
+    margin-top: 15px;
+    margin-left: 5%;
+}
+/*添加好友的申请信息模板 终止*/
+/*展示说说的模板*/
+/*展示已有说说的模块 开始*/
+.share_model{
+    /*margin-top: 20px;*/
+    width: 450px;
+    /*height: 250px;*/
+    height: auto;
+    margin-left: 30px;
+    /*background-color: #adadad;*/
+    /*border: 2px solid #adadad;*/
+}
+#model{
+    width: auto;
+    height: auto;
+    margin-top: 10px;
+    float: left;
+    background-color: #adadad;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+#user_info{
+    margin-top: 10px;
+    width: 450px;
+    height: 70px;
+    /*background-color: #269abc;*/
+    float: left;
+}
+#head_img{
+    width: 60px;
+    height: 60px;
+    margin-top: 5px;
+    margin-left: 5px;
+    background-color: white;
+    float: left;
+    border-color: whitesmoke;
+}
+#head_img img{
+    width: 58px;
+    height: 58px;
+    margin-top: 1px;
+    margin-left: 1px;
+}
+#share_user_name{
+    width: 370px;
+    height: 25px;
+    margin-top: 5px;
+    margin-left: 5px;
+    /*background-color: yellow;*/
+    float: left;
+    font-weight: bold;
+}
+#share_time{
+    width: 370px;
+    height: 25px;
+    margin-top: 10px;
+    margin-left: 5px;
+    /*background-color: #f7ecb5;*/
+    float: left;
+    font-size: 13px;
+}
+#word_message{
+    width: 450px;
+    /*height: 100px;*/
+    height: auto;
+    /*background-color: #adadad;*/
+    float: left;
+}
+#message{
+    width: 400px;
+    height: auto;
+    /*height: max-content;*/
+    background-color: white;
+    float: left;
+    margin-top: 5px;
+    margin-left: 25px;
+}
+#photos{
+    width: 428px;
+    /*height: 462px;*/
+    height: auto;
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    /*background-color: #66512c;*/
+}
+.photo_model{
+    width: 140px ;
+    height: 150px;
+    margin-left: 2px ;
+    margin-top: 2px;
+    float: left;
+}
+.photo_model img{
+    width: 140px ;
+    height: 150px;
+    border-radius: 5px;
+    border: 1px solid wheat;
+}
+#browse_times{
+    width: 450px;
+    height: 25px;
+    background-color: #777777;
+    margin-top: 10px;
+    float: left;
+}
+#browse{
+    width: 150px;
+    height: 25px;
+    margin-left: 25px;
+    /*background-color: #269abc;*/
+    float: left;
+}
+#delete{
+    width: 60px;
+    height: 25px;
+    background-color: #adadad ;
+    float: right;
+    text-align: center;
+}
+#likes{
+    width: 60px;
+    height: 25px;
+    background-color: #adadad;
+    float: right;
+    text-align: center;
+}
+#leave_message{
+    width: 60px;
+    height: 25px;
+    background-color: #66512c;
+    float: right;
+    text-align: center;
+}
+/*展示已有说说的模块 结束*/

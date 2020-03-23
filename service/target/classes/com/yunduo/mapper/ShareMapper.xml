@@ -23,6 +23,9 @@
     id, master_id, master_name, master_img, share_time, picture1, picture2, picture3, 
     picture4, picture5, picture6, picture7, picture8, picture9, words, saw_time
   </sql>
+  <select id="selectSumByMasterId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(*) from share where master_id=#{master_id};
+  </select>
   <select id="selectByMasteridAndTime" resultType="com.yunduo.entities.Share">
     select * from share where share.master_id=#{master_id,jdbcType=INTEGER} and share.share_time=#{share_time,jdbcType=VARCHAR};
   </select>

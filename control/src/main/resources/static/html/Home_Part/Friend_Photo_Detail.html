@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Home_Photo_Deteil</title>
+    <link href="../../css/Home_Part/Friend_Photo_Detail.css" rel="stylesheet">
+    <script src="../../js/jquery-3.4.1.min.js"></script>
+    <script src="../../js/vue.min.js"></script>
+    <script src="../../js/jquery.form.js"></script>
+    <script>
+        $(function () {
+            //获取cookie
+            //取出名字和用户的账号
+            function getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for(var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+            // var username=getCookie("cookie_username");
+            var ablumid = getCookie("ablumid");
+            var account = getCookie("cookie_account");
+            //绑定头部的相册首页信息
+            var head = new Vue({
+                el: "#head_part",
+                data: {
+                    ablum_head: "",
+                    ablum_title: "",
+                    ablum_description: ""
+                }
+            });
+            //绑定照片
+            var content=new Vue({
+                el:"#detail_part",
+                data:{
+                    list:{}
+                },methods:{
+                }
+            })
+            //获取相册首页的信息
+            $.ajax({
+                url: "http://127.0.0.1:8090/ablum/findAblumByAblumId",
+                dataType: "json",
+                type: "post",
+                data: {
+                    id: ablumid
+                }, success: function (data) {
+                    head.ablum_head = data.ablum_head;
+                    head.ablum_title = data.ablum_title;
+                    head.ablum_description = data.ablum_description;
+                }, error: function () {
+                    // alert("系统异常")
+                }
+            });
+            //获取相册中的照片信息
+            $.ajax({
+                url:"http://127.0.0.1:8090/picture/findPictureByAblumId",
+                dataType: "json",
+                type: "post",
+                data: {
+                    ablum_id: ablumid
+                }, success: function (data) {
+                    content.list=data;
+                }, error: function () {
+                    // alert("系统异常")
+                }
+            })
+        })
+
+    </script>
+</head>
+<body>
+<div id="content">
+    <div id="head_part">
+        <div id="head_img"><img v-bind:src="ablum_head"></div>
+        <!--        <div id="head_img"><img src="../../images/rabbit.jpg"></div>-->
+        <div id="head_title">
+            <div id="title_up">
+                <div id="title_name" contenteditable="false">{{ablum_title}}</div>
+            </div>
+            <div id="title_down">
+                <div id="description" contenteditable="false">{{ablum_description}}</div>
+            </div>
+        </div>
+    </div>
+    <div id="detail_part">
+        <div id="picture_model" v-for="(picture,i) in list">
+            <img v-bind:src="picture.url">
+            <div id="tip">
+                <div id="push_time">{{picture.push_time}}</div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

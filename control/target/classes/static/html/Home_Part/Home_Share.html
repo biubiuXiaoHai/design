@@ -387,9 +387,6 @@
 <!--发表说说-->
         <div id="shareinfo">
             <div id="words" contenteditable="true">请输入文字信息</div>
-<!--            <div id="words">-->
-<!--                <input type="textarea" placeholder="请输入文字信息">-->
-<!--            </div>-->
             <div id="chose">
                 <div id="add_photo">添加照片</div>
                 <div id="cancer">取消发表</div>
@@ -398,6 +395,7 @@
         </div>
 <!--展示已有的说说-->
         <div class="share_model" v-for="(share,i) in sharelist">
+            <div id="model">
             <div id="user_info">
                 <div id="head_img">
                     <img v-bind:src="share.master_img">
@@ -428,14 +426,15 @@
                 <div id="leave_message">留言</div>
                 <div id="delete" v-on:click="deleteshare(share.id)">删除</div>
             </div>
-            <div id="praise"> </div>
-            <div id="talk_message"></div>
+<!--            <div id="praise"> </div>-->
+<!--            <div id="talk_message"></div>-->
 
         </div>
-
+        </div>
     </div>
 <!--        最近访客信息-->
-    <div id="right"></div>
+<!--        不做了-->
+<!--    <div id="right"></div>-->
     </div>
 </body>
 </html>

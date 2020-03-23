@@ -4,14 +4,14 @@
 body{
     width: 530px;
     height: 752px;
-    background-color: #adadad;
 
 }
 #body_content{
     width: 100%;
     height: 100%;
+    background-color: #999999;
 }
-/*添加好友的申请信息模板*/
+/*添加好友的申请信息模板 起始*/
 .add_friend_info{
     width: 90%;
     height: 150px;
@@ -21,10 +21,10 @@ body{
 #title{
     width: 50%;
     height: 30px;
-    background-color: #adadad;
     float: left;
     margin-left: 25%;
     text-align: center;
+    font-weight: bold;
 }
 #content{
     width: 90%;
@@ -32,47 +32,51 @@ body{
     margin-left: 5%;
     background-color: #777777;
     float: left;
+    border-radius: 8px;
 
 }
-#content img{
-    width: 75px;
-    height: 75px;
+#applyimg{
+    width: 79px;
+    height: 79px;
+    float: left;
     margin-left: 7px;
     margin-top: 7px;
+    border: 1px solid wheat;
+}
+#applyimg img{
+    width: 75px;
+    height: 75px;
+    margin-left: 2px;
+    margin-top: 2px;
     float: left;
     background-color: #286090;
 }
 #info{
-    width:240px ;
+    width:210px ;
     height: 100%;
-    background-color: #286090;
     float: left;
 }
-/*#info p{*/
-/*    margin: 0px*/
-/*}*/
 #account{
     width: 150px;
     height: 20px;
     margin-left: 10px;
-    background-color: #555555;
     float: left;
+    font-weight: bold;
 }
 #name{
     width: 150px;
     height: 20px;
     margin-left: 10px;
-    background-color: #f7ecb5;
     float: left;
+    font-weight: bold;
 }
 #signature{
     margin-top: 5px;
-    margin-left: 5%;
     width: 90%;
     height: 45px;
     margin-left: 10px;
-    background-color: #555555;
     float: left;
+    /*background-color: #adadad;*/
 }
 #accept{
     width:45px;
@@ -80,8 +84,10 @@ body{
     float: right;
     margin-top: 30px ;
     margin-right: 5px;
-    background-color: #4cae4c;
+    background-color: #ec971f;
     text-align: center;
+    border: 1px solid greenyellow;
+    border-radius: 3px;
 }
 #refuse{
     width: 45px;
@@ -91,34 +97,45 @@ body{
     margin-right: 5px;
     background-color: #c9302c;
     text-align: center;
+    border: 1px solid greenyellow;
+    border-radius: 3px;
 }
-
 #time{
     width:250px ;
     height: 23px;
     margin-top: 3px;
-    background-color: #286090;
     text-align: center;
     float: right;
+    font-size: 14px;
 
 }
-
-/*好友说说的展示*/
+/*添加好友的申请信息模板 终止*/
 
 /*展示说说的模板*/
+/*展示已有说说的模块 开始*/
 .share_model{
-    margin-left: 5%;
-    margin-top: 20px;
+    /*margin-top: 20px;*/
     width: 450px;
     /*height: 250px;*/
     height: auto;
-    background-color: #f7ecb5;
+    margin-left: 30px;
+    /*background-color: #adadad;*/
+    /*border: 2px solid #adadad;*/
 }
-/*用户的信息*/
+#model{
+    width: auto;
+    height: auto;
+    margin-top: 10px;
+    float: left;
+    background-color: #adadad;
+    border: 1px solid white;
+    border-radius: 5px;
+}
 #user_info{
+    margin-top: 10px;
     width: 450px;
     height: 70px;
-    background-color: #269abc;
+    /*background-color: #269abc;*/
     float: left;
 }
 #head_img{
@@ -126,41 +143,39 @@ body{
     height: 60px;
     margin-top: 5px;
     margin-left: 5px;
-    background-color: #66512c;
+    background-color: white;
     float: left;
-    border-color: #777777;
+    border-color: whitesmoke;
 }
 #head_img img{
     width: 58px;
     height: 58px;
     margin-top: 1px;
     margin-left: 1px;
-
 }
-#user_name{
+#share_user_name{
     width: 370px;
     height: 25px;
     margin-top: 5px;
     margin-left: 5px;
-    background-color: yellow;
+    /*background-color: yellow;*/
     float: left;
+    font-weight: bold;
 }
 #share_time{
     width: 370px;
     height: 25px;
     margin-top: 10px;
     margin-left: 5px;
-    background-color: #f7ecb5;
+    /*background-color: #f7ecb5;*/
     float: left;
+    font-size: 13px;
 }
-
-/*说说的文字内容信息*/
 #word_message{
-    overflow: auto;
     width: 450px;
-    height: auto;
     /*height: 100px;*/
-    background-color: #adadad;
+    height: auto;
+    /*background-color: #adadad;*/
     float: left;
 }
 #message{
@@ -172,7 +187,6 @@ body{
     margin-top: 5px;
     margin-left: 25px;
 }
-/*说说的照片 模块起始。。。。。*/
 #photos{
     width: 428px;
     /*height: 462px;*/
@@ -180,7 +194,7 @@ body{
     float: left;
     margin-left: 10px;
     margin-top: 10px;
-    background-color: #66512c;
+    /*background-color: #66512c;*/
 }
 .photo_model{
     width: 140px ;
@@ -192,22 +206,30 @@ body{
 .photo_model img{
     width: 140px ;
     height: 150px;
+    border-radius: 5px;
+    border: 1px solid wheat;
 }
-/*浏览次数*/
 #browse_times{
     width: 450px;
     height: 25px;
-    background-color: #5bc0de;
+    background-color: #777777;
+    margin-top: 10px;
     float: left;
 }
 #browse{
     width: 150px;
     height: 25px;
     margin-left: 25px;
-    background-color: #269abc;
+    /*background-color: #269abc;*/
     float: left;
 }
-
+#delete{
+    width: 60px;
+    height: 25px;
+    background-color: #adadad ;
+    float: right;
+    text-align: center;
+}
 #likes{
     width: 60px;
     height: 25px;
@@ -222,6 +244,8 @@ body{
     float: right;
     text-align: center;
 }
+/*展示已有说说的模块 结束*/
+/*待后续开发部分*/
 #praise_content{
     width: 400px;
     height: auto;

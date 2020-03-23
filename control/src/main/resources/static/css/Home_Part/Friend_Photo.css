@@ -1,5 +1,5 @@
 *{
-margin:0px;
+    margin:0px;
 }
 #content{
     overflow: auto;
@@ -89,7 +89,6 @@ margin:0px;
     background-color: whitesmoke;
     border-radius: 5px;
 }
-/*照片*/
 #picture_content{
     overflow: auto;
     width: 800px;

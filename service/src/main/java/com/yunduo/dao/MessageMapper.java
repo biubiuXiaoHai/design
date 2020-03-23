@@ -5,6 +5,8 @@ import com.yunduo.entities.Message;
 import java.util.List;
 
 public interface MessageMapper {
+    List<Message> selectByFriendId(Integer friend_id);
+    Integer selectSumByMasterId(Integer master_id);
     List<Message>selectByMasterId(Integer master_id);
     int deleteByPrimaryKey(Integer id);
 

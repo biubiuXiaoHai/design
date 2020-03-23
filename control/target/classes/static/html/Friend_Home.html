@@ -25,14 +25,14 @@
                 }
                 return "";
             }
-            var username=getCookie("cookie_friendname");
-            var account=getCookie("cookie_friendaccount");
+            var friendname=getCookie("cookie_friendname");
+            var friendaccount=getCookie("cookie_friendaccount");
 
             var userinfo=new Vue({
                 el:"#person",
                 data:{
-                    user: username,
-                    account:account,
+                    user: friendname,
+                    account:friendaccount,
                     imgurl: {}
                 }
             })
@@ -43,7 +43,7 @@
                 type:"post",
                 dataType:"json",
                 data:{
-                    userid:account
+                    userid:friendaccount
                 },
                 success:function (data) {
                     userinfo.imgurl=data.avatar;
@@ -120,7 +120,7 @@
 </div>
 <!--变换的底部-->
 <div id="bottom">
-    <iframe id="contain"src="Home_Part/Friend_Home.html" scrolling="auto"></iframe>
+    <iframe id="contain" src="Home_Part/Friend_Person.html" scrolling="auto"></iframe>
 </div>
 </body>
 </html>

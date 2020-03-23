@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Friend_Person</title>
+    <link href="../../css/Home_Part/Friend_Person.css" rel="stylesheet">
+    <link href="../../css/Home_Part/Friend_Person.css" rel="stylesheet">
+    <script src="../../js/jquery-3.4.1.min.js"></script>
+    <script src="../../js/vue.min.js"></script>
+    <script>
+        $(function () {
+            function getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+            // var friendname=getCookie("cookie_username");
+            var friendaccount = getCookie("cookie_friendaccount");
+            //绑定左侧的总览信息
+            var overview=new Vue({
+                el:"#letf_part",
+                data:{
+                    share_sum:0,
+                    message_sum:0,
+                    photo_sum:0
+                }
+            });
+            //绑定右侧个人信息
+            var userin= new Vue({
+                el:"#userinfo",
+                data:{
+                    imgurl:"",
+                    name:"",
+                    sex:"",
+                    account:"",
+                    fondness:"",
+                    signature:"",
+                    phone:""
+                }
+            });
+            //绑定动态信息
+            var contentlist=new Vue({
+                el:"#center_part",
+                data:{
+                    sharelist:{}
+                }
+            });
+
+            //获取右侧的个人的信息
+                $.ajax({
+                    url: "http://127.0.0.1:8090/userinfo/findUserInfo",
+                    dataType: "json",
+                    type: "post",
+                    data: {
+                        userid: friendaccount,
+                    }, success: function (data) {
+                        // alert("获取个人信息成功")
+                        userin.imgurl = data.avatar;
+                        userin.name = data.name;
+                        userin.account=data.account;
+                        userin.sex = data.sex;
+                        userin.fondness = data.fondness;
+                        userin.signature = data.signature;
+                        userin.phone = data.phone;
+                    }, error: function (data) {
+                        alert("获取个人信息失败")
+                    }
+                })
+            //获取左侧的总览信息
+            $.ajax({
+                url: "http://127.0.0.1:8090/userinfo/findOverView",
+                dataType: "json",
+                type: "post",
+                data: {
+                    account: friendaccount,
+                }, success: function (data) {
+                    overview.share_sum=data.share_sum;
+                    overview.message_sum=data.message_sum;
+                    overview.photo_sum=data.photo_sum;
+                }, error: function (data) {
+                    // alert("获取总览信息失败")
+                }
+            })
+            //获取消息 ：所有的个人的已经发表的说说信息
+            $.ajax({
+                url:"http://127.0.0.1:8090/share/findMasterShare",
+                dataType:"json",
+                type:"post",
+                data:{
+                    master_id: friendaccount
+                }
+                ,success:function (data) {
+                    contentlist.sharelist=data;
+                }
+            });
+        })
+    </script>
+</head>
+<body>
+<!--左侧好友列表-->
+<div id="letf_part">
+    <div id="overview">
+        <li><div>说说： </div><p>{{share_sum}}</p></li>
+        <li><div>留言： </div><p>{{message_sum}}</p></li>
+        <li><div>相册： </div><p>{{photo_sum}}</p></li>
+    </div>
+
+</div>
+<!--      中间的好友动态部分-->
+<div id="center_part">
+    <!--展示已有的说说-->
+    <div class="share_model" v-for="(share,i) in sharelist">
+        <div id="model">
+            <div id="user_info">
+                <div id="head_img">
+                    <img v-bind:src="share.master_img">
+                </div>
+                <div id="share_user_name">{{share.master_name}}</div>
+                <div id="share_time">{{share.share_time}}</div>
+            </div>
+            <div id="word_message">
+                <div id="message">
+                    {{share.words}}
+                </div>
+            </div>
+            <div id="photos">
+                <div class="photo_model" v-if="share.picture1 !==null"><img v-bind:src="share.picture1"></div>
+                <div class="photo_model" v-if="share.picture2 !==null"><img v-bind:src="share.picture2"></div>
+                <div class="photo_model" v-if="share.picture3 !==null"><img v-bind:src="share.picture3"></div>
+                <div class="photo_model" v-if="share.picture4 !==null"><img v-bind:src="share.picture4"></div>
+                <div class="photo_model" v-if="share.picture5 !==null"><img v-bind:src="share.picture5"></div>
+                <div class="photo_model" v-if="share.picture6 !==null"><img v-bind:src="share.picture6"></div>
+                <div class="photo_model" v-if="share.picture7 !==null"><img v-bind:src="share.picture7"></div>
+                <div class="photo_model" v-if="share.picture8 !==null"><img v-bind:src="share.picture8"></div>
+                <div class="photo_model" v-if="share.picture9 !==null"><img v-bind:src="share.picture9"></div>
+            </div>
+            <!--            浏览次数等-->
+            <div id="browse_times">
+                <div id="browse">被浏览了 {{share.saw_time}} 次</div>
+                <div id="likes">点赞</div>
+                <div id="leave_message">留言</div>
+                <div id="delete" v-on:click="deleteshare(share.id)">删除</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--右侧的个人信息展示部分-->
+<div id="right_part">
+    <div id="userinfo">
+        <div id="user_logo"><img id="user_logo_img" v-bind:src="imgurl"/></div>
+        <div id="useraccount">{{account}}</div>
+        <div id="content_info">
+            <div id="user_name" >
+                <p>昵称：</p><div id="username">{{name}}</div>
+            </div>
+            <li><div class="model"><div id="sex" >性别：</div><div class="write"><div id="sex_type">{{sex}} </div></div></div></li>
+            <li><div class="model"><div id="like">爱好：</div><div class="write"><div id="fondness" >{{fondness}}</div></div></div></li>
+            <li><div class="model"><div id="sign">个性签名：</div><div class="write"><div id="usersignature" >{{signature}}</div></div></div></li>
+            <li><div class="model">
+                <div id="phone">电话号码：</div>
+                <div class="write">
+                    <div id="phonenumber">{{phone}}</div>
+                </div>
+            </div></li>
+        </div>
+    </div>
+</div>
+</body>
+</html>

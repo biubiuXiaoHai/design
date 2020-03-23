@@ -34,31 +34,44 @@
 }
 .friend_home{
     float: left;
-    width: 80%;
-    height: 100%;
+    width: 155px;
+    height: 50px;
 }
-.friendmodel img{
-    width: 25%;
-    height: 100%;
-    /*margin-left: 2%;*/
-    /*margin-top: 1%;*/
+#friendimg{
+    width: 46px;
+    height: 46px;
+    margin-top: 2px;
+    margin-left: 2px;
+    background-color: #8c8c8a;
     float: left;
-    background-color: #66afe9;
-    border-radius: 5px;
+}
+#friendimg img{
+    width: 44px;
+    height: 44px;
+    float: left;
+    margin-top: 1px;
+    margin-left: 1px;
+    /*background-color: #66afe9;*/
+    /*border-radius: 2px;*/
 }
 .friendmodel p{
-    width: 50%;
-    height: 100%;
+    width: 80px;
+    height: 50px;
     float: left;
     margin-left: 5%;
+    margin-top: 5px;
+    font-weight: bold;
 }
 .deletefriend{
-    width: 20%;
-    height: 100%;
+    width: 55px;
+    height: 26px;
     background-color: #c9302c;
-    float: left;
     font-size: 13px;
     text-align: center;
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
 
 }
 #left_list_page{
@@ -80,7 +93,7 @@
 #center{
     width: 50%;
     height: 100%;
-    background-color: #777777;
+    background-color: #999999;
     float: left;
 }
 #active_center{
@@ -125,7 +138,7 @@
     margin-left: 5% ;
     margin-top: 10%;
     float: left;
-    background-color: #555555;
+    /*background-color: #555555;*/
     text-align: center;
 }
 #right_content input{
@@ -143,7 +156,7 @@
 #search_content{
     width: 100%;
     height: 75%;
-    background-color: #286090;
+    background-color: #8c8c8a;
 
 }
 .result_model{
@@ -153,26 +166,37 @@
     float: left;
     margin-top: 3%;
 }
-.result_model img{
-    width: 25%;
-    height: 100%;
+#user_img{
+    width: 39px;
+    height: 39px;
+    float: left;
+    margin-left: 5px;
+    margin-top: 1px;
+    background-color: #8c8c8a ;
+}
+#user_img img{
+    width: 37px;
+    height: 37px;
     /*margin-left: 2%;*/
     /*margin-top: 1%;*/
     float: left;
-    background-color: #66afe9;
+    margin-left: 1px;
+    margin-top: 1px;
     border-radius: 5px;
 }
 .result_model p{
     float: left;
     margin-top: 10px;
+    font-weight: bold;
 }
 .result_model div{
     float: right;
     font-size: large;
-    margin-right: 10px;
+    margin-right: 3px;
     margin-top: 8px;
     background-color: #4cae4c;
-    margin-left: 3px;
+    /*margin-left: 2px;*/
+    border-radius: 3px;
 }
 
 

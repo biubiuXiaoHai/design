@@ -63,9 +63,7 @@
                 $("#nowregister").css("background-color","#5bc0de")
                 return false;
               }
-
         }
-
             //点击 “立即注册”
             $("#nowregister").click(function () {
                 if( register_change()===false){
@@ -84,7 +82,7 @@
                     },
                     success:function (data) {
                         if(data.result==1){
-                            alert("注册成功")
+                            alert("        恭喜您，您已注册成功，成为了云朵空间中的一个分享者，注册成功信息已通过短息发送给您，请留意查收，您的云朵账号为： "+data.account+"，也可用手机号："+$("input[name='phone']").val()+"，来作为账号登录，您的密码为： "+data.password+"，云朵空间，乐在分享生活每一天，祝您生活愉快~~")
                             //还有注册成功提示框：显示账号密码的没做
                             window.location.href="http://127.0.01:8090/html/Login.html"
                         }if(data.result==2){

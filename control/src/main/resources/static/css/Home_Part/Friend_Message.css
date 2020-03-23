@@ -1,7 +1,8 @@
 #message{
     width: 870px;
-    height: 2000px;
-    background-color: #777777;
+    height: 700px;
+    overflow: auto;
+    background-color:  #9d9d9d;
 }
 /*第一部分：主人寄语*/
 #master_message{
@@ -9,19 +10,19 @@
     height: 200px;
     margin-left: 35px;
     float: left;
-    background-color: #f7ecb5;
+    /*background-color: #f7ecb5;*/
 }
 #title{
     width: 740px;
     height: 35px;
-    background-color: #269abc;
+    /*background-color: #269abc;*/
     float: left;
     margin-left: 30px;
 }
 #tip{
     width: 180px;
     height: 35px;
-    background-color: #5bc0de;
+    /*background-color: #5bc0de;*/
     font-size: 30px;
     float: left;
 }
@@ -31,12 +32,13 @@
     height: 130px;
     margin-top: 5px;
     margin-left: 25px;
-    background-color: #4cae4c;
+    background-color: #adadad;
+    border-radius: 10px;
 }
 #last_time{
     width: 800px;
     height: 30px;
-    background-color: #555555;
+    /*background-color: #555555;*/
     float: left;
 }
 #last_time p{
@@ -44,7 +46,6 @@
     float: right;
     margin-right: 20px;
 }
-
 /*给该好友留言的部分*/
 #givemessage{
     width: 800px;
@@ -56,7 +57,7 @@
 #give_title{
     width: 800px;
     height: 25px;
-    background-color: white;
+    /*background-color: white;*/
     float: left;
 }
 #give_title div{
@@ -64,7 +65,7 @@
     height: 25px;
     margin-left: 300px;
     float: left;
-    background-color: #269abc;
+    /*background-color: #269abc;*/
     text-align: center;
     font-weight:bold;
 }
@@ -72,8 +73,10 @@
     width: 700px;
     height: 70px;
     margin-left: 50px;
-    background-color: #269abc;
+    background-color: #985f0d;
     float: left;
+    /*text-align: center;*/
+    border-radius: 10px;
 }
 #give_result{
     width: 800px;
@@ -84,23 +87,28 @@
     width: 80px;
     height: 25px;
     float: right;
-    background-color: #5bc0de;
+    background-color:#31b0d5;
     text-align: center;
     margin-right: 20px;
+    border-radius: 5px;
+    border: 1px solid white;
 }
 #give_sure{
     width: 80px;
     height: 25px;
     float: right;
-    background-color: #286090;
+    background-color: #8c8c8c;
     text-align: center;
     margin-right: 30px;
+    border-radius: 5px;
+    border: 1px solid white;
 }
 
 /*留言内容部分*/
 #messageinfo{
     width: 800px;
     height: 2000px;
+    overflow: auto;
     margin-left: 35px;
     background-color: white;
     float: left;
@@ -109,35 +117,48 @@
 #messagetitle{
     width: 800px;
     height: 35px;
-    background-color: #4cae4c;
+    /*background-color: #4cae4c;*/
     float: left;
 }
 #messagetitle div{
     width: 200px;
     height: 35px;
     float: left;
-    background-color: #5bc0de;
+    /*background-color: #5bc0de;*/
     text-align: center;
     font-size: 30px;
+    font-weight: bold;
+
 }
 #messagemodel{
-    margin-top: 5px;
+    margin-top: 10px;
     width: 760px ;
     height: 180px ;
     margin-left: 20px;
-    background-color: #f7ecb5;
+    background-color: #5bc0de;
     float: left;
+    border-radius: 10px;
 }
 #userinfo{
     width: 100%;
     height: 60px;
-    background-color: #777777;
+    /*background-color: #777777;*/
     float: left;
 }
 #userhead{
-    width: 55px;
-    height: 55px;
-    margin-top: 3px;
+    width: 54px;
+    height: 54px;
+    margin-top: 2px;
+    margin-left: 2px;
+    float: left;
+    border-radius: 3px;
+}
+#head_boder{
+    width: 56px;
+    height: 56px;
+    margin-left: 15px;
+    margin-top: 2px;
+    border: 2px solid whitesmoke;
     float: left;
 }
 #username{
@@ -146,7 +167,8 @@
     float: left;
     margin-left: 20px;
     margin-top: 13px;
-    background-color: #269abc;
+    font-weight: bold;
+    /*background-color: #269abc;*/
 }
 #answer{
     float: right;
@@ -156,6 +178,7 @@
     margin-top: 15px;
     background-color: #f7ecb5;
     text-align: center;
+    border-radius: 5px;
 }
 #delete{
     float: right;
@@ -163,21 +186,25 @@
     width: 80px;
     height: 30px;
     margin-top: 15px;
-    background-color: #ec971f;
+    background-color: #d9534f;
     text-align: center;
+    border-radius: 5px;
 }
 #words{
-    width: 100%;
+    width: 80%;
     height: 95px ;
     background-color: white;
     float: left;
+    margin-left: 10%;
     text-align: center;
+    border-radius: 10px;
 }
 #words_time{
-    width: 100%;
+    width: 95%;
     height: 25px;
-    background-color: #269abc;
+    /*background-color: #269abc;*/
     float: left;
+    margin-right: 5%;
 }
 #words_time p{
     margin: 0;

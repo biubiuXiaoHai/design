@@ -70,6 +70,10 @@ public class FriendsSeviceImp  implements FriendsService {
             //如果添加的是自己，则不要创建申请信息了。
             return 1;
         }
+        //如果双方已经互相成为了好友
+        if(friendsMapper.selectByMasterIdAndFriendId(model.getFriend_id(),model.getMaster_id())!=0){
+            return 1;
+        }
         //给对方创建一条好友请求信息
         FriendApplication friendApplication=new FriendApplication();
         friendApplication.setMaster_id(model.getFriend_id());

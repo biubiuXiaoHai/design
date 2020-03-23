@@ -209,11 +209,11 @@
             </div>
             <div id="detail2">已有 <b id="N">{{friendnumber}}</b> 位云朵空间好友</div>
             <div id="detail3"><input type="button" value="开通云朵会员"></input></div>
-            <div id="detail4">
-                <li><a>说说</a></li>
-                <li><a>留言</a></li>
-                <li><a>相册</a></li>
-            </div>
+<!--            <div id="detail4">-->
+<!--                <li><a>说说</a></li>-->
+<!--                <li><a>留言</a></li>-->
+<!--                <li><a>相册</a></li>-->
+<!--            </div>-->
         </div>
     </div>
 </div>
@@ -226,7 +226,7 @@
                 <div id="left_list_content">
                         <div class="friendmodel" v-for="(friend,i) in list" >
                             <div class="friend_home" v-on:click="friend_home(friend)">
-                                <img v-bind:src="friend.avatar">
+                                <div id="friendimg"><img v-bind:src="friend.avatar"></div>
                                 <p>{{friend.name}}</p>
 <!--                                <p>{{friend.account}}</p>-->
                             </div>
@@ -252,7 +252,7 @@
                 </div>
                 <div id="search_content">
                     <div class="result_model" v-for="(user,i) in list">
-                        <img v-bind:src="user.avatar"><p>{{user.name}}</p><div v-on:click="addfriend(user)">添加好友</div>
+                        <div id="user_img"><img v-bind:src="user.avatar"></div><p>{{user.name}}</p><div v-on:click="addfriend(user)">添加好友</div>
                     </div>
                 </div>
                 <div id="right_list_page"><p>首页</p><p>上一页</p><p>下一页</p><p>尾页</p></div>
