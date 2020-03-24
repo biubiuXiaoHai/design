@@ -24,7 +24,7 @@
     select count(*) from picture where ablum_id=#{ablum_id};
   </select>
   <select id="selectByAblumId" parameterType="java.lang.Integer" resultType="com.yunduo.entities.Picture">
-    select * from picture where ablum_id=#{ablum_id};
+    select * from picture where ablum_id=#{ablum_id} order by picture_id desc;
   </select>
 
 
